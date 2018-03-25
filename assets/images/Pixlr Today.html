@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Pixlr Today</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="assets/css/style.min.css">
+<link rel="stylesheet" href="assets/css/todolist.min.css">
+</head>
+<body>
+<div class="ovelayTransparent"></div>
+<div class="overlay">
+    <img src='assets/img/icon.png'>
+</div>
+<div class="logo">
+    <a href="https://pixlr.com/?utm_source=ChromeExt&utm_medium=Wallpaper&utm_campaign=PixlrToday&utm_content=Homepage" title="pixlr.com">
+    <img class="logo-image" src="http://img-cdn.pixlr.com/images/pixlr-logo-icon-50x50.png">
+    PIXLR
+    </a>
+    <ul class="links">
+        <li><a href="https://pixlr.com/editor/?utm_source=ChromeExt&utm_medium=Wallpaper&utm_campaign=PixlrToday&utm_content=Editor">EDITOR</a></li>
+        <li><a href="https://pixlr.com/express/?utm_source=ChromeExt&utm_medium=Wallpaper&utm_campaign=PixlrToday&utm_content=Express">EXPRESS</a></li>
+        <li><a href="https://vectr.com/?utm_source=PixlrToday&utm_medium=ChromeExt&utm_content=WW">VECTR</a></li>
+    </ul>
+</div>
+
+<ul class="wrap-button">
+    <li class="button-todo">TO DO</li>
+    <li class="button-recent-visited">RECENT VISITED</li>
+    <li class="button-setting"></li>
+</ul>
+
+
+<div class="todolist newTasks">
+    <h2>MY TODO LIST</h2>
+    <ul class="wrap-todo-list" id="wrap-todo-list">
+    </ul>
+    <div class="new-task">
+        <textarea   type="text" id ="value-newTask" class="new_todo_list" placeholder="Create todo here..." maxlength="100" required></textarea>
+        <button class="newButton" id="new-task">
+        </button>
+    </div>
+</div>
+<div class="options">
+    <div class="title">Setting</div>
+    <ul class="setting">
+        <li class="setting_clock">
+            <a class = "parent" href="#" id="check_clock_w">Time
+
+            </a>
+            <div class="children-clock">
+                <a id="clock-12h-w" class="option-clock" href="#">
+                    AM / PM
+                    <input type="radio" name="clock-style" id="clock-12h" value="default" >
+                </a>
+                <a id = "clock-24h-w" class="option-clock" href="#">
+                    24 Hours format
+                    <input type="radio" name="clock-style" id="clock-24h" value="default" checked >
+                </a>
+            </div>
+        </li>
+        <li class='setting_recent'>
+            <a class = "parent" href="#" id="check_recent_w"> Recent visited
+                <input class ="button_power" type="checkbox" value="None" id="check_recent" name="check" checked />
+            </a>
+        </li>
+        <li class="setting_weather">
+            <a class = "parent" href="#" id="check_weather_w">Weather
+                <input class ="button_power" type="checkbox" value="None" id="check_weather" name="check" checked />
+            </a>
+            <div class="children-weather">
+                <a id = "radio-celsius-w" class="option-clock" href="#">
+                    Celsius
+                    <input type="radio" name="select_weather" id="radio-celsius" value="default" checked>
+                </a>
+                <a id="radio-fahrenheit-w" class="option-clock" href="#">
+                    Fahrenheit
+                    <input type="radio" name="select_weather" id="radio-fahrenheit" value="default" >
+                </a>
+                <div class="setting_detailWeather options-location-container">
+                    <label class="title-location">Locations</label>
+                    <div class="options-location-change">
+                        <form class="options-location-form">
+                            <input type="text" placeholder="City, country" class="options-location-input" maxlength="128">
+                        </form>
+                        <a href="#" class="location-reset">Reset</a>
+                        <a href="#" class="location-confirm">Confirm</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li class="setting_todolist">
+            <a class = "parent" href="#" id="check_todolist_w">ToDo List
+                <input class ="button_power"  type="checkbox" value="None" id="check_todolist" name="check" checked/>
+            </a>
+        </li>
+
+        <li class="setting_quotes">
+            <a class = "parent" href="#" id="check_quotes_w">Quotes
+                <input  class ="button_power" type="checkbox" value="None" id="check_quotes" name="check" checked />
+            </a>
+        </li>
+
+        <li class='setting_sync'>
+            <a class = "parent" href="#" id="check_sync_w">Sync with Google Tasks
+                <input  class ="button_power" type="checkbox" value="None" id="check_sync" name="check" checked />
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="recent-rf" id="recent-rf">
+    <div class="title">RECENT VISITED</div>
+    <ul id="mostVisitedThumb"></ul>
+</div>
+<div class="wrap-widget">
+    <div id="clock">
+        <p class="wrap-hours">
+            <span id="hours"></span>
+            <span id="ampm"></span>
+        </p>
+        <p id="date"></p>
+    </div>
+
+    <div id="searches">
+        <div id="search-type">
+            <span class="tab-sw search-google show-tab" id="google-btn">Google</span>
+            <span class="tab-sw search-123rf " id="123rf-btn">Stock Photos</span>
+        </div>
+        <div class="widget-search google show-tab" id="google-btn-search">
+          <form id="google-search-form" method="get" action="https://www.google.com/search">
+            <input id="input-text" class ="input-text"  name="q" type="text" data-placeholder-loc="search_google" autocomplete="off" spellcheck="false" dir="auto" placeholder="Search Google">
+            <input type="hidden" name="utm_source" id="utm_source" value=""/>
+            <input type="hidden" name="utm_medium" id="utm_medium" value=""/>
+            <input type="hidden" name="utm_campaign" id="utm_campaign" value=""/>
+            <input type="hidden" name="utm_content" id="utm_content" value=""/>
+            <a href="#" class="search_link" target="_self"><div class="button-search"></div></a>
+          </form>
+        </div>
+    </div>
+    <div id="quotes" class="quotes">
+        <div class="wrap-quotes">
+            <div class="title">When one door of happiness closes, another opens, but often we look so long at the closed door that we do not see the one that has been opened for us</div>
+            <div class="artist">HELEN KELLER</div>
+        </div>
+    </div>
+</div>
+<div class="wrap-quotes-weather">
+    <div class="wrap-weather">
+        <div class="wrap-detail-weather"></div>
+        <div class="weather" id="weather">
+        <div class="weather-conditions notSeperate">
+            <div id="description-weather"></div>
+        </div></div>
+    </div>
+</div>
+
+<div id ="description" class="wrap-desc">
+</div>
+<script src="assets/js/jquery.min.js" ></script>
+<script src="assets/js/app.min.js" async ></script>
+<script src="assets/js/common.min.js" async ></script>
+<script src="assets/js/weather.min.js" async ></script>
+<script src="assets/js/jquery-ui.min.js" async ></script>
+</body>
+</html>

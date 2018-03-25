@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="40px" viewBox="0 0 33 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Artboard" stroke="#FFFFFF" stroke-width="0.67">
+            <g id="Group" transform="translate(4.000000, 5.000000)">
+                <path d="M2.24355662,25.6118368 L2.24355662,18.6671921 C2.24355662,13.1694158 6.74570973,8.71228421 12.2990191,8.71228421 C17.8539633,8.71228421 22.3561164,13.1694158 22.3561164,18.6671921 L22.3561164,25.6118368" id="Stroke-204"></path>
+                <path d="M5.08004386,17.6019474 C5.08004386,14.2437237 7.82972488,11.5199211 11.2235048,11.5199211" id="Stroke-206"></path>
+                <path d="M24.5983652,29.8778329 L0,29.8778329 L0,27.1378461 C0,26.3577671 0.640829346,25.7233461 1.42878788,25.7233461 L23.1695774,25.7233461 C23.9591707,25.7233461 24.5983652,26.3577671 24.5983652,27.1378461 L24.5983652,29.8778329 Z" id="Stroke-208"></path>
+                <path d="M0.00081738437,6.63536447 L2.8763756,9.48216711" id="Stroke-210" fill="#D8D8D8"></path>
+                <path d="M12.1973365,0 L12.1973365,4.02663158" id="Stroke-212" fill="#D8D8D8"></path>
+                <path d="M24.4536882,6.49213421 L21.57813,9.33893684" id="Stroke-214" fill="#D8D8D8"></path>
+            </g>
+        </g>
+    </g>
+</svg>
