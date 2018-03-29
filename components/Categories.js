@@ -8,46 +8,10 @@ import {
 
 import WebarrioIcon from './WebarrioIcon';
 import Colors from '../constants/Colors';
+import CATEGORIES from '../constants/Categories';
 
 const ICON_SIZE = 40;
 const ICON_COLOR = Colors.orange;
-const CATEGORIES = [
-  {
-    name: 'Eventos',
-    icon: 'event',
-    filter: 'event'
-  },
-  {
-    name: 'Mascotas',
-    icon: 'pet',
-    filter: 'pet'
-  },
-  {
-    name: 'Recomendaciones',
-    icon: 'recommendation',
-    filter: 'recommendation'
-  },
-  {
-    name: 'Compartir Auto',
-    icon: 'car',
-    filter: 'car_pooling'
-  },
-  {
-    name: 'Anuncios',
-    icon: 'announcement',
-    filter: 'announcement'
-  },
-  {
-    name: 'Compra / Vende',
-    icon: 'listing',
-    filter: 'listing'
-  },
-  {
-    name: 'Todos',
-    icon: 'bucle',
-    filter: 'all'
-  },
-];
 
 export default class Categories extends React.Component{
   render(){
@@ -58,7 +22,7 @@ export default class Categories extends React.Component{
           (<TouchableOpacity
             style={styles.option}
             key={category.name}
-            onPress={() => callback(category.filter)}>
+            onPress={() => callback(category)}>
             <View style={styles.icon}>
               <WebarrioIcon
                 size={ICON_SIZE}

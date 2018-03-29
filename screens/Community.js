@@ -30,18 +30,21 @@ class CommunityScreen extends React.Component {
     this.setFilter = this.setFilter.bind(this);
   }
 
-  static navigationOptions = ({navigation}) => ({
-    title: 'Comunidad',
-    headerRight: (
-      <TouchableOpacity onPress={() => navigation.navigate('AddPublication')}>
-        <Feather name="plus" size={25} color="white" />
-      </TouchableOpacity>),
-    headerLeft: (
-      <TouchableOpacity onPress={() => navigation.state.params.toggleFilter()}>
-        <Feather name="menu" size={25} color="white" />
-      </TouchableOpacity>
-    )
-  });
+  static navigationOptions = ({navigation}) => {
+    const { params } = navigation.state;
+    return {
+      title: params.title,
+      headerRight: (
+        <TouchableOpacity onPress={() => navigation.navigate('NewPublication')}>
+          <Feather name="plus" size={25} color="white" />
+        </TouchableOpacity>),
+      headerLeft: (
+        <TouchableOpacity onPress={() => navigation.state.params.toggleFilter()}>
+          <Feather name="menu" size={25} color="white" />
+        </TouchableOpacity>
+      )
+    };
+  }
 
   getFeed = () => {
     const { authToken, currentUnit } = this.props;
@@ -57,12 +60,12 @@ class CommunityScreen extends React.Component {
     });
   }
 
-  setFilter = filter => {
-    this.toggleFilter();
-    if(this.state.filter === filter) {
-      return;
+  setFilter = category => {
+    if(this.state.filter !== category.filter) {
+      this.setState({filter: category.filter, publications: []}, this.getFeed);
+      this.props.navigation.setParams({title: category.filter === 'all' ? 'Comunidad' : category.name});
     }
-    this.setState({filter: filter, publications: []}, this.getFeed);
+    this.toggleFilter();
   }
 
   componentWillMount(){
@@ -70,7 +73,7 @@ class CommunityScreen extends React.Component {
   }
 
   componentDidMount = () => {
-    this.props.navigation.setParams({toggleFilter: this.toggleFilter});
+    this.props.navigation.setParams({toggleFilter: this.toggleFilter, title: 'Comunidad'});
   }
 
   toggleFilter() {
@@ -83,19 +86,19 @@ class CommunityScreen extends React.Component {
   }
 
   newPublication = () => {
-    this.props.navigation.navigate('AddPublication');
+    this.props.navigation.navigate('NewPublication');
   }
 
   renderPublication = ({item}) => {
     const publication = item;
     return (
-      <PublicationCard publication={publication} />
+      <PublicationCard publication={publication} navigate={this.props.navigation.navigate} />
     )
   }
 
   render(){
     return (
-      <View>
+      <View style={styles.screen}>
         <FlatList
           data={this.state.publications}
           keyExtractor={(item, index) => index}
@@ -136,5 +139,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0
+  },
+  screen: {
+    flex: 1
   }
-})
+});

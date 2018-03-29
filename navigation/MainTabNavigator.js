@@ -1,7 +1,11 @@
 import React from 'react';
 import { Platform, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import {
+  StackNavigator,
+  TabNavigator,
+  TabBarBottom
+} from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
@@ -9,32 +13,61 @@ import HomeScreen from '../screens/HomeScreen';
 import DashboardScreen from '../screens/Dashboard';
 import ChatScreen from '../screens/Chat';
 import CommunityScreen from '../screens/Community';
+import NewPublicationScreen from '../screens/NewPublication';
 import SosScreen from '../screens/Sos';
+import PublicationScreen from '../screens/Publication';
 
+const header = {
+  headerForceInset: {top: 5},
+    headerStyle: {
+      backgroundColor: Colors.orange,
+      height: 50,
+      paddingHorizontal: 10,
+    },
+    headerTitleStyle: {
+      color: 'white',
+      flex: 1,
+      textAlign: 'center',
+    },
+    headerLeft: (<View/>),
+    headerRight: (<View/>),
+}
+
+const CommunityStack = StackNavigator(
+  {
+    Feed: CommunityScreen,
+    NewPublication: NewPublicationScreen,
+    Publication: PublicationScreen
+  },
+  {
+    headerMode: 'screen',
+    navigationOptions: header,
+    initialRouteParams: {
+      title: 'Comunidad'
+    }
+  }
+);
+
+const HomeStack = StackNavigator(
+  {
+    Home: HomeScreen
+  },
+  {
+    headerMode: 'screen',
+    navigationOptions: header
+  }
+);
 
 export default TabNavigator(
   {
-    Home: HomeScreen,
+    Home: HomeStack,
     Dashboard: DashboardScreen,
     Chat: ChatScreen,
-    Community: CommunityScreen,
+    Community: CommunityStack,
     Sos: SosScreen
   },
   {
     navigationOptions: ({ navigation }) => ({
-      headerForceInset: {top: 5},
-      headerStyle: {
-        backgroundColor: Colors.orange,
-        height: 50,
-        paddingHorizontal: 10,
-      },
-      headerTitleStyle: {
-        color: 'white',
-        flex: 1,
-        textAlign: 'center',
-      },
-      headerLeft: (<View/>),
-      headerRight: (<View/>),
       tabBarIcon: ({ focused }) => {
         const { routeName } = navigation.state;
         let iconName;

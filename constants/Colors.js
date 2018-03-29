@@ -11,5 +11,6 @@ export default {
   warningText: '#666804',
   noticeBackground: tintColor,
   noticeText: '#fff',
-  orange: '#f76913'
+  orange: '#f76913',
+  inputBorder: '#92a2a2'
 };

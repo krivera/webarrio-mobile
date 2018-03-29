@@ -6,6 +6,7 @@ import RecommendationIcon from '../assets/icons/recommendation';
 import CarIcon from '../assets/icons/car';
 import AnnouncementIcon from '../assets/icons/announcement';
 import ListingIcon from '../assets/icons/listing';
+import LoopIcon from '../assets/icons/loop';
 
 export default class WebarrioIcon extends React.PureComponent{
   render(){
@@ -22,6 +23,8 @@ export default class WebarrioIcon extends React.PureComponent{
         return (<AnnouncementIcon {...this.props} />);
       case 'listing':
         return (<ListingIcon {...this.props} />);
+      case 'loop':
+        return (<LoopIcon {...this.props} />);
       default:
         return (<View />);
     }

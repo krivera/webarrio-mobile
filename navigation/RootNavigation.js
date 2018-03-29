@@ -27,7 +27,7 @@ const AppStack = StackNavigator(
     },
   },
   {
-    headerMode: 'screen'
+    headerMode: 'none'
   }
 );
 
