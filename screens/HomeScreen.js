@@ -1,11 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import {
+  Animated,
   Image,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
@@ -14,42 +17,58 @@ import SideMenu from 'react-native-side-menu';
 import SvgImage from '../components/svgImage';
 import { MonoText } from '../components/StyledText';
 import Colors from '../constants/Colors';
-import Icon from '@expo/vector-icons/MaterialIcons';
 import MessageIcon from '../assets/icons/message';
 import ContactsIcon from '../assets/icons/contacts';
 import CommunityIcon from '../assets/icons/community';
-import MoneyIcon from '../assets/icons/money'
+import MoneyIcon from '../assets/icons/money';
+import WebarrioIcon from '../components/WebarrioIcon';
+import { closeSession } from '../actions/auth';
 
-export default class HomeScreen extends React.Component {
-  static navigationOptions = {
+class HomeScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
     title: 'Home',
     headerRight: (
-      <TouchableOpacity onPress={this.openDrawer}>
-        <Icon
-          name="person-outline"
+      <TouchableOpacity onPress={() => navigation.state.params.toggleProfileMenu()}>
+        <WebarrioIcon
+          name="user"
           color="white"
           size={24}
         />
       </TouchableOpacity>
     )
-  };
+  });
 
   constructor(props){
     super(props);
     this.state = {
-      profileMenuOpen: false
+      profileMenuOpen: false,
+      profileMenuWidth: new Animated.Value(0),
     }
-    this.openDrawer = this.openDrawer.bind(this);
+    this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
   }
 
-  openDrawer = () => {
-    this.setState({
-      profileMenuOpen: true
-    });
+  toggleProfileMenu() {
+    const toMenuOpen = !this.state.profileMenuOpen;
+    this.setState({profileMenuOpen: toMenuOpen});
+    Animated.timing(this.state.profileMenuWidth, {
+      toValue: toMenuOpen ? 150 : 0,
+      duration: 250,
+    }).start();
+  }
+
+  componentWillReceiveProps(newProps) {
+    if(newProps.authToken !== this.props.authToken)
+      this.props.navigation.navigate('AuthLoading')
   }
 
   componentWillMount(){
     return;
+  }
+
+  componentDidMount = () => {
+    this.props.navigation.setParams({
+      toggleProfileMenu: this.toggleProfileMenu
+    });
   }
 
   go = screen => {
@@ -58,68 +77,78 @@ export default class HomeScreen extends React.Component {
     };
   }
 
+  closeSession = () => {
+    this.props.dispatch(closeSession());
+  }
+
   render() {
+    const { currentApartment, currentNeighborhood, currentUnit } = this.props;
     return (
-      <SideMenu menuPosition="right" isOpen={this.state.profileMenuOpen}>
-        <View>
+      <View>
+        <TouchableOpacity style={styles.current}>
+          <Text>{currentNeighborhood.name}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.current}>
+          <Text>{currentUnit.name}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.current}>
+          <Text>{currentApartment.number}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.section, ]}
+          onPress={this.go('Dashboard')}
+        >
+          <MoneyIcon/>
+          <Text>Adminstración</Text>
+        </TouchableOpacity>
+        <View style={styles.middle}>
           <TouchableOpacity
-            style={[styles.section, ]}
-            onPress={this.go('Dashboard')}
+            style={[styles.section, styles.middleSection, styles.messageSection]}
+            onPress={this.go('Chats')}
           >
-            <MoneyIcon/>
-            <Text>Adminstración</Text>
+            <MessageIcon/>
+            <Text>Mensajes</Text>
           </TouchableOpacity>
-          <View style={styles.middle}>
-            <TouchableOpacity
-              style={[styles.section, styles.middleSection, styles.messageSection]}
-              onPress={this.go('Chat')}
-            >
-              <MessageIcon/>
-              <Text>Mensajes</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.section, styles.middleSection]}
-              onPress={this.go('Contacts')}
-            >
-              <ContactsIcon size={80}/>
-              <Text>Agenda</Text>
-            </TouchableOpacity>
-          </View>
           <TouchableOpacity
-            style={[styles.section, ]}
-            onPress={this.go('Community')}
+            style={[styles.section, styles.middleSection]}
+            onPress={this.go('Contacts')}
           >
-            <CommunityIcon/>
-            <Text>Comunidad</Text>
+            <ContactsIcon size={80}/>
+            <Text>Agenda</Text>
           </TouchableOpacity>
         </View>
-      </SideMenu>
+        <TouchableOpacity
+          style={[styles.section, ]}
+          onPress={this.go('Community')}
+        >
+          <CommunityIcon/>
+          <Text>Comunidad</Text>
+        </TouchableOpacity>
+        {this.state.profileMenuOpen && (
+          <TouchableWithoutFeedback
+            onPress={this.toggleProfileMenu}
+            style={styles.closeMenu}
+          ><View /></TouchableWithoutFeedback>
+        )}
+        <Animated.View style={[styles.profileMenu, {width: this.state.profileMenuWidth}]}>
+          <TouchableOpacity onPress={this.closeSession}>
+            <Text>Cerrar Sesión</Text>
+          </TouchableOpacity>
+        </Animated.View>
+      </View>
     );
   }
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
 }
+
+const mapStateToProps = state => ({
+  currentNeighborhood: state.currentsReducer.neighborhood,
+  currentUnit: state.currentsReducer.unit,
+  currentApartment: state.currentsReducer.apartment,
+  neighborhoods: state.neighborhoodReducer.neighborhoods,
+  authToken: state.authReducer.authToken,
+});
+
+export default connect(mapStateToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
   icon: {
@@ -132,7 +161,8 @@ const styles = StyleSheet.create({
   },
   section: {
     alignItems: 'center',
-    paddingVertical: 10
+    paddingVertical: 10,
+    backgroundColor: 'white'
   },
   middleSection: {
     flex: 1,
@@ -231,4 +261,25 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+  profileMenu: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    backgroundColor: '#555',
+    overflow: 'hidden',
+  },
+  closeMenu: {
+    position: 'absolute',
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  current: {
+    alignItems: 'center',
+    borderBottomColor: '#92a2a2',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    padding: 5
+  }
 });

@@ -1,7 +1,9 @@
 import React from 'react';
 import {
   Animated,
+  Dimensions,
   FlatList,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -15,6 +17,9 @@ import PublicationCard from '../components/publicationCard';
 import { Feather } from '@expo/vector-icons';
 import SideMenu from 'react-native-side-menu';
 import Categories from '../components/Categories';
+import Report from '../components/Report';
+
+const { height: fullHeight } = Dimensions.get('window');
 
 class CommunityScreen extends React.Component {
   constructor(props){
@@ -23,11 +28,16 @@ class CommunityScreen extends React.Component {
       publications: [],
       filterOpen: false,
       filter: 'all',
-      filterWidth: new Animated.Value(0)
+      filterWidth: new Animated.Value(0),
+      reportOpen: false,
+      reportingId: '',
+      offset: 0
     }
     this.toggleFilter = this.toggleFilter.bind(this);
     this.newPublication = this.newPublication.bind(this);
     this.setFilter = this.setFilter.bind(this);
+    this.report = this.report.bind(this);
+    this.closeReport = this.closeReport.bind(this);
   }
 
   static navigationOptions = ({navigation}) => {
@@ -76,6 +86,13 @@ class CommunityScreen extends React.Component {
     this.props.navigation.setParams({toggleFilter: this.toggleFilter, title: 'Comunidad'});
   }
 
+  onLayout = ({
+    nativeEvent: { layout: { height }
+  }}) => {
+    const offset = fullHeight - height - 50;
+    this.setState({ offset });
+  }
+
   toggleFilter() {
     const toFilterOpen = !this.state.filterOpen;
     this.setState({filterOpen: toFilterOpen});
@@ -91,27 +108,66 @@ class CommunityScreen extends React.Component {
 
   renderPublication = ({item}) => {
     const publication = item;
+    const { currentUser, navigation } = this.props;
     return (
-      <PublicationCard publication={publication} navigate={this.props.navigation.navigate} />
+      <PublicationCard
+       publication={publication}
+       navigate={navigation.navigate}
+       currentUserId={currentUser.id}
+       report={this.report}
+      />
     )
   }
 
+  report = (reportingId) => {
+    this.setState({
+      reportOpen: true,
+      reportingId
+    });
+  }
+
+  closeReport = () => this.setState({reportOpen: false});
+
   render(){
+    const { currentUser, currentUnit } = this.props;
+    const {
+      filterOpen,
+      reportOpen,
+      reportingId,
+      offset,
+      publications,
+      filterWidth,
+    } = this.state;
     return (
-      <View style={styles.screen}>
+      <View style={styles.screen} onLayout={this.onLayout}>
+        <View style={styles.screen}>
         <FlatList
-          data={this.state.publications}
+          data={publications}
           keyExtractor={(item, index) => index}
           renderItem={this.renderPublication}
         />
-        {this.state.filterOpen && (
+        {filterOpen && (
           <TouchableWithoutFeedback onPress={this.toggleFilter}>
             <View style={styles.touchToClose} />
           </TouchableWithoutFeedback>
         )}
-        <Animated.View style={[styles.menu, {width: this.state.filterWidth}]}>
+        <Animated.View style={[styles.menu, {width: filterWidth}]}>
           <Categories callback={this.setFilter} />
         </Animated.View>
+        {reportOpen && (
+          <Report
+            currentUser={{id: currentUser.id}}
+            resourceType="publication"
+            resourceId={reportingId}
+            currentUnitId={currentUnit.id}
+            close={this.closeReport}
+          />
+        )}
+        </View>
+        <KeyboardAvoidingView
+          behavior="padding"
+          keyboardVerticalOffset={offset}
+        />
       </View>
     );
   }
@@ -121,6 +177,7 @@ const mapStateToProps = state => {
   return {
     authToken: state.authReducer.authToken,
     currentUnit: state.currentsReducer.unit,
+    currentUser: state.currentsReducer.user
   }
 };
 
@@ -132,6 +189,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     backgroundColor: '#f6f6f7',
+    overflow: 'hidden'
   },
   touchToClose: {
     position: 'absolute',

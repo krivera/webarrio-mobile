@@ -1,4 +1,4 @@
-import { AUTH_TOKEN_UPDATED } from '../actions/auth';
+import { AUTH_TOKEN_UPDATED, DESTROY_TOKEN } from '../actions/auth';
 import { REHYDRATE } from 'redux-persist/es/constants';
 
 let initialState = {authToken: null};
@@ -9,6 +9,10 @@ const authReducer = (state=initialState, action) => {
       return {
         ...state,
         authToken: action.authToken,
+      };
+    case DESTROY_TOKEN:
+      return {
+        authToken: ''
       };
     default:
       return state

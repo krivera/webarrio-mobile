@@ -1,3 +1,5 @@
+import { Months } from '../constants/utils';
+
 export const camelCase = value =>
   value.replace(/-([a-z])/g, g => g[1].toUpperCase());
 
@@ -30,3 +32,21 @@ export const transformStyle = ({ nodeName, nodeValue, fillProp }) => {
 
 export const getEnabledAttributes = enabledAttributes => ({ nodeName }) =>
   enabledAttributes.includes(camelCase(nodeName));
+
+export const getDate = time => {
+  let date = new Date(time);
+  let day = new Date(); // today
+  if(date.toDateString() === day.toDateString()){
+    date = date.getHours() + ':' + date.getMinutes();
+  }
+  else{
+    day.setDate(date.getDate() - 1); // yesterday
+    if(date.toDateString() === day.toDateString()){
+      date = 'Ayer';
+    }
+    else{
+      date = `${date.getDate()} ${Months[date.getMonth()]}`
+    }
+  }
+  return date;
+}

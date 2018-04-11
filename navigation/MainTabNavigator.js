@@ -1,6 +1,5 @@
 import React from 'react';
 import { Platform, View } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 import {
   StackNavigator,
   TabNavigator,
@@ -11,11 +10,14 @@ import Colors from '../constants/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
 import DashboardScreen from '../screens/Dashboard';
+import ChatListScreen from '../screens/ChatList';
 import ChatScreen from '../screens/Chat';
+import NeighborsScreen from '../screens/Neighbors';
 import CommunityScreen from '../screens/Community';
 import NewPublicationScreen from '../screens/NewPublication';
 import SosScreen from '../screens/Sos';
 import PublicationScreen from '../screens/Publication';
+import WebarrioIcon from '../components/WebarrioIcon';
 
 const header = {
   headerForceInset: {top: 5},
@@ -32,6 +34,18 @@ const header = {
     headerLeft: (<View/>),
     headerRight: (<View/>),
 }
+
+const ChatStack = StackNavigator(
+  {
+    ChatList: ChatListScreen,
+    Chat: ChatScreen,
+    Neighbors: NeighborsScreen
+  },
+  {
+    headerMode: 'screen',
+    navigationOptions: header,
+  }
+)
 
 const CommunityStack = StackNavigator(
   {
@@ -62,7 +76,7 @@ export default TabNavigator(
   {
     Home: HomeStack,
     Dashboard: DashboardScreen,
-    Chat: ChatScreen,
+    Chats: ChatStack,
     Community: CommunityStack,
     Sos: SosScreen
   },
@@ -76,19 +90,28 @@ export default TabNavigator(
             iconName = 'home';
             break;
           case 'Dashboard':
-            iconName = 'attach-money';
+            iconName = 'dashboard';
             break;
-          case 'Chat':
-            iconName = 'chat-bubble-outline';
+          case 'Chats':
+            iconName = 'chat';
             break;
           case 'Community':
-            iconName = 'people-outline';
+            iconName = 'people';
             break;
           case 'Sos':
-            iconName = 'info-outline'
+            return(
+              <View style={sosStyle}>
+                <WebarrioIcon
+                  name='sos'
+                  size={28}
+                  style={{ marginBottom: -3 }}
+                  color="white"
+                />
+              </View>)
+          iconName = 'sos'
         }
         return (
-          <MaterialIcons
+          <WebarrioIcon
             name={iconName}
             size={28}
             style={{ marginBottom: -3 }}
@@ -106,3 +129,14 @@ export default TabNavigator(
     swipeEnabled: false,
   }
 );
+
+const sosStyle = {
+  position: 'absolute',
+  backgroundColor: 'red',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  alignItems: 'center',
+  justifyContent: 'center'
+};

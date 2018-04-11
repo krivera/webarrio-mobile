@@ -1,37 +1,52 @@
 import React from 'react';
 import {
+  Animated,
   Image,
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View
 } from 'react-native';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import {
+  Feather,
+  MaterialCommunityIcons
+} from '@expo/vector-icons';
 import Categories from '../constants/Categories';
 import WebarrioIcon from './WebarrioIcon';
 import Colors from '../constants/Colors';
+import { Months } from '../constants/utils';
+import Avatar from './Avatar';
+import PublicationMenu from './PublicationMenu';
 
 export default class PublicationCard extends React.Component{
   constructor(props){
     super(props);
-    const { publication } = this.props;
-    this.iconName = (Categories.find(
+    const { publication, currentUserId } = this.props;
+    this.state = {
+      menuOpen: false,
+      menuWidth: new Animated.Value(0),
+      menuHeight: new Animated.Value(0),
+      menuOpenHeight: currentUserId === publication.author.id ? 30 : 60
+    }
+    this.category = (Categories.find(
       category =>
-        category.filter === publication.publication_type) || {icon: 'loop'})
-      .icon;
+        category.filter === publication.publication_type) || {icon: 'loop', name: 'Otro'});
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+
+  toggleMenu = () => {
+    this.setState({menuOpen: !this.state.menuOpen})
   }
 
   render(){
-    const { publication, navigate } = this.props;
-    const months = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN',
-      'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
+    const { publication, navigate, currentUserId, report } = this.props;
     const published = new Date(publication.created_at);
     return(
       <View style={styles.layout}>
         <View style={styles.imageSection}>
-          <View style={styles.avatarContainer}>
-            <Image style={styles.avatar} source={{uri: publication.author.avatar_url}} />
-          </View>
+          <Avatar source={{uri: publication.author.avatar}} name={publication.author.name} />
         </View>
         <TouchableOpacity
           style={styles.content}
@@ -40,9 +55,12 @@ export default class PublicationCard extends React.Component{
           <Text style={styles.title}>
             {publication.title}
           </Text>
-          <Text style={styles.author}>
-            por {publication.author.name}
-          </Text>
+          <View style={styles.underTitle}>
+            <Text style={styles.author}>
+              por {publication.author.name} {publication.author.last_name} ● {this.category.name}{' '}
+            </Text>
+            <WebarrioIcon name={this.category.icon} size={14} color="#92a2a2" />
+          </View>
           <Text style={styles.description} numberOfLines={2} ellipsizeMode="tail" >
             {publication.description}
           </Text>
@@ -50,25 +68,26 @@ export default class PublicationCard extends React.Component{
             <Image
               style={styles.previewImage}
               source={{uri: publication.image_url}}
+              resizeMode="contain"
             />
           )}
         </TouchableOpacity>
+        {this.menu && this.state.menuOpen && (
+          <TouchableWithoutFeedback onPress={this.menu.toggleMenu}>
+            <View style={styles.closeMenu}/>
+          </TouchableWithoutFeedback>
+        )}
         <View style={styles.optionsSection}>
-          <Text style={styles.date}>{published.getDate() + ' ' + months[published.getMonth()]}</Text>
-          <View style={styles.horizontal}>
-            <WebarrioIcon
-              name={this.iconName}
-              size={18}
-              color={Colors.orange}
-            />
-            <TouchableOpacity>
-              <MaterialCommunityIcons
-                name="dots-horizontal"
-                size={18}
-                color={Colors.orange}
-              />
-            </TouchableOpacity>
-          </View>
+          <Text style={styles.date}>{published.getDate() + ' ' + Months[published.getMonth()]}</Text>
+          <PublicationMenu
+            publication={publication}
+            navigate={navigate}
+            currentUserId={currentUserId}
+            toggleMenuCallback={this.toggleMenu}
+            openDirection="bottom"
+            ref={r => this.menu = r}
+            report={report}
+          />
         </View>
       </View>
     )
@@ -110,29 +129,31 @@ const styles = StyleSheet.create({
   imageSection: {
     flex: 0.15
   },
-  avatar:{
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-  },
-  avatarContainer: {
-    borderRadius: 20,
-    height: 40,
-    width: 40,
-    backgroundColor: '#e6edec',
-    alignSelf: 'center',
-    marginTop: 10
-  },
   previewImage: {
     height: 150,
     width: 250,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginTop:10,
   },
   optionsSection: {
     paddingTop: 10,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
   horizontal: {
     flexDirection: 'row'
+  },
+  underTitle: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 10
+  },
+  closeMenu: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'transparent'
   }
 });

@@ -1,5 +1,6 @@
 import { Notifications } from 'expo';
 import React from 'react';
+import { connect } from 'react-redux';
 import { StackNavigator, SwitchNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 

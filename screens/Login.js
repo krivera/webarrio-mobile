@@ -83,7 +83,7 @@ class LoginScreen extends React.Component{
       >
         <WebView
           style={styles.logo}
-          scrollEnabled="false"
+          scrollEnabled={false}
           source={{html: `${firstHtml}${logo}${lastHtml}`}}
         />
         <KeyboardAvoidingView style={styles.form}>
@@ -98,6 +98,7 @@ class LoginScreen extends React.Component{
             label="Email"
             keyboardType="email-address"
             onChangeText={t => this.setState({email: t})}
+            autoCapitalize="none"
           />
           <FloatingLabelInput
             style={styles.input}
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
     color: Colors.errorText
   }
 });
-
+ 
 const logo = `<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 viewBox="0 0 215.4 118" style="enable-background:new 0 0 215.4 118;" xml:space="preserve">
 <style type="text/css">
