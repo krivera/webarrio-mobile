@@ -7,7 +7,7 @@ export const REQUEST_CHATS = 'REQUEST_CHATS';
 
 export function receiveChats (rawChats){
   let chats = Object.keys(rawChats || {}).map(
-    userId => ({...rawChats[userId], userId: userId})
+    userId => Object.assign({}, rawChats[userId], { userId: userId })
   ).sort((a,b) => (b.updatedAt || b.createdAt) - (a.updatedAt || a.createdAt));
   return {
     type: CHATS_LOADED,

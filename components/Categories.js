@@ -10,7 +10,7 @@ import WebarrioIcon from './WebarrioIcon';
 import Colors from '../constants/Colors';
 import CATEGORIES from '../constants/Categories';
 
-const ICON_SIZE = 40;
+const ICON_SIZE = 35;
 const ICON_COLOR = Colors.orange;
 
 export default class Categories extends React.Component{
@@ -33,6 +33,7 @@ export default class Categories extends React.Component{
             <Text
               numberOfLines={1}
               lineBreakMode='clip'
+              style={category.admin && styles.adminText}
             >
               {category.name}
             </Text>
@@ -51,5 +52,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     paddingHorizontal: 5
+  },
+  adminText: {
+    color: Colors.orange
   }
 });

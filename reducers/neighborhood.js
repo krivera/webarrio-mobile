@@ -1,15 +1,24 @@
-import { SET_NEIGHBORHOO_TREE } from '../actions/neighborhood';
+import {
+  SET_NEIGHBORHOODS,
+  SET_NEIGHBORHOOD_TREE
+} from '../actions/neighborhood';
 
 let initialState = {
-  neighborhoods: []
+  neighborhoods: [],
+  neighborhood_list: []
 }
 
 export default (state=initialState, action) => {
   switch(action.type){
-    case SET_NEIGHBORHOO_TREE:
+    case SET_NEIGHBORHOOD_TREE:
       return {
-        ...state,
-        neighborhoods: action.data
+        neighborhoods: action.data,
+        neighborhood_list: state.neighborhood_list
+      }
+    case SET_NEIGHBORHOODS:
+      return {
+        neighborhoods: state.neighborhoods,
+        neighborhood_list: action.neighborhoods
       }
     default:
       return state;

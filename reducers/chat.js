@@ -29,26 +29,23 @@ const chatReducer = (state=initialState, action) => {
   switch(action.type){
     case CHATS_LOADED:
       return {
-        ...state,
         messages: state.messages || {},
         chats: action.chats,
         isRequesting: false
       };
     case ADD_MESSAGES_TO_CHAT:
-      let addedMessages = {};
-      addedMessages[action.chatId] = state.messages[action.chatId]
-        ? {...state.messages[action.chatId], ...action.messages}
-        : action.messages;
+      let addedMessages = {
+        [action.chatId]: action.messages
+      };
       return {
-        ...state,
-        messages: {
-          ...state.messages,
-          ...addedMessages
-        }
+        chats: state.chats,
+        isRequesting: state.isRequesting,
+        messages: Object.assign({}, state.messages, addedMessages)
       }
     case REQUEST_CHATS:
       return {
-        ...state,
+        messages: state.messages,
+        chats: state.chats,
         isRequesting: true
       }
     default:

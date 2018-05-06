@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   Animated,
   Dimensions,
   FlatList,
@@ -31,7 +32,8 @@ class CommunityScreen extends React.Component {
       filterWidth: new Animated.Value(0),
       reportOpen: false,
       reportingId: '',
-      offset: 0
+      offset: 0,
+      loading: true
     }
     this.toggleFilter = this.toggleFilter.bind(this);
     this.newPublication = this.newPublication.bind(this);
@@ -60,13 +62,17 @@ class CommunityScreen extends React.Component {
     const { authToken, currentUnit } = this.props;
     const filter = this.state.filter;
     let url_end = filter !== 'all' ? '/' + filter : '';
+    this.setState({loading: true});
     axios.get(API_URL + '/units/' + currentUnit.id + '/publications/feed' + url_end, {
       headers: {
         'Authorization': authToken
       }
     })
     .then((response) => {
-      this.setState({publications: response.data.publications});
+      this.setState({
+        publications: response.data.publications,
+        loading: false
+      });
     });
   }
 
@@ -137,6 +143,7 @@ class CommunityScreen extends React.Component {
       offset,
       publications,
       filterWidth,
+      loading
     } = this.state;
     return (
       <View style={styles.screen} onLayout={this.onLayout}>
@@ -146,6 +153,10 @@ class CommunityScreen extends React.Component {
           keyExtractor={(item, index) => index}
           renderItem={this.renderPublication}
         />
+        {loading && (<ActivityIndicator />)}
+        {!loading && publications.length == 0 && (
+          <Text>No hay publicaciones aún</Text>
+        )}
         {filterOpen && (
           <TouchableWithoutFeedback onPress={this.toggleFilter}>
             <View style={styles.touchToClose} />

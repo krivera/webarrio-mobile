@@ -81,6 +81,9 @@ class NewPublicationScreen extends React.Component{
   }
 
   picker = () => {
+    const categories = Categories.filter(category => {
+      return category.filter !== 'all' && !category.admin;
+    });
     if(Platform.OS === 'ios'){
       return (
         <View>
@@ -89,8 +92,7 @@ class NewPublicationScreen extends React.Component{
             onValueChange={v => this.setState({publication_type: v})}
             style={styles.publication_type_text}
           >
-            {Categories.filter(category => category.filter !== 'all')
-              .map(category => (
+            {categories.map(category => (
                 <PickerIOS.Item
                   key={category.filter}
                   label={category.name}
@@ -117,8 +119,7 @@ class NewPublicationScreen extends React.Component{
             value=""
             label="Categoría"
           />
-          {Categories.filter(category => category.filter !== 'all')
-            .map(category => (
+          {categories.map(category => (
               <Picker.Item
                 key={category.filter}
                 label={category.name}
@@ -134,9 +135,9 @@ class NewPublicationScreen extends React.Component{
     const { date } = this.state;
     let month = date.getMonth() + 1;
     month = ('0' + month).slice(-2);
-    let day = ('0' + date.getDate()).slice(-2);
-    let hour = ('0' + date.getHours()).slice(-2);
-    let minute = ('0' + date.getMinutes()).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const hour = ('0' + date.getHours()).slice(-2);
+    const minute = ('0' + date.getMinutes()).slice(-2);
     return (
       <TouchableWithoutFeedback
         onPress={this.openDatePicker}
@@ -321,7 +322,8 @@ class NewPublicationScreen extends React.Component{
 
 const mapStateToProps = state => ({
   authToken: state.authReducer.authToken,
-  currentNeighborhood: state.currentsReducer.neighborhood
+  currentNeighborhood: state.currentsReducer.neighborhood,
+  user: state.currentsReducer.user
 });
 
 export default connect(mapStateToProps)(NewPublicationScreen);

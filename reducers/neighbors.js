@@ -9,13 +9,12 @@ export default (state=initialState, action) => {
   switch(action.type){
     case NEIGHBORS_LOADED:
       return {
-        ...state,
         neighbors: action.neighbors,
         isRequesting: false
       }
     case REQUESTING:
       return {
-        ...state,
+        neighbors: state.neighbors,
         isRequesting: true
       }
     default:

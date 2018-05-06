@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Platform, View } from 'react-native';
 import {
   StackNavigator,
   TabNavigator,
   TabBarBottom
 } from 'react-navigation';
+import { Notifications } from "expo";
+import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 import Colors from '../constants/Colors';
 
@@ -72,12 +75,22 @@ const HomeStack = StackNavigator(
   }
 );
 
-export default TabNavigator(
+const DashboardStack = StackNavigator(
   {
-    Home: HomeStack,
-    Dashboard: DashboardScreen,
-    Chats: ChatStack,
+    Administration: DashboardScreen
+  },
+  {
+    headerMode: 'screen',
+    navigationOptions: header
+  }
+);
+
+const AppTabNavigator = TabNavigator(
+  {
+    //Home: HomeStack,
     Community: CommunityStack,
+    Chats: ChatStack,
+    //Dashboard: DashboardStack,
     Sos: SosScreen
   },
   {
@@ -107,8 +120,7 @@ export default TabNavigator(
                   style={{ marginBottom: -3 }}
                   color="white"
                 />
-              </View>)
-          iconName = 'sos'
+              </View>);
         }
         return (
           <WebarrioIcon
@@ -129,6 +141,44 @@ export default TabNavigator(
     swipeEnabled: false,
   }
 );
+
+class MainTabNavigator extends React.Component{
+  componentDidMount = () => {
+    this._registerForPushNotifications();
+  }
+
+  componentWillUnmount() {
+    this._notificationSubscription && this._notificationSubscription.remove();
+  }
+
+  _registerForPushNotifications() {
+    // Send our push token over to our backend so we can receive notifications
+    // You can comment the following line out if you want to stop receiving
+    // a notification every time you open the app. Check out the source
+    // for this function in api/registerForPushNotificationsAsync.js
+    const { currentUser, currentNeighborhood, authToken } = this.props;
+    registerForPushNotificationsAsync(currentUser.id, currentNeighborhood.id, authToken);
+
+    // Watch for incoming notifications
+    this._notificationSubscription = Notifications.addListener(this._handleNotification);
+  }
+
+  _handleNotification = ({ origin, data }) => {
+    console.log(`Push notification ${origin} with data: ${JSON.stringify(data)}`);
+  };
+
+  render(){
+    return (<AppTabNavigator />)
+  }
+}
+
+const mapStateToProps = state => ({
+  currentUser: state.currentsReducer.user,
+  currentNeighborhood: state.currentsReducer.neighborhood,
+  authToken: state.authReducer.authToken
+});
+
+export default connect(mapStateToProps)(MainTabNavigator);
 
 const sosStyle = {
   position: 'absolute',

@@ -159,38 +159,40 @@ class PublicationScreen extends React.Component{
                 <Text style={styles.description}>{publication.description}</Text>
               </View>
             </View>
-            <View style={styles.commentSection}>
-              {this.state.loadingComments && (
-                <ActivityIndicator />
-              )}
-              <FlatList
-                data={this.state.comments}
-                renderItem={this.renderComment}
-                keyExtractor={ (item, index) => index }
-              />
-              <View style={styles.comment}>
-                <TextInput
-                  multiline={true}
-                  underlineColorAndroid="transparent"
-                  value={this.state.comment}
-                  onChangeText={t => this.setState({comment: t})}
-                  placeholder="Escribe un comentario..."
-                  style={styles.commentInput}
-                  onFocus={() => this.sv.scrollToEnd()}
+            {!this.category.admin && (
+              <View style={styles.commentSection}>
+                {this.state.loadingComments && (
+                  <ActivityIndicator />
+                )}
+                <FlatList
+                  data={this.state.comments}
+                  renderItem={this.renderComment}
+                  keyExtractor={ (item, index) => index }
                 />
-                <TouchableOpacity
-                  onPress={this.comment}
-                  disabled={!this.state.comment}
-                  style={styles.commentButton}
-                >
-                  <Text
-                    style={[styles.commentButtonText, this.state.comment && styles.commentButtonActive]}
+                <View style={styles.comment}>
+                  <TextInput
+                    multiline={true}
+                    underlineColorAndroid="transparent"
+                    value={this.state.comment}
+                    onChangeText={t => this.setState({comment: t})}
+                    placeholder="Escribe un comentario..."
+                    style={styles.commentInput}
+                    onFocus={() => this.sv.scrollToEnd()}
+                  />
+                  <TouchableOpacity
+                    onPress={this.comment}
+                    disabled={!this.state.comment}
+                    style={styles.commentButton}
                   >
-                    Comentar
-                  </Text>
-                </TouchableOpacity>
+                    <Text
+                      style={[styles.commentButtonText, this.state.comment && styles.commentButtonActive]}
+                    >
+                      Comentar
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
+            )}
             {menuOpen && (
               <TouchableWithoutFeedback onPress={this.menu.toggleMenu}>
                 <View style={styles.menuClose} />

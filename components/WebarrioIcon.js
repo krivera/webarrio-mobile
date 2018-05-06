@@ -6,13 +6,19 @@ import RecommendationIcon from '../assets/icons/recommendation';
 import CarIcon from '../assets/icons/car';
 import AnnouncementIcon from '../assets/icons/announcement';
 import ListingIcon from '../assets/icons/listing';
-import LoopIcon from '../assets/icons/loop';
+import LoopIcon from '../assets/icons/all';
 import UserIcon from '../assets/icons/user';
 import HomeIcon from '../assets/icons/home';
 import DashboardIcon from '../assets/icons/dashboard';
 import ChatIcon from '../assets/icons/chat';
 import SosIcon from '../assets/icons/sos';
 import PeopleIcon from '../assets/icons/people';
+import FireIcon from "../assets/icons/fire";
+import CopIcon from "../assets/icons/cop";
+import CrossIcon from "../assets/icons/cross";
+import PollIcon from "../assets/icons/poll";
+import AdminAnnouncementIcon from "../assets/icons/admin_announce";
+
 export default class WebarrioIcon extends React.PureComponent{
   render(){
     switch (this.props.name){
@@ -42,6 +48,16 @@ export default class WebarrioIcon extends React.PureComponent{
         return (<ChatIcon {...this.props} />);
       case 'people':
         return (<PeopleIcon {...this.props} />);
+      case 'fire':
+        return (<FireIcon {...this.props} />);
+      case 'cross':
+        return (<CrossIcon {...this.props} />);
+      case 'cop':
+        return (<CopIcon {...this.props} />);
+      case 'poll':
+        return (<PollIcon {...this.props} />);
+      case 'admin-announcement':
+        return (<AdminAnnouncementIcon {...this.props} />);
       default:
         return (<View />);
     }

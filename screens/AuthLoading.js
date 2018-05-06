@@ -8,6 +8,7 @@ import {
 import { connect } from 'react-redux';
 import { API_URL } from 'react-native-dotenv';
 import axios from 'axios';
+import BallScalePulse from '../components/BallScalePulse';
 
 const mapStateToProps = (state) => {
   return {
@@ -41,8 +42,8 @@ class AuthLoadingScreen extends React.Component {
   // Render any loading content that you like here
   render() {
     return (
-      <View>
-        <ActivityIndicator />
+      <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+        <BallScalePulse size={40} outerColor="#ddd" innerColor="#eee" />
         <StatusBar barStyle="default" />
       </View>
     );

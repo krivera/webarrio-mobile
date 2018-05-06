@@ -22,7 +22,7 @@ import ContactsIcon from '../assets/icons/contacts';
 import CommunityIcon from '../assets/icons/community';
 import MoneyIcon from '../assets/icons/money';
 import WebarrioIcon from '../components/WebarrioIcon';
-import { closeSession } from '../actions/auth';
+import ProfileMenu from '../components/profileMenu';
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -45,20 +45,16 @@ class HomeScreen extends React.Component {
       profileMenuWidth: new Animated.Value(0),
     }
     this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
+    this.goToLoad = this.goToLoad.bind(this);
   }
 
   toggleProfileMenu() {
     const toMenuOpen = !this.state.profileMenuOpen;
     this.setState({profileMenuOpen: toMenuOpen});
     Animated.timing(this.state.profileMenuWidth, {
-      toValue: toMenuOpen ? 150 : 0,
+      toValue: toMenuOpen ? 200 : 0,
       duration: 250,
     }).start();
-  }
-
-  componentWillReceiveProps(newProps) {
-    if(newProps.authToken !== this.props.authToken)
-      this.props.navigation.navigate('AuthLoading')
   }
 
   componentWillMount(){
@@ -77,12 +73,15 @@ class HomeScreen extends React.Component {
     };
   }
 
-  closeSession = () => {
-    this.props.dispatch(closeSession());
-  }
+  goToLoad = () => this.props.navigation.replace('AuthLoading');
 
   render() {
-    const { currentApartment, currentNeighborhood, currentUnit } = this.props;
+    const {
+      currentApartment,
+      currentNeighborhood,
+      currentUnit,
+      navigation
+    } = this.props;
     return (
       <View>
         <TouchableOpacity style={styles.current}>
@@ -127,13 +126,12 @@ class HomeScreen extends React.Component {
         {this.state.profileMenuOpen && (
           <TouchableWithoutFeedback
             onPress={this.toggleProfileMenu}
-            style={styles.closeMenu}
-          ><View /></TouchableWithoutFeedback>
+          >
+            <View style={styles.closeMenu} />
+          </TouchableWithoutFeedback>
         )}
         <Animated.View style={[styles.profileMenu, {width: this.state.profileMenuWidth}]}>
-          <TouchableOpacity onPress={this.closeSession}>
-            <Text>Cerrar Sesión</Text>
-          </TouchableOpacity>
+          <ProfileMenu navigation={navigation} goToLoad={this.goToLoad} />
         </Animated.View>
       </View>
     );

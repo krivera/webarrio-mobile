@@ -71,6 +71,9 @@ class ChatListScreen extends React.Component {
             <ActivityIndicator />
           </View>
         )}
+        {!isRequestingChats && chats.length === 0 && (
+          <Text>Aún no hay conversaciones</Text>
+        )}
         <FlatList
           renderItem={this.renderChat}
           keyExtractor={(item, index) => index}

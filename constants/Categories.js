@@ -30,6 +30,18 @@ export default [
     filter: 'listing'
   },
   {
+    name: 'Anuncios administración',
+    icon: 'admin-announcement',
+    filter: 'admin-announcement',
+    admin: true
+  },
+  {
+    name: 'Asambleas',
+    icon: 'poll',
+    filter: 'poll',
+    admin: true
+  },
+  {
     name: 'Todos',
     icon: 'loop',
     filter: 'all'

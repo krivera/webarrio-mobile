@@ -10,12 +10,10 @@ let initialState = {
 export default (state=initialState, action) => {
   switch (action.type){
     case SET_CURRENT:
-      let new_state = {};
-      new_state[action.key] = action.value;
-      return {
-        ...state,
-        ...new_state
-      }
+      let new_state = {
+        [action.key]: action.value
+      };
+      return Object.assign({}, state, new_state);
     default:
       return state
   }

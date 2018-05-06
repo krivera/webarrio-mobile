@@ -44,7 +44,10 @@ export default class PublicationCard extends React.Component{
     const { publication, navigate, currentUserId, report } = this.props;
     const published = new Date(publication.created_at);
     return(
-      <View style={styles.layout}>
+      <View style={[
+        styles.layout,
+        this.category.admin && styles.adminCard
+      ]}>
         <View style={styles.imageSection}>
           <Avatar source={{uri: publication.author.avatar}} name={publication.author.name} />
         </View>
@@ -155,5 +158,8 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: 'transparent'
+  },
+  adminCard: {
+    backgroundColor: Colors.orangeLight
   }
 });

@@ -6,10 +6,11 @@ let initialState = {authToken: null};
 const authReducer = (state=initialState, action) => {
   switch(action.type){
     case AUTH_TOKEN_UPDATED:
-      return {
-        ...state,
-        authToken: action.authToken,
-      };
+      return Object.assign(
+        {},
+        state,
+        { authToken: action.authToken }
+      );
     case DESTROY_TOKEN:
       return {
         authToken: ''
