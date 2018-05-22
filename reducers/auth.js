@@ -1,7 +1,7 @@
 import { AUTH_TOKEN_UPDATED, DESTROY_TOKEN } from '../actions/auth';
 import { REHYDRATE } from 'redux-persist/es/constants';
 
-let initialState = {authToken: null};
+const initialState = {authToken: null};
 
 const authReducer = (state=initialState, action) => {
   switch(action.type){

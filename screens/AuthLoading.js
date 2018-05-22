@@ -10,6 +10,7 @@ import { API_URL } from 'react-native-dotenv';
 import axios from 'axios';
 import BallScalePulse from '../components/BallScalePulse';
 
+
 const mapStateToProps = (state) => {
   return {
     authToken: state.authReducer.authToken

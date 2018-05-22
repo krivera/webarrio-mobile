@@ -40,9 +40,9 @@ class NeighborsScreen extends React.Component{
         style={styles.neighbor}
         onPress={() => navigation.navigate('Chat', {user: neighbor})}
       >
-        <Avatar source={{uri: neighbor.avatar}} />
+        <Avatar source={{uri: neighbor.avatar}} name={neighbor.name} />
         <Text>
-          {neighbor.name} del {neighbor.apartments[0].number}
+          {neighbor.name} de {neighbor.apartments[0].number}
         </Text>
       </TouchableOpacity>
     )
@@ -57,7 +57,7 @@ class NeighborsScreen extends React.Component{
       }
     );
     return(
-      <View>
+      <View style={styles.screen}>
         <View style={styles.searchBar}>
           <Ionicons name="ios-search" size={20} color="#c7c7cd" />
           <TextInput
@@ -74,7 +74,7 @@ class NeighborsScreen extends React.Component{
         <FlatList
           data={filteredNeighbors}
           renderItem={this.renderNeighbor}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => `${index}`}
         />
       </View>
     )
@@ -110,5 +110,8 @@ const styles = StyleSheet.create({
   searchInput: {
     paddingHorizontal: 10,
     flex: 1
+  },
+  screen: {
+    flex: 1,
   }
 })

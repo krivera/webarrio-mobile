@@ -7,7 +7,7 @@ export default class CommunityIcon extends React.PureComponent{
     size = size || 51;
     color = color || 'black';
     const st0 = { fill: "#FFFFFF", stroke: "#FFFFFF", strokeWidth: 1.2, strokeMiterlimit: 10 };
-    const st1 = { fill: "#CD672B" };
+    const st1 = { fill: "#fff" };
     const st2 = { fill: "#FFFFFF" }
     return(
       <Svg id="Capa_1" width={size} height={size} viewBox={`0 0 ${size} ${size}`}>

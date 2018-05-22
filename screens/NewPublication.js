@@ -16,6 +16,7 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native';
+import { Permissions } from 'expo';
 import { connect } from 'react-redux';
 import { ImagePicker } from 'expo';
 import { Feather } from '@expo/vector-icons';
@@ -156,14 +157,24 @@ class NewPublicationScreen extends React.Component{
   }
 
   selectPicture = async () => {
-    let image = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: false,
-      mediaTypes: 'Images'
+    Promise.all([
+      Permissions.askAsync(Permissions.CAMERA),
+      Permissions.askAsync(Permissions.CAMERA_ROLL)
+    ]).then(res =>
+      res.filter(r => r.status === 'granted')
+    ).then(async (permissions) => {
+      if(permissions.length === 2) {
+        let image = await ImagePicker.launchImageLibraryAsync({
+          allowsEditing: false,
+          mediaTypes: 'Images'
+        });
+
+        if (!image.cancelled) {
+          this.setState({ image: image.uri });
+        }
+      }
     });
 
-    if (!image.cancelled) {
-      this.setState({ image: image.uri });
-    }
   }
 
   savePublication = () => {

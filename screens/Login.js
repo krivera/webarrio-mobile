@@ -97,7 +97,7 @@ class LoginScreen extends React.Component{
               <Text style={authStyles.helperText}>Olvidé mi clave</Text>
             </TouchableOpacity>
             <Text style={authStyles.buttonText}>  |  </Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigate('Forgot2')}>
               <Text style={authStyles.helperText}>Tengo una invitación</Text>
             </TouchableOpacity>
           </View>

@@ -19,8 +19,10 @@ import { Feather } from '@expo/vector-icons';
 import SideMenu from 'react-native-side-menu';
 import Categories from '../components/Categories';
 import Report from '../components/Report';
+import BallScalePulse from '../components/BallScalePulse';
 
 const { height: fullHeight } = Dimensions.get('window');
+const PAGE_SIZE = 25;
 
 class CommunityScreen extends React.Component {
   constructor(props){
@@ -33,7 +35,8 @@ class CommunityScreen extends React.Component {
       reportOpen: false,
       reportingId: '',
       offset: 0,
-      loading: true
+      loading: true,
+      endReached: false
     }
     this.toggleFilter = this.toggleFilter.bind(this);
     this.newPublication = this.newPublication.bind(this);
@@ -59,9 +62,11 @@ class CommunityScreen extends React.Component {
   }
 
   getFeed = () => {
+    if(this.state.endReached) return;
     const { authToken, currentUnit } = this.props;
     const filter = this.state.filter;
     let url_end = filter !== 'all' ? '/' + filter : '';
+    url_end += '?page=' + (1 + (this.state.publications.length / PAGE_SIZE));
     this.setState({loading: true});
     axios.get(API_URL + '/units/' + currentUnit.id + '/publications/feed' + url_end, {
       headers: {
@@ -70,15 +75,16 @@ class CommunityScreen extends React.Component {
     })
     .then((response) => {
       this.setState({
-        publications: response.data.publications,
-        loading: false
+        publications: this.state.publications.concat(response.data.publications),
+        loading: false,
+        endReached: response.data.publications.length < PAGE_SIZE
       });
     });
   }
 
   setFilter = category => {
     if(this.state.filter !== category.filter) {
-      this.setState({filter: category.filter, publications: []}, this.getFeed);
+      this.setState({filter: category.filter, publications: [], endReached: false}, this.getFeed);
       this.props.navigation.setParams({title: category.filter === 'all' ? 'Comunidad' : category.name});
     }
     this.toggleFilter();
@@ -134,6 +140,14 @@ class CommunityScreen extends React.Component {
 
   closeReport = () => this.setState({reportOpen: false});
 
+  loading = () => {
+    return (<View style={styles.loading}>
+      {!this.state.endReached &&(
+        <ActivityIndicator />
+      )}
+    </View>);
+  }
+
   render(){
     const { currentUser, currentUnit } = this.props;
     const {
@@ -150,10 +164,12 @@ class CommunityScreen extends React.Component {
         <View style={styles.screen}>
         <FlatList
           data={publications}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => `${index}`}
           renderItem={this.renderPublication}
+          onEndReached={this.getFeed}
+          onEndReachedThreshold={0.2}
+          ListFooterComponent={this.loading}
         />
-        {loading && (<ActivityIndicator />)}
         {!loading && publications.length == 0 && (
           <Text>No hay publicaciones aún</Text>
         )}
@@ -211,5 +227,9 @@ const styles = StyleSheet.create({
   },
   screen: {
     flex: 1
+  },
+  loading: {
+    alignSelf: 'stretch',
+    alignItems: 'center'
   }
 });

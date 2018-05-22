@@ -11,6 +11,6 @@ export function setNeighborhoodTree(data){
 export function setNeighborhoods(neighborhoods){
   return {
     type: SET_NEIGHBORHOODS,
-    neighborhoods
-  }
+    neighborhoods: neighborhoods,
+  };
 }

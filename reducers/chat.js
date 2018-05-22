@@ -35,7 +35,9 @@ const chatReducer = (state=initialState, action) => {
       };
     case ADD_MESSAGES_TO_CHAT:
       let addedMessages = {
-        [action.chatId]: action.messages
+        [action.chatId]: state.messages[action.chatId]
+          ? {...state.messages[action.chatId], ...action.messages}
+          : action.messages
       };
       return {
         chats: state.chats,

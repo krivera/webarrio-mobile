@@ -114,7 +114,7 @@ class ChatScreen extends React.Component{
       apartment: currentApartment.number
     }
     const { user } = this.props.navigation.state.params;
-    let this_messages = this.chatId
+    let this_messages = this.chatId && messages[this.chatId]
       ? Object.values(messages[this.chatId]).sort((a, b) => b.createdAt - a.createdAt)
       : [MESSAGE_ZERO(user.name)];
     return (

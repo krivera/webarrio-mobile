@@ -25,7 +25,7 @@ export default class Forgot extends React.Component{
   }
 
   back = () => {
-    this.props.navigation.navigate("Forgot");
+    this.props.navigation.navigate("Login");
   }
 
   validate = () => {
@@ -49,8 +49,12 @@ export default class Forgot extends React.Component{
   }
 
   updatePassword = () => {
-    this.setState({loading: true});
+    this.setState({loading: true, error: false});
     const { password, password_confirmation, token } = this.state;
+    if(password !== password_confirmation){
+      this.setState({loading: false, error: 'Repetir contraseña y contraseña no coinciden'});
+      return;
+    }
     Axios.put(
       `${API_URL}/users/password`,
       {
@@ -74,6 +78,10 @@ export default class Forgot extends React.Component{
           }
         ]
       )
+    }).catch(error => {
+      if(error.response && error.response.data){
+        this.setState({loading: false, error: 'No se pudo crear la contraseña.\nPosibles causas: Contraseña no segura, el código ha expirado'})
+      }
     })
   }
 
@@ -120,7 +128,10 @@ export default class Forgot extends React.Component{
           </TouchableOpacity>
         )}
         {validToken && (
-          <TouchableOpacity style={authStyles.button} onPress={this.updatePassword}>
+          <TouchableOpacity
+            style={authStyles.button}
+            onPress={this.updatePassword}
+          >
             <Text style={authStyles.buttonText}>RESTABLECER CONTRASEÑA</Text>
           </TouchableOpacity>
         )}
