@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { API_URL } from 'react-native-dotenv';
 import firebase from "../api/firebase";
 
 export const CHATS_LOADED = 'CHATS_LOADED';
@@ -39,17 +41,33 @@ export function fetchMessages (chatId) {
   }
 }
 
-export function sendMessage (chatId, message, neighborhood, sender, receiver) {
+export function sendMessage (chatId, message, neighborhood, sender, recipient, authToken) {
   const ref = firebase.database().ref();
   const newMsgRef = ref.child(`/messages/${chatId}/${message._id}`)
     .set(message);
-  ref.child(`/users/${sender}/chats/${neighborhood}/${receiver}`).update({
+  ref.child(`/users/${sender}/chats/${neighborhood}/${recipient}`).update({
     lastMessage: message.text,
     updatedAt: message.createdAt,
   });
-  ref.child(`/users/${receiver}/chats/${neighborhood}/${sender}`).update({
+  ref.child(`/users/${recipient}/chats/${neighborhood}/${sender}`).update({
     lastMessage: message.text,
     updatedAt: message.createdAt,
+  })
+  .then(data => {
+    axios.post(
+      `${API_URL}/users/send_notification`,
+      {
+        from: sender,
+        to: recipient,
+        message: message.text,
+        chatId
+      },
+      {
+        headers: {
+          Authorization: authToken
+        }
+      }
+    )
   });
   let messages = {};
   messages[message._id] = message

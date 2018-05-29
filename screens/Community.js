@@ -5,6 +5,7 @@ import {
   Dimensions,
   FlatList,
   KeyboardAvoidingView,
+  RefreshControl,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -35,8 +36,9 @@ class CommunityScreen extends React.Component {
       reportOpen: false,
       reportingId: '',
       offset: 0,
-      loading: true,
-      endReached: false
+      loading: false,
+      endReached: false,
+      refreshing: false,
     }
     this.toggleFilter = this.toggleFilter.bind(this);
     this.newPublication = this.newPublication.bind(this);
@@ -62,11 +64,12 @@ class CommunityScreen extends React.Component {
   }
 
   getFeed = () => {
-    if(this.state.endReached) return;
+    if(this.state.endReached || this.state.loading) return;
     const { authToken, currentUnit } = this.props;
     const filter = this.state.filter;
     let url_end = filter !== 'all' ? '/' + filter : '';
-    url_end += '?page=' + (1 + (this.state.publications.length / PAGE_SIZE));
+    if(!this.state.refreshing)
+      url_end += '?page=' + (1 + (this.state.publications.length / PAGE_SIZE));
     this.setState({loading: true});
     axios.get(API_URL + '/units/' + currentUnit.id + '/publications/feed' + url_end, {
       headers: {
@@ -74,10 +77,14 @@ class CommunityScreen extends React.Component {
       }
     })
     .then((response) => {
+      const publications = this.state.refreshing
+        ? response.data.publications
+        : this.state.publications.concat(response.data.publications);
       this.setState({
-        publications: this.state.publications.concat(response.data.publications),
+        publications: publications,
         loading: false,
-        endReached: response.data.publications.length < PAGE_SIZE
+        endReached: response.data.publications.length < PAGE_SIZE,
+        refreshing: false
       });
     });
   }
@@ -148,6 +155,22 @@ class CommunityScreen extends React.Component {
     </View>);
   }
 
+  onRefresh = () => {
+    this.setState({
+      refreshing: true,
+      endReached: false,
+    }, this.getFeed);
+  }
+
+  refreshControl = () => {
+    return (
+      <RefreshControl
+        refreshing={this.state.refreshing}
+        onRefresh={this.onRefresh}
+      />
+    )
+  }
+
   render(){
     const { currentUser, currentUnit } = this.props;
     const {
@@ -163,6 +186,7 @@ class CommunityScreen extends React.Component {
       <View style={styles.screen} onLayout={this.onLayout}>
         <View style={styles.screen}>
         <FlatList
+          refreshControl={this.refreshControl()}
           data={publications}
           keyExtractor={(item, index) => `${index}`}
           renderItem={this.renderPublication}

@@ -76,7 +76,7 @@ class ChatListScreen extends React.Component {
         )}
         <FlatList
           renderItem={this.renderChat}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => `${index}`}
           data={chats}
         />
       </View>

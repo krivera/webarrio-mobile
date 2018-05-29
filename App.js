@@ -3,7 +3,8 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/lib/integration/react'
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { FormattedProvider } from 'react-native-globalize';
 import RootNavigation from './navigation/RootNavigation';
 import configStore from './store';
 
@@ -28,11 +29,13 @@ export default class App extends React.Component {
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
-          <Provider store={store}>
-            <PersistGate persistor={persistor}>
-              <RootNavigation />
-            </PersistGate>
-          </Provider>
+          <FormattedProvider locale="es">
+            <Provider store={store}>
+              <PersistGate persistor={persistor}>
+                <RootNavigation />
+              </PersistGate>
+            </Provider>
+          </FormattedProvider>
         </View>
       );
     }

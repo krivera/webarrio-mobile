@@ -15,6 +15,7 @@ import { Header } from 'react-navigation';
 import firebase from '../api/firebase';
 import Colors from '../constants/Colors';
 import BackButton from '../components/BackButton';
+import Avatar from '../components/Avatar';
 import { fetchMessages, sendMessage } from '../actions/chat';
 
 const MESSAGE_ZERO = name => ({
@@ -27,11 +28,15 @@ const MESSAGE_ZERO = name => ({
 const { height: fullHeight } = Dimensions.get('window');
 
 class ChatScreen extends React.Component{
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Conversación',
-    headerLeft: (<BackButton navigation={navigation} />),
-    tabBarVisible: false
-  });
+  static navigationOptions = ({ navigation }) => {
+    const { user } = navigation.state.params;
+    return {
+      headerTitle: `${user.name} (${user.apartments[0].number})`,
+      headerLeft: (<BackButton navigation={navigation} />),
+      headerRight: (<Avatar source={{uri: user.avatar}} name={user.name} />),
+      tabBarVisible: false
+    };
+  }
 
   constructor(props){
     super(props);
@@ -65,6 +70,7 @@ class ChatScreen extends React.Component{
       currentNeighborhood,
       currentApartment,
       dispatch,
+      authToken,
     } = this.props;
     if(!this.chatId){
       const createdAt = new Date();
@@ -93,7 +99,8 @@ class ChatScreen extends React.Component{
         { ...message, createdAt: message.createdAt.getTime() },
         currentNeighborhood.id,
         currentUser.id,
-        user.id
+        user.id,
+        authToken
       ));
     }
   }
@@ -120,6 +127,7 @@ class ChatScreen extends React.Component{
     return (
       <View style={styles.screen} onLayout={this.onLayout}>
         <GiftedChat
+          renderAvatar={null}
           messages={this_messages}
           onSend={this.send}
           user={chatUser}
@@ -147,7 +155,8 @@ const mapStateToProps = state => ({
   currentNeighborhood: state.currentsReducer.neighborhood,
   currentApartment: state.currentsReducer.apartment,
   messages: state.chatReducer.messages,
-  chats: state.chatReducer.chats
+  chats: state.chatReducer.chats,
+  authToken: state.authReducer.authToken,
 });
 
 export default connect(mapStateToProps)(ChatScreen);
