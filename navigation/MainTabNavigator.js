@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import {
   StackNavigator,
   TabNavigator,
@@ -8,11 +8,13 @@ import {
 } from 'react-navigation';
 import { Notifications } from "expo";
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
+import { handleNotification } from '../actions/navigation';
 
 import Colors from '../constants/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
 import DashboardScreen from '../screens/Dashboard';
+import Expenses from '../screens/Expenses';
 import ChatListScreen from '../screens/ChatList';
 import ChatScreen from '../screens/Chat';
 import NeighborsScreen from '../screens/Neighbors';
@@ -21,6 +23,8 @@ import NewPublicationScreen from '../screens/NewPublication';
 import SosScreen from '../screens/Sos';
 import PublicationScreen from '../screens/Publication';
 import WebarrioIcon from '../components/WebarrioIcon';
+
+export let navigatorRef;
 
 const header = {
   headerForceInset: {top: 5},
@@ -77,7 +81,7 @@ const HomeStack = StackNavigator(
 
 const DashboardStack = StackNavigator(
   {
-    Administration: DashboardScreen
+    Expenses
   },
   {
     headerMode: 'screen',
@@ -90,7 +94,7 @@ const AppTabNavigator = TabNavigator(
     //Home: HomeStack,
     Community: CommunityStack,
     Chats: ChatStack,
-    //Dashboard: DashboardStack,
+    Dashboard: DashboardStack,
     Sos: SosScreen
   },
   {
@@ -145,6 +149,7 @@ const AppTabNavigator = TabNavigator(
 class MainTabNavigator extends React.Component{
   componentDidMount = () => {
     this._registerForPushNotifications();
+    navigatorRef = this.navigator;
   }
 
   componentWillUnmount() {
@@ -164,11 +169,14 @@ class MainTabNavigator extends React.Component{
   }
 
   _handleNotification = ({ origin, data }) => {
+    if(origin === 'selected'){
+      this.props.dispatch(handleNotification(data));
+    }
     console.log(`Push notification ${origin} with data: ${JSON.stringify(data)}`);
   };
 
   render(){
-    return (<AppTabNavigator />)
+    return (<AppTabNavigator ref={r => this.navigator = r} />)
   }
 }
 

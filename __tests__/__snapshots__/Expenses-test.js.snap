@@ -1,0 +1,346 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render individual expense 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#92a2a2",
+      "borderBottomWidth": 0.5,
+    }
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "opacity": 1,
+        "padding": 15,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Enero
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "textAlign": "right",
+          },
+          Object {
+            "color": "#92a2a2",
+            "fontSize": 22,
+          },
+        ]
+      }
+    >
+      $ 
+      123.123
+    </Text>
+  </View>
+  <View
+    collapsable={undefined}
+    pointerEvents="none"
+    style={
+      Object {
+        "height": 0,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <View
+      collapsable={undefined}
+      onLayout={[Function]}
+      style={Object {}}
+    >
+      <View
+        style={
+          Object {
+            "height": null,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignSelf": "center",
+              "paddingBottom": 15,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontWeight": "bold",
+              }
+            }
+          >
+            Detalle de gastos
+          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "width": 200,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "width": 30,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              />
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              LUZ
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "flex": 1,
+                  "textAlign": "right",
+                }
+              }
+            >
+              $ 
+              123
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "width": 200,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "width": 30,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              />
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              AGUA
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "flex": 1,
+                  "textAlign": "right",
+                }
+              }
+            >
+              $ 
+              124
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "width": 200,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "width": 30,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              />
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              GAS
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "flex": 1,
+                  "textAlign": "right",
+                }
+              }
+            >
+              $ 
+              126
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "width": 200,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "width": 30,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              />
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              PERSONAL
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "flex": 1,
+                  "textAlign": "right",
+                }
+              }
+            >
+              $ 
+              125
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "width": 200,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "width": 30,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              />
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            >
+              OTROS
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "flex": 1,
+                  "textAlign": "right",
+                }
+              }
+            >
+              $ 
+              127
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
