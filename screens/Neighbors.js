@@ -42,7 +42,9 @@ class NeighborsScreen extends React.Component{
       >
         <Avatar source={{uri: neighbor.avatar}} name={neighbor.name} />
         <Text>
-          {neighbor.name} de {neighbor.apartments[0].number}
+          {neighbor.name}{neighbor.apartments && neighbor.apartments.length
+            ? ' de ' + neighbor.apartments[0].number
+            : ''}
         </Text>
       </TouchableOpacity>
     )

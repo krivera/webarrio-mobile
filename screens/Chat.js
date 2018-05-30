@@ -31,7 +31,7 @@ class ChatScreen extends React.Component{
   static navigationOptions = ({ navigation }) => {
     const { user } = navigation.state.params;
     return {
-      headerTitle: `${user.name} (${user.apartments[0].number})`,
+      headerTitle: user.name + (user.apartments && user.apartments.length ? ` (${user.apartments[0].number})` : ''),
       headerLeft: (<BackButton navigation={navigation} />),
       headerRight: (<Avatar source={{uri: user.avatar}} name={user.name} />),
       tabBarVisible: false
@@ -81,14 +81,14 @@ class ChatScreen extends React.Component{
         createdAt: createdAt,
         personPhoto: user.avatar,
         personName: user.name,
-        personApartment: user.apartments[0].number,
+        personApartment: user.apartments && user.apartments.length ? user.apartments[0].number : '',
         chatId: this.chatId
       });
       const chatRef2 = ref.child(`/users/${user.id}/chats/${currentNeighborhood.id}/${currentUser.id}`).set({
         createdAt: createdAt,
         personPhoto: currentUser.avatar,
         personName: currentUser.name,
-        personApartment: currentApartment.number,
+        personApartment: currentApartment ? currentApartment.number : '',
         chatId: this.chatId
       });
     }
@@ -118,7 +118,7 @@ class ChatScreen extends React.Component{
       _id: currentUser.id,
       avatar: currentUser.avatar,
       name: currentUser.name,
-      apartment: currentApartment.number
+      apartment: currentApartment ? currentApartment.number : ''
     }
     const { user } = this.props.navigation.state.params;
     let this_messages = this.chatId && messages[this.chatId]

@@ -30,7 +30,7 @@ class SosScreen extends React.Component {
     Axios.post(
       `${API_URL}/neighborhoods/${currentNeighborhood.id}/sos`,
       {
-        apartment_id: currentApartment.id
+        apartment_id: currentApartment ? currentApartment.id : null
       },
       {
         headers: {
