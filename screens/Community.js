@@ -21,6 +21,7 @@ import SideMenu from 'react-native-side-menu';
 import Categories from '../components/Categories';
 import Report from '../components/Report';
 import BallScalePulse from '../components/BallScalePulse';
+import Colors from '../constants/Colors';
 
 const { height: fullHeight } = Dimensions.get('window');
 const PAGE_SIZE = 25;
@@ -239,7 +240,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    backgroundColor: '#f6f6f7',
+    backgroundColor: Colors.menubkg,
     overflow: 'hidden'
   },
   touchToClose: {

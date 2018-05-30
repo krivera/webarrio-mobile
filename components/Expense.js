@@ -10,6 +10,7 @@ import { Ionicons, Foundation, SimpleLineIcons } from '@expo/vector-icons';
 import { withGlobalize } from 'react-native-globalize';
 import WebarrioIcon from '../components/WebarrioIcon';
 import Colors from '../constants/Colors';
+import { MonthsFull } from '../constants/utils';
 
 const ICON_SIZE = 25;
 
@@ -75,7 +76,7 @@ class Expense extends React.Component{
             color={Colors.orange}
             style={styles.collapseButton}
           /> 
-          <Text>{expense.month}</Text>
+          <Text>{MonthsFull[parseInt(expense.month) - 1]}</Text>
           <Text style={[styles.number, styles.total]}>
             $ {formatter(expense.total)}
           </Text>
@@ -141,4 +142,4 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: Colors.border
   }
-})
+});
