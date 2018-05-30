@@ -54,7 +54,7 @@ class ChatListScreen extends React.Component {
       >
         <Avatar source={{uri: chat.personPhoto}} name={chat.personName} />
         <View style={styles.middle}>
-          <Text style={styles.name}>{chat.personName} del {chat.personApartment}</Text>
+          <Text style={styles.name}>{chat.personName}{chat.personApartment ? ` de ${chat.personApartment}` : ''}</Text>
           <Text style={styles.lastMessage}>{chat.lastMessage}</Text>
         </View>
         <Text style={[styles.lastMessage]}>{date}</Text>
