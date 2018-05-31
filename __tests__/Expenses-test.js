@@ -2,9 +2,10 @@ import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Expense from '../components/Expense';
-import { FormattedProvider } from 'react-native-globalize'
+import { FormattedProvider } from 'react-native-globalize';
+import AddExpenseScreen from '../screens/AddExpense';
 
-it('should render individual expense', () => {
+it('renders individual expense', () => {
   const expense = {
     total: 123123,
     month: 'Enero',
@@ -20,5 +21,10 @@ it('should render individual expense', () => {
       <Expense expense={expense} />
     </FormattedProvider>
   ).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders expenses form', () => {
+  const tree = renderer.create(<AddExpenseScreen />).toJSON();
   expect(tree).toMatchSnapshot();
 });

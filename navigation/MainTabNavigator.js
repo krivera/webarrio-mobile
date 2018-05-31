@@ -15,6 +15,7 @@ import Colors from '../constants/Colors';
 import HomeScreen from '../screens/HomeScreen';
 import DashboardScreen from '../screens/Dashboard';
 import Expenses from '../screens/Expenses';
+import AddExpense from '../screens/AddExpense';
 import ChatListScreen from '../screens/ChatList';
 import ChatScreen from '../screens/Chat';
 import NeighborsScreen from '../screens/Neighbors';
@@ -81,7 +82,8 @@ const HomeStack = StackNavigator(
 
 const DashboardStack = StackNavigator(
   {
-    Expenses
+    Expenses,
+    AddExpense
   },
   {
     headerMode: 'screen',

@@ -1,6 +1,115 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render individual expense 1`] = `
+exports[`renders expenses form 1`] = `
+<View>
+  <View>
+    <View
+      style={undefined}
+    >
+      <RCTPicker
+        items={
+          Array [
+            Object {
+              "label": "ENERO",
+              "textColor": undefined,
+              "value": 1,
+            },
+            Object {
+              "label": "FEBRERO",
+              "textColor": undefined,
+              "value": 2,
+            },
+            Object {
+              "label": "MARZO",
+              "textColor": undefined,
+              "value": 3,
+            },
+            Object {
+              "label": "ABRIL",
+              "textColor": undefined,
+              "value": 4,
+            },
+            Object {
+              "label": "MAYO",
+              "textColor": undefined,
+              "value": 5,
+            },
+            Object {
+              "label": "JUNIO",
+              "textColor": undefined,
+              "value": 6,
+            },
+            Object {
+              "label": "JULIO",
+              "textColor": undefined,
+              "value": 7,
+            },
+            Object {
+              "label": "AGOSTO",
+              "textColor": undefined,
+              "value": 8,
+            },
+            Object {
+              "label": "SEPTIEMBRE",
+              "textColor": undefined,
+              "value": 9,
+            },
+            Object {
+              "label": "OCTUBRE",
+              "textColor": undefined,
+              "value": 10,
+            },
+            Object {
+              "label": "NOVIEMBRE",
+              "textColor": undefined,
+              "value": 11,
+            },
+            Object {
+              "label": "DICIEMBRE",
+              "textColor": undefined,
+              "value": 12,
+            },
+          ]
+        }
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        selectedIndex={3}
+        style={
+          Array [
+            Object {
+              "height": 216,
+            },
+            undefined,
+          ]
+        }
+      />
+    </View>
+    <View
+      style={undefined}
+    >
+      <RCTPicker
+        items={Array []}
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        selectedIndex={0}
+        style={
+          Array [
+            Object {
+              "height": 216,
+            },
+            undefined,
+          ]
+        }
+      />
+    </View>
+  </View>
+  )}
+</View>
+`;
+
+exports[`renders individual expense 1`] = `
 <View
   style={
     Object {
@@ -47,9 +156,7 @@ exports[`should render individual expense 1`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
-    >
-      Enero
-    </Text>
+    />
     <Text
       accessible={true}
       allowFontScaling={true}

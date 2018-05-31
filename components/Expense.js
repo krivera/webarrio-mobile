@@ -10,37 +10,7 @@ import { Ionicons, Foundation, SimpleLineIcons } from '@expo/vector-icons';
 import { withGlobalize } from 'react-native-globalize';
 import WebarrioIcon from '../components/WebarrioIcon';
 import Colors from '../constants/Colors';
-import { MonthsFull } from '../constants/utils';
-
-const ICON_SIZE = 25;
-
-const expenseDetail = [
-  {
-    key: 'electricity',
-    label: 'LUZ',
-    icon: (<Ionicons size={ICON_SIZE} name= 'ios-bulb-outline' />),
-  },
-  {
-    key: 'water',
-    label: 'AGUA',
-    icon: (<Ionicons size={ICON_SIZE} name= 'ios-water-outline' />),
-  },
-  {
-    key: 'gas',
-    label: 'GAS',
-    icon: (<Ionicons size={ICON_SIZE} name="ios-flame-outline" color="black" />),
-  },
-  {
-    key: 'staff',
-    label: 'PERSONAL',
-    icon: (<Ionicons size={ICON_SIZE} name="ios-people-outline" />),
-  },
-  {
-    key: 'extras',
-    label: 'OTROS',
-    icon: (<Ionicons size={ICON_SIZE} name="ios-add-circle-outline" />),
-  },
-]
+import { MonthsFull, ExpenseDetails } from '../constants/utils';
 
 class Expense extends React.Component{
   constructor(props) {
@@ -84,9 +54,9 @@ class Expense extends React.Component{
         <Collapsible collapsed={this.state.collapsed}>
           <View style={styles.detail}>
             <Text style={styles.detailHeader}>Detalle de gastos</Text>
-            {expenseDetail.map(detail => (
+            {ExpenseDetails.map(detail => (
               <View style={styles.row} key={detail.key}>
-                <View style={styles.iContainter}>
+                <View style={styles.iContainer}>
                   {detail.icon}
                 </View>
                 <Text>{detail.label}</Text>
@@ -104,7 +74,7 @@ class Expense extends React.Component{
 
 export default withGlobalize(Expense);
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     flex: 1,
@@ -124,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 200
   },
-  iContainter: {
+  iContainer: {
     width: 30, 
     alignItems: 'center'
   },
