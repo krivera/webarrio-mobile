@@ -22,6 +22,7 @@ export default class Avatar extends React.PureComponent{
       borderRadius: size_ / 2
     };
     const fontSize = size_ * 0.75;
+    let name_ = name || 'W';
 
     return (
       <View style={containerStyle}>
@@ -29,7 +30,7 @@ export default class Avatar extends React.PureComponent{
           {!this.state.loaded && (
             <View style={styles.letterContainer}>
               <Text style={[styles.letterAvatar, { fontSize }]}>
-                {name.slice(0,1).toUpperCase()}
+                {name_.slice(0,1).toUpperCase()}
               </Text>
             </View>
           )}
