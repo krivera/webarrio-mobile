@@ -228,8 +228,7 @@ exports[`renders the neighbors list 1`] = `
             ellipsizeMode="tail"
           >
             test
-             de 
-            1
+             de 1
           </Text>
         </View>
       </View>
