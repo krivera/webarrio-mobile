@@ -1,5 +1,7 @@
 import React from 'react';
 import {
+  Animated,
+  Easing,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -8,45 +10,76 @@ import {
 import Collapsible from 'react-native-collapsible';
 import { Ionicons, Foundation, SimpleLineIcons } from '@expo/vector-icons';
 import { withGlobalize } from 'react-native-globalize';
+import { Bar as ProgressBar } from 'react-native-progress';
 import WebarrioIcon from '../components/WebarrioIcon';
+import Button from '../components/Button';
 import Colors from '../constants/Colors';
 import { MonthsFull, ExpenseDetails } from '../constants/utils';
+
+const ICON_SIZE = 25;
 
 class Expense extends React.Component{
   constructor(props) {
     super(props);
   
     this.state = {
-      collapsed: true
+      collapsed: true,
+      flip: new Animated.Value(0)
     };
+    this.goToPayment = this.goToPayment.bind(this);
   }
 
   toggleCollapse = () => {
     this.setState({
       collapsed: !this.state.collapsed
-    });
+    }, () =>
+      Animated.timing(this.state.flip, {
+        toValue: this.state.collapsed ? 0 : 1,
+        duration: 300,
+        easing: Easing.linear
+      }).start()
+    );
+  }
+
+  goToPayment = () => {
+    this.props.goToPayment(this.props.expense)
   }
 
   render(){
-    const { expense, globalize } = this.props;
+    const { expense, globalize, treasurerView } = this.props;
     const formatter = globalize.getNumberFormatter({});
     let checkmark = 'ios-checkmark-circle';
-    if(!this.state.collapsed){
+    const spin = this.state.flip.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '180deg'],
+      useNativeDriver: true
+    });
+    let percentCollected = 0;
+    if(!expense.paid){
       checkmark += '-outline'
     }
+    if(treasurerView){
+      percentCollected = expense.collected / expense.total;
+    }
+
     return (
       <View style={styles.expense}>
         <TouchableOpacity
           onPress={this.toggleCollapse}
           style={styles.header}
         >
-          <Ionicons
-            size={25}
-            name={checkmark}
-            color={Colors.orange}
-            style={styles.collapseButton}
-          /> 
-          <Text>{MonthsFull[parseInt(expense.month) - 1]}</Text>
+          {!treasurerView && (
+            <Ionicons
+              size={25}
+              name={checkmark}
+              color={Colors.orange}
+              style={styles.collapseButton}
+            />
+          )}
+          <Text style={styles.month}>{MonthsFull[parseInt(expense.month) - 1]}</Text>
+          <Animated.View style={{transform: [{rotateX: spin}]}}>
+            <Ionicons name="ios-arrow-down" size={20} />
+          </Animated.View>
           <Text style={[styles.number, styles.total]}>
             $ {formatter(expense.total)}
           </Text>
@@ -57,14 +90,46 @@ class Expense extends React.Component{
             {ExpenseDetails.map(detail => (
               <View style={styles.row} key={detail.key}>
                 <View style={styles.iContainer}>
-                  {detail.icon}
+                  <Ionicons name={detail.icon} color={Colors.subHeading} size={ICON_SIZE} />
                 </View>
-                <Text>{detail.label}</Text>
+                <Text style={styles.detailText}>{detail.label}</Text>
                 <Text style={styles.number}>
-                  $ {formatter(expense[`total_${detail.key}`])}
+                  ${formatter(expense[`total_${detail.key}`])}
                 </Text>
               </View>
             ))}
+            {treasurerView && (
+              <View style={styles.treasurer}>
+                <View style={styles.row}>
+                  <Text style={styles.detailHeader}>Total Recaudado</Text>
+                  <Text style={[styles.number, styles.collected]}>
+                    $ {formatter(expense.collected)}
+                  </Text>
+                </View>
+                <View style={styles.progress}>
+                  <Text
+                    style={[styles.progressPercent, {width: 300 * percentCollected}]}
+                    numberOfLines={1}
+                  >
+                    {formatter(Math.round(100 * percentCollected))}%
+                  </Text>
+                  <ProgressBar
+                    progress={percentCollected}
+                    width={300}
+                    height={10}
+                    borderRadius={0}
+                    borderWidth={0}
+                    color={Colors.orange}
+                    unfilledColor={'#e9efef'}
+                  />
+                </View>
+              </View>
+            )}
+            {!treasurerView && (
+              <Button onPress={this.goToPayment}>
+                Pagar
+              </Button>
+            )}
           </View>
         </Collapsible>
       </View>
@@ -81,29 +146,41 @@ export const styles = StyleSheet.create({
     padding: 15,
     alignItems: 'center'
   },
+  month: {
+    fontSize: 20,
+    marginRight: 10
+  },
   number: {
     flex: 1,
     textAlign: 'right',
   },
   total: {
-    color: Colors.border,
+    color: Colors.orange,
     fontSize: 22
+  },
+  collected: {
+    color: Colors.orange,
+    fontSize: 20
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: 200
   },
   iContainer: {
     width: 30, 
-    alignItems: 'center'
+    alignItems: 'center',
+    marginLeft: -7
   },
   detail: {
-    alignSelf: 'center',
-    paddingBottom: 15
+    alignSelf: 'stretch',
+    paddingBottom: 15,
+    paddingHorizontal: 15
   },
   detailHeader: {
     fontWeight: 'bold'
+  },
+  detailText: {
+    color: Colors.subHeading
   },
   collapseButton: {
     paddingRight: 10
@@ -111,5 +188,17 @@ export const styles = StyleSheet.create({
   expense: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: Colors.border
+  },
+  progress: {
+    alignSelf: 'center',
+  },
+  progressPercent: {
+    color: Colors.orange,
+    textAlign: 'right',
+    fontSize: 20,
+    minWidth: 28
+  },
+  treasurer: {
+    paddingTop: 15
   }
 });

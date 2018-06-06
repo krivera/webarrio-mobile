@@ -40,13 +40,14 @@ class ExpensesScreen extends React.Component{
       menuOpen: false
     };
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.goToPayment = this.goToPayment.bind(this);
   }
 
   componentWillMount = () => {
     const { authToken, currentApartment, currentNeighborhood, navigation } = this.props;
     const treasurer = currentNeighborhood.user_roles.includes('treasurer');
-    const treasurerView = treasurer && !(navigation.state.params && navigation.state.params.personal);
-    const url = `${API_URL}/${treasurerView ? 'neighborhoods/' + currentNeighborhood.id : 'apartments/' + currentApartment.id}/common_expenses`;
+    this.treasurerView = treasurer && !(navigation.state.params && navigation.state.params.personal);
+    const url = `${API_URL}/${this.treasurerView ? 'neighborhoods/' + currentNeighborhood.id : 'apartments/' + currentApartment.id}/common_expenses`;
     Axios.get(
       url,
       {
@@ -74,8 +75,15 @@ class ExpensesScreen extends React.Component{
     })
   }
 
+  goToPayment = expense => this.props.navigation.navigate('Payment', { expense });
+
   renderExpense = ({ item: expense}) => {
-    return (<Expense expense={expense} />);
+    return (
+      <Expense
+        expense={expense}
+        treasurerView={this.treasurerView}
+        goToPayment={this.goToPayment}
+      />);
   }
 
   goToPersonal = () => {
