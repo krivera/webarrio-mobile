@@ -25,7 +25,7 @@ export default class FloatingLabelInput extends React.Component {
   }
 
   render() {
-    const { label, ...props } = this.props;
+    const { label, labelColor, ...props } = this.props;
     const labelStyle = {
       position: 'absolute',
       left: 0,
@@ -39,7 +39,7 @@ export default class FloatingLabelInput extends React.Component {
       }),
       color: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: ['#aaa', '#fff'],
+        outputRange: ['#aaa', labelColor],
       }),
     };
     return (
@@ -63,8 +63,7 @@ export default class FloatingLabelInput extends React.Component {
 style = {
   height: 26,
   fontSize: 20,
-  color: '#000',
   borderBottomWidth: 1,
   borderBottomColor: '#555',
-  margin: 10
+  margin: 5
 }

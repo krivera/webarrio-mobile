@@ -7,8 +7,11 @@ import {
   TabBarBottom
 } from 'react-navigation';
 import { Notifications } from "expo";
+import Axios from 'axios';
+import { API_URL } from 'react-native-dotenv';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 import { handleNotification } from '../actions/navigation';
+import { setInitialData } from '../actions/currents';
 
 import Colors from '../constants/Colors';
 
@@ -149,25 +152,34 @@ const AppTabNavigator = TabNavigator(
 );
 
 class MainTabNavigator extends React.Component{
+  componentWillMount = () => {
+    const { authToken, dispatch } = this.props;
+    Axios.get(
+      `${API_URL}/users/me`,
+      {
+        headers: {
+          Authorization: authToken
+        }
+      }
+    ).then(response => {
+      dispatch(setInitialData(response.data));
+      
+      // Send our push token over to our backend so we can receive notifications
+      // You can comment the following line out if you want to stop receiving
+      // a notification every time you open the app. Check out the source
+      // for this function in api/registerForPushNotificationsAsync.js
+      const { user, neighborhoods } = response.data;
+      registerForPushNotificationsAsync(user.id, neighborhoods[0].id, authToken);
+      this._notificationSubscription = Notifications.addListener(this._handleNotification);
+    })
+  }
+
   componentDidMount = () => {
-    this._registerForPushNotifications();
     navigatorRef = this.navigator;
   }
 
   componentWillUnmount() {
     this._notificationSubscription && this._notificationSubscription.remove();
-  }
-
-  _registerForPushNotifications() {
-    // Send our push token over to our backend so we can receive notifications
-    // You can comment the following line out if you want to stop receiving
-    // a notification every time you open the app. Check out the source
-    // for this function in api/registerForPushNotificationsAsync.js
-    const { currentUser, currentNeighborhood, authToken } = this.props;
-    registerForPushNotificationsAsync(currentUser.id, currentNeighborhood.id, authToken);
-
-    // Watch for incoming notifications
-    this._notificationSubscription = Notifications.addListener(this._handleNotification);
   }
 
   _handleNotification = ({ origin, data }) => {

@@ -94,7 +94,7 @@ class Expense extends React.Component{
                 </View>
                 <Text style={styles.detailText}>{detail.label}</Text>
                 <Text style={styles.number}>
-                  ${formatter(expense[`total_${detail.key}`])}
+                  ${formatter(expense[`${detail.key}`])}
                 </Text>
               </View>
             ))}
