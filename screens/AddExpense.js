@@ -14,7 +14,9 @@ import {
 } from 'react-native';
 import { API_URL } from 'react-native-dotenv';
 import { Picker as PickerIOS } from 'react-native-picker-dropdown';
+import Axios from 'axios';
 import FloatingLabelInput from '../components/FloatingLabel';
+import Loading from '../components/Loading';
 import BackButton from '../components/BackButton';
 import Button from '../components/Button';
 import { ExpenseDetails, MonthsFull } from '../constants/utils';
@@ -34,33 +36,34 @@ class AddExpenseScreen extends React.Component{
       month: now.getMonth() + 1,
       year: now.getFullYear(),
       total: 0,
+      portion: 0,
+      loading: false
     };
     ExpenseDetails.map(detail => this.state[detail.key] = '')
     this.maxYear = now.getFullYear();
   }
 
   handleChange = (key, value) => {
+    const { currentNeighborhood } = this.props;
     this.setState(
       {[key]: parseInt(value.replace('$', ''))}, 
-      () => this.setState({
-        total: ExpenseDetails.reduce((total, detail) => total + (parseInt(this.state[detail.key]) || 0), 0)
-      })
+      () => {
+        const total = ExpenseDetails.reduce((result, detail) => result + (parseInt(this.state[detail.key]) || 0), 0);
+        const portion = Math.ceil(total / currentNeighborhood.number_of_homes);
+        this.setState({ total, portion });
+      }
     );
   }
 
-  addExpense => () => {
+  addExpense = () => {
     this.setState({
       loading: true,
     }, () => {
-      const { authToken } = this.props;
-      let data = {
-        common_expense: {
-          total: this.state.total,
-          portion: this.state.portion,
-        }
-      }
+      const { authToken, currentNeighborhood, navigation } = this.props;
+      const { total , portion, year, month } = this.state;
+      let data = { total, portion, year, month };
       for(detail of ExpenseDetails){
-        data.common_expense[detail.key] = this.state[detail.key];
+        data[detail.key] = parseInt(this.state[detail.key] || 0);
       }
       Axios.post(
         `${API_URL}/neighborhoods/${currentNeighborhood.id}/common_expenses`,
@@ -70,13 +73,17 @@ class AddExpenseScreen extends React.Component{
             Authorization: authToken
           }
         }
-      ).then()
-    })
+      ).then(response => {
+        this.setState({loading: false})
+        navigation.goBack();
+        navigation.state.params.refreshList();
+      });
+    });
   }
 
   render(){
     const { currentNeighborhood } = this.props;
-    const { month, year, total } = this.state;
+    const { month, year, total, portion, loading } = this.state;
     const Picker_ = Platform.OS === 'ios' ? PickerIOS : Picker;
     return (
       <View style={styles.screen}>
@@ -138,20 +145,22 @@ class AddExpenseScreen extends React.Component{
                 labelColor="#000"
                 style={[styles.detailInput, styles.total]}
                 label="Prorratear"
-                value={`\$ ${Math.ceil(total / currentNeighborhood.number_of_homes)}`}
+                value={`\$ ${portion}`}
               />
             </View>
           </View>
           <Button onPress={this.addExpense}>Agregar</Button>
         </ScrollView>
         <KeyboardAvoidingView behavior="padding"/>
+        <Loading loading={loading} />
       </View>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  currentNeighborhood: state.currentsReducer.neighborhood
+  currentNeighborhood: state.currentsReducer.neighborhood,
+  authToken: state.authReducer.authToken,
 });
 
 export default connect(mapStateToProps)(AddExpenseScreen);

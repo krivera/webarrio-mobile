@@ -1,8 +1,9 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { withNavigation } from 'react-navigation';
 
-export default class BackButton extends React.PureComponent{
+class BackButton extends React.PureComponent{
   render(){
     return (
       <TouchableOpacity onPress={this.props.navigation.popToTop}>
@@ -11,3 +12,5 @@ export default class BackButton extends React.PureComponent{
     );
   }
 }
+
+export default withNavigation(BackButton);

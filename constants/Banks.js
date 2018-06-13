@@ -1,0 +1,16 @@
+export default [
+  'Banco de Chile / Edwards',
+  'Banco Internacional',
+  'Scotiabank',
+  'Banco de Crédito e Inversiones',
+  'Banco BICE',
+  'HSBC Bank',
+  'Banco Santander',
+  'Itaú Corpbanca',
+  'Banco Security',
+  'Banco Falabella',
+  'Banco Ripley',
+  'Banco Consorcio',
+  'Banco Bilbao Vizcaya Argentaria (BBVA)',
+  'Banco BTG Pactual',
+]

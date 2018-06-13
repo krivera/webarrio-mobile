@@ -15,6 +15,7 @@ import {
 import { API_URL } from 'react-native-dotenv';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import RefreshingList from '../components/RefreshingList';
 import PublicationCard from '../components/publicationCard';
 import { Feather } from '@expo/vector-icons';
 import SideMenu from 'react-native-side-menu';
@@ -92,14 +93,10 @@ class CommunityScreen extends React.Component {
 
   setFilter = category => {
     if(this.state.filter !== category.filter) {
-      this.setState({filter: category.filter, publications: [], endReached: false}, this.getFeed);
+      this.setState({filter: category.filter}, this.list.onRefresh);
       this.props.navigation.setParams({title: category.filter === 'all' ? 'Comunidad' : category.name});
     }
     this.toggleFilter();
-  }
-
-  componentWillMount(){
-    this.getFeed();
   }
 
   componentDidMount = () => {
@@ -148,56 +145,28 @@ class CommunityScreen extends React.Component {
 
   closeReport = () => this.setState({reportOpen: false});
 
-  loading = () => {
-    return (<View style={styles.loading}>
-      {!this.state.endReached &&(
-        <ActivityIndicator />
-      )}
-    </View>);
-  }
-
-  onRefresh = () => {
-    this.setState({
-      refreshing: true,
-      endReached: false,
-    }, this.getFeed);
-  }
-
-  refreshControl = () => {
-    return (
-      <RefreshControl
-        refreshing={this.state.refreshing}
-        onRefresh={this.onRefresh}
-      />
-    )
-  }
-
   render(){
-    const { currentUser, currentUnit } = this.props;
+    const { currentUser, currentUnit, authToken } = this.props;
     const {
       filterOpen,
       reportOpen,
       reportingId,
       offset,
-      publications,
       filterWidth,
-      loading
+      filter
     } = this.state;
+    let url = `${API_URL}/units/${currentUnit.id}/publications/feed`;
+    if(filter !== 'all') url += `/${filter}`;
     return (
       <View style={styles.screen} onLayout={this.onLayout}>
         <View style={styles.screen}>
-        <FlatList
-          refreshControl={this.refreshControl()}
-          data={publications}
-          keyExtractor={(item, index) => `${index}`}
+        <RefreshingList
+          ref={r => this.list = r}
           renderItem={this.renderPublication}
-          onEndReached={this.getFeed}
-          onEndReachedThreshold={0.2}
-          ListFooterComponent={this.loading}
+          authorization={authToken}
+          dataName="publications"
+          url={url}
         />
-        {!loading && publications.length == 0 && (
-          <Text>No hay publicaciones aún</Text>
-        )}
         {filterOpen && (
           <TouchableWithoutFeedback onPress={this.toggleFilter}>
             <View style={styles.touchToClose} />

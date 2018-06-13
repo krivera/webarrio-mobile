@@ -4,6 +4,7 @@ import {
   TextInput,
   Animated,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class FloatingLabelInput extends React.Component {
   state = {
@@ -25,7 +26,7 @@ export default class FloatingLabelInput extends React.Component {
   }
 
   render() {
-    const { label, labelColor, ...props } = this.props;
+    const { label, labelColor, containerStyle, ...props } = this.props;
     const labelStyle = {
       position: 'absolute',
       left: 0,
@@ -43,14 +44,14 @@ export default class FloatingLabelInput extends React.Component {
       }),
     };
     return (
-      <View style={{ paddingTop: 18 }}>
+      <View style={[{ paddingTop: 18 }, containerStyle]}>
         <Animated.Text style={labelStyle}>
           {label}
         </Animated.Text>
         <TextInput
           {...props}
           underlineColorAndroid="transparent"
-          style={[style, props.style]}
+          style={[{...style, borderBottomColor: labelColor}, props.style]}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           blurOnSubmit
@@ -60,10 +61,13 @@ export default class FloatingLabelInput extends React.Component {
   }
 }
 
+FloatingLabelInput.propTypes = {
+  label: PropTypes.string,
+  labelColor: PropTypes.string
+}
+
 style = {
   height: 26,
   fontSize: 20,
   borderBottomWidth: 1,
-  borderBottomColor: '#555',
-  margin: 5
 }

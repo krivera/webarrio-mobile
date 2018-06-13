@@ -10,11 +10,12 @@ it('renders individual expense', () => {
     total: 123123,
     month: 'Enero',
     year: 2018,
-    total_electricity: 123,
-    total_water: 124,
-    total_staff: 125,
-    total_gas: 126,
-    total_extras: 127,
+    electricity: 123,
+    water: 124,
+    staff: 125,
+    gas: 126,
+    extras: 127,
+    paid: false
   }
   const tree = renderer.create(
     <FormattedProvider locale='es'>

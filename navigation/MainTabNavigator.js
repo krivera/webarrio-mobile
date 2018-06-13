@@ -19,6 +19,8 @@ import HomeScreen from '../screens/HomeScreen';
 import DashboardScreen from '../screens/Dashboard';
 import Expenses from '../screens/Expenses';
 import AddExpense from '../screens/AddExpense';
+import PaymentMethods from '../screens/PaymentMethods';
+import AddPaymentMethod from '../screens/AddPaymentMethod';
 import ChatListScreen from '../screens/ChatList';
 import ChatScreen from '../screens/Chat';
 import NeighborsScreen from '../screens/Neighbors';
@@ -29,6 +31,13 @@ import PublicationScreen from '../screens/Publication';
 import WebarrioIcon from '../components/WebarrioIcon';
 
 export let navigatorRef;
+export let tabBarHeight = 0;
+
+const getTabBarHeight = ({
+  nativeEvent: { layout: { height } }
+}) => {
+  tabBarHeight = height;
+}
 
 const header = {
   headerForceInset: {top: 5},
@@ -86,7 +95,9 @@ const HomeStack = StackNavigator(
 const DashboardStack = StackNavigator(
   {
     Expenses,
-    AddExpense
+    AddExpense,
+    PaymentMethods,
+    AddPaymentMethod
   },
   {
     headerMode: 'screen',
@@ -122,7 +133,7 @@ const AppTabNavigator = TabNavigator(
             break;
           case 'Sos':
             return(
-              <View style={sosStyle}>
+              <View style={sosStyle} onLayout={getTabBarHeight}>
                 <WebarrioIcon
                   name='sos'
                   size={28}

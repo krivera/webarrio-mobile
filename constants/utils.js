@@ -30,4 +30,23 @@ export const ExpenseDetails = [
     label: 'Otros',
     icon: 'ios-add-circle-outline',
   },
-]
+];
+
+export const PaymentMethodTypes = {
+  'bank_transfer': {
+    label: 'Transferencia Bancaria',
+    attrs: [
+      {key: 'rut', label: 'RUT'},
+      {key: 'bank', label: 'Banco'},
+      {key: 'account_type', label: 'Tipo de cuenta'},
+      {key: 'account_number', label: 'Número de cuenta'},
+      {key: 'email', label: 'Mail'}
+    ]
+  },
+  'cash': {
+    label: 'Efectivo',
+    attrs: [
+      {key: 'address', label: 'Dirección'}
+    ]
+  }
+};
