@@ -65,7 +65,7 @@ class ExpensesScreen extends React.Component{
     navigation.setParams({ treasurerView: this.treasurerView });
   }
 
-  goToPayment = expense => this.props.navigation.navigate('Payment', { expense });
+  goToPayment = expense => this.props.navigation.navigate('Pay', { total: expense.total, month: expense.month });
 
   renderExpense = ({ item: expense}) => {
     return (

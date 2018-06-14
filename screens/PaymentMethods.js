@@ -18,7 +18,7 @@ class PaymentMethods extends React.Component{
     headerTitle: "Métodos de pago",
     headerRight: (
       <TouchableOpacity
-        onPress={() => navigation.navigate('AddPaymentMethod')}
+        onPress={() => navigation.navigate('AddPaymentMethod', {methodsList: navigation.state.params.methodsList})}
       >
         <Feather name="plus" size={25} color="white" />
       </TouchableOpacity>
@@ -33,17 +33,24 @@ class PaymentMethods extends React.Component{
             {PaymentMethodTypes[method.type_of].label}
           </Text>
           <TouchableOpacity
-            onPress={() => this.props.navigation('AddPaymentMethod', { method })}
+            onPress={() => this.props.navigation.navigate('AddPaymentMethod', { method, methodsList: this.methodsList })}
           >
             <SimpleLineIcons name="pencil" size={20} color={Colors.orange} />
           </TouchableOpacity>
         </View>
         <Text>{method.name}</Text>
-        {PaymentMethodTypes[method.type].attrs.map(attr => (
-          <Text>{attr.label}: {method[attr.key]}</Text>
+        {PaymentMethodTypes[method.type_of].attrs.map((attr, index) => (
+          <Text key={`${index}`}>{attr.label}: {method[attr.key]}</Text>
         ))}
+        {method.comments && (
+          <Text>Comentarios: {method.comments}</Text>
+        )}
       </View>
     );
+  }
+
+  componentDidMount = () => {
+    this.props.navigation.setParams({methodsList: this.methodsList})
   }
 
   render(){
@@ -56,6 +63,7 @@ class PaymentMethods extends React.Component{
           dataName="payment_methods"
           authorization={authToken}
           renderItem={this.renderMethod}
+          ref={r => this.methodsList = r}
         />
       </View>
     )
@@ -77,10 +85,16 @@ const styles = StyleSheet.create({
   methodHead: {
     flexDirection: 'row',
     flex: 1,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 5
+  },
+  methodHeadText: {
+    color: Colors.orange,
+    fontSize: 18,
   },
   method: {
-    padding: 10,
+    padding: 15,
     borderBottomColor: Colors.border,
     borderBottomWidth: StyleSheet.hairlineWidth
   }

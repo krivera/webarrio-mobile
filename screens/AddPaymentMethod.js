@@ -9,12 +9,16 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  ToastAndroid,
   View
 } from 'react-native'
+import ToastIOS from 'react-native-root-toast';
 import { Picker as PickerIOS } from 'react-native-picker-dropdown';
+import Axios from 'axios';
 import FloatingLabelInput from '../components/FloatingLabel';
 import BackButton from '../components/BackButton';
 import Button from "../components/Button";
+import Loading from '../components/Loading';
 import { PaymentMethodTypes } from '../constants/utils';
 import Colors from '../constants/Colors';
 import Banks from '../constants/Banks';
@@ -28,11 +32,15 @@ class AddPaymentMethod extends React.Component{
 
   constructor(props) {
     super(props);
-  
+    
+    const { method } = props.navigation.state.params;
+
     this.state = {
-      type_of: 'bank_transfer',
-      name: '',
-      offset: 0
+      ...method || {},
+      bank: method && method.bank ? Banks.indexOf(method.bank) : 0,
+      type_of: method ? method.type_of : 'bank_transfer',
+      name: method ? method.name : '',
+      offset: 0,
     };
   }
 
@@ -43,19 +51,59 @@ class AddPaymentMethod extends React.Component{
   }
 
   saveMethod = () => {
-    const { authToken, currentNeighborhood } = this.props;
+    const { authToken, currentNeighborhood, navigation } = this.props;
     this.setState(
       {loading: true},
       () => {
-        Axios.post(
-          `${API_URL}/neighborhood/${currentNeighborhood.id}/payment_methods`,
-          {},
+        const {
+          type_of,
+          name,
+          address,
+          comments,
+          rut,
+          bank,
+          account_type,
+          account_number,
+          email,
+        } = this.state;
+        const edit = navigation.state.params && navigation.state.params.method;
+        const reqMethod = edit ? 'put' : 'post';
+        let url = `${API_URL}/neighborhoods/${currentNeighborhood.id}/payment_methods`;
+        if(edit) url += `/${navigation.state.params.method.id}`;
+        Axios[reqMethod](
+          url,
+          {
+            payment_method: {
+              type_of,
+              name,
+              address,
+              comments,
+              rut,
+              bank: Banks[bank],
+              account_type,
+              account_number,
+              email
+            }
+          },
           {
             headers: {
               Authorization: authToken
             }
           }
-        )
+        ).then(response => {
+          this.setState({loading: false});
+          this.props.navigation.goBack();
+          this.props.navigation.state.params.methodsList.onRefresh();
+        }).catch(err => {
+          const msg = 'Revise su conexión y reintente';
+          this.setState({loading: false});
+          if(Platform.OS === 'android'){
+            ToastAndroid.show(msg, ToastAndroid.LONG);
+          }
+          else {
+            ToastIOS.show(msg, {duration: ToastIOS.durations.LONG})
+          }
+        });
       }
     )
   }
@@ -72,7 +120,8 @@ class AddPaymentMethod extends React.Component{
       comments,
       email,
       address,
-      offset
+      offset,
+      loading
     } = this.state;
     return (
       <View style={styles.screen} onLayout={this.onLayout}>
@@ -164,6 +213,7 @@ class AddPaymentMethod extends React.Component{
                   label="Email"
                   labelColor={Colors.subHeading}
                   keyboardType="email-address"
+                  autoCapitalize="none"
                 />
               </View>
             </View>
@@ -186,13 +236,14 @@ class AddPaymentMethod extends React.Component{
               labelColor={Colors.subHeading}
             />
           </View>
-          <Button>Guardar</Button>
+          <Button onPress={this.saveMethod}>Guardar</Button>
         </ScrollView>
         <KeyboardAvoidingView
           behavior="padding"
           keyboardVerticalOffset={offset}
           enabled
         />
+        <Loading loading={loading} />
       </View>
     );
   }

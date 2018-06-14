@@ -21,6 +21,7 @@ import Expenses from '../screens/Expenses';
 import AddExpense from '../screens/AddExpense';
 import PaymentMethods from '../screens/PaymentMethods';
 import AddPaymentMethod from '../screens/AddPaymentMethod';
+import Pay from '../screens/Pay';
 import ChatListScreen from '../screens/ChatList';
 import ChatScreen from '../screens/Chat';
 import NeighborsScreen from '../screens/Neighbors';
@@ -97,7 +98,8 @@ const DashboardStack = StackNavigator(
     Expenses,
     AddExpense,
     PaymentMethods,
-    AddPaymentMethod
+    AddPaymentMethod,
+    Pay
   },
   {
     headerMode: 'screen',
