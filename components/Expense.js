@@ -42,7 +42,7 @@ class Expense extends React.Component{
   }
 
   goToPayment = () => {
-    this.props.goToPayment(this.props.expense)
+    this.props.goToPayment(this.props.expense);
   }
 
   render(){

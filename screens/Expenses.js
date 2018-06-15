@@ -20,12 +20,6 @@ import CommonExpensesTabs from '../navigation/CommonExpensesTabs';
 class ExpensesScreen extends React.Component{
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Gastos Comunes',
-    headerLeft: (<View>{navigation.state.params && navigation.state.params.showMenu && (
-        <TouchableOpacity onPress={navigation.state.params.toggleMenu}>
-          <Feather name="menu" size={25} color="white" />
-        </TouchableOpacity>
-      )}
-    </View>),
     headerRight: (<View>
       {navigation.state.params && navigation.state.params.treasurerView && (
         <TouchableOpacity onPress={() =>
