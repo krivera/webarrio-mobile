@@ -497,9 +497,12 @@ exports[`renders the login screen 1`] = `
       </View>
       <View
         style={
-          Object {
-            "paddingTop": 18,
-          }
+          Array [
+            Object {
+              "paddingTop": 18,
+            },
+            undefined,
+          ]
         }
       >
         <Text
@@ -530,12 +533,10 @@ exports[`renders the login screen 1`] = `
           style={
             Array [
               Object {
-                "borderBottomColor": "#555",
+                "borderBottomColor": "#fff",
                 "borderBottomWidth": 1,
-                "color": "#000",
                 "fontSize": 20,
                 "height": 26,
-                "margin": 10,
               },
               Object {
                 "borderBottomColor": "white",
@@ -549,9 +550,12 @@ exports[`renders the login screen 1`] = `
       </View>
       <View
         style={
-          Object {
-            "paddingTop": 18,
-          }
+          Array [
+            Object {
+              "paddingTop": 18,
+            },
+            undefined,
+          ]
         }
       >
         <Text
@@ -581,12 +585,10 @@ exports[`renders the login screen 1`] = `
           style={
             Array [
               Object {
-                "borderBottomColor": "#555",
+                "borderBottomColor": "#fff",
                 "borderBottomWidth": 1,
-                "color": "#000",
                 "fontSize": 20,
                 "height": 26,
-                "margin": 10,
               },
               Object {
                 "borderBottomColor": "white",

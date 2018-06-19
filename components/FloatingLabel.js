@@ -1,63 +1,66 @@
-import React from 'react';
+import React from 'react'
 import {
   View,
   TextInput,
-  Animated,
-} from 'react-native';
-import PropTypes from 'prop-types';
+  Animated
+} from 'react-native'
+import PropTypes from 'prop-types'
 
 export default class FloatingLabelInput extends React.Component {
   state = {
-    isFocused: false,
+    isFocused: false
   };
 
   componentWillMount() {
-    this._animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
+    this.animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1)
   }
 
   handleFocus = () => this.setState({ isFocused: true });
   handleBlur = () => this.setState({ isFocused: false });
 
   componentDidUpdate() {
-    Animated.timing(this._animatedIsFocused, {
+    Animated.timing(this.animatedIsFocused, {
       toValue: (this.state.isFocused || this.props.value !== '') ? 1 : 0,
-      duration: 200,
-    }).start();
+      duration: 200
+    }).start()
   }
 
   render() {
-    const { label, labelColor, containerStyle, ...props } = this.props;
+    const { label, labelColor, containerStyle, ...props } = this.props
     const labelStyle = {
       position: 'absolute',
       left: 0,
-      top: this._animatedIsFocused.interpolate({
+      top: this.animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [18, 0],
+        outputRange: [18, 0]
       }),
-      fontSize: this._animatedIsFocused.interpolate({
+      fontSize: this.animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [20, 14],
+        outputRange: [18, 14]
       }),
-      color: this._animatedIsFocused.interpolate({
+      color: this.animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: ['#aaa', labelColor],
-      }),
-    };
+        outputRange: ['#aaa', labelColor]
+      })
+    }
     return (
       <View style={[{ paddingTop: 18 }, containerStyle]}>
-        <Animated.Text style={labelStyle}>
+        <Animated.Text
+          style={labelStyle}
+          numberOfLines={1}
+        >
           {label}
         </Animated.Text>
         <TextInput
           {...props}
-          underlineColorAndroid="transparent"
-          style={[{...style, borderBottomColor: labelColor}, props.style]}
+          underlineColorAndroid='transparent'
+          style={[{...style, borderBottomColor: labelColor }, props.style]}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           blurOnSubmit
         />
       </View>
-    );
+    )
   }
 }
 
@@ -66,8 +69,8 @@ FloatingLabelInput.propTypes = {
   labelColor: PropTypes.string
 }
 
-style = {
-  height: 26,
-  fontSize: 20,
-  borderBottomWidth: 1,
+const style = {
+  minHeight: 24,
+  fontSize: 18,
+  borderBottomWidth: 1
 }

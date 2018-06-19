@@ -2,48 +2,48 @@ export default [
   {
     name: 'Eventos',
     icon: 'event',
-    filter: 'event'
+    key: 'event'
   },
   {
     name: 'Mascotas',
     icon: 'pet',
-    filter: 'pet'
+    key: 'pet'
   },
   {
     name: 'Recomendaciones',
     icon: 'recommendation',
-    filter: 'recommendation'
+    key: 'recommendation'
   },
   {
     name: 'Compartir Auto',
     icon: 'car',
-    filter: 'car_pooling'
+    key: 'car_pooling'
   },
   {
     name: 'Anuncios',
     icon: 'announcement',
-    filter: 'announcement'
+    key: 'announcement'
   },
   {
     name: 'Compra / Vende',
     icon: 'listing',
-    filter: 'listing'
+    key: 'listing'
   },
   {
     name: 'Anuncios administración',
     icon: 'admin-announcement',
-    filter: 'admin-announcement',
+    key: 'admin-announcement',
     admin: true
   },
   {
     name: 'Asambleas',
     icon: 'poll',
-    filter: 'poll',
+    key: 'poll',
     admin: true
   },
   {
     name: 'Todos',
     icon: 'loop',
-    filter: 'all'
+    key: 'all'
   },
 ];

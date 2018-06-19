@@ -4,6 +4,9 @@ import renderer from 'react-test-renderer';
 import Expense from '../components/Expense';
 import { FormattedProvider } from 'react-native-globalize';
 import AddExpenseScreen from '../screens/AddExpense';
+import configStore from '../store';
+
+const { store, persistor } = configStore();
 
 it('renders individual expense', () => {
   const expense = {
@@ -26,6 +29,6 @@ it('renders individual expense', () => {
 });
 
 it('renders expenses form', () => {
-  const tree = renderer.create(<AddExpenseScreen />).toJSON();
+  const tree = renderer.create(<AddExpenseScreen store={store} />).toJSON();
   expect(tree).toMatchSnapshot();
 });

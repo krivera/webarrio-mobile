@@ -31,7 +31,7 @@ export default class PublicationCard extends React.Component{
     }
     this.category = (Categories.find(
       category =>
-        category.filter === publication.publication_type) || {icon: 'loop', name: 'Otro'});
+        category.key === publication.publication_type) || {icon: 'loop', name: 'Otro'});
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 

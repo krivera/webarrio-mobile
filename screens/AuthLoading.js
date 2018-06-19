@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { API_URL } from 'react-native-dotenv'; 
+import { API_URL } from 'react-native-dotenv';
 import axios from 'axios';
 import BallScalePulse from '../components/BallScalePulse';
 
