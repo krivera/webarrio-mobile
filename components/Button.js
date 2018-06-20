@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 import {
   StyleSheet,
   Text,
   TouchableOpacity
-} from 'react-native';
-import PropTypes from 'prop-types';
-import Colors from '../constants/Colors';
+} from 'react-native'
+import PropTypes from 'prop-types'
+import Colors from '../constants/Colors'
 
-export default class Button extends React.Component{
-  render(){
+export default class Button extends React.Component {
+  render() {
     return (
       <TouchableOpacity
         style={styles.button}

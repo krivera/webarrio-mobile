@@ -47,10 +47,6 @@ class CommunityScreen extends React.Component {
     const { params } = navigation.state
     return {
       title: params.title,
-      headerRight: (
-        <TouchableOpacity onPress={() => navigation.navigate('Categories', { pubList: params.pubList })}>
-          <Feather name='plus' size={25} color='white' />
-        </TouchableOpacity>),
       headerLeft: (
         <TouchableOpacity onPress={() => navigation.state.params.toggleFilter()}>
           <Feather name='menu' size={25} color='white' />

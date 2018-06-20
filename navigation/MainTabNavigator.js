@@ -69,9 +69,7 @@ const ChatStack = StackNavigator(
 const CommunityStack = StackNavigator(
   {
     Feed: CommunityScreen,
-    NewPublication: NewPublicationScreen,
-    Publication: PublicationScreen,
-    Categories
+    Publication: PublicationScreen
   },
   {
     headerMode: 'screen',
@@ -79,6 +77,17 @@ const CommunityStack = StackNavigator(
     initialRouteParams: {
       title: 'Comunidad'
     }
+  }
+)
+
+const NewPublicationStack = StackNavigator(
+  {
+    Categories,
+    NewPublication: NewPublicationScreen
+  },
+  {
+    headerMode: 'screen',
+    navigationOptions: header
   }
 )
 
@@ -100,6 +109,7 @@ const AppTabNavigator = TabNavigator(
   {
     Community: CommunityStack,
     Chats: ChatStack,
+    NewPublication: NewPublicationStack,
     Dashboard: DashboardStack,
     Sos: SosScreen
   },
@@ -114,6 +124,9 @@ const AppTabNavigator = TabNavigator(
           break
         case 'Dashboard':
           iconName = 'dashboard'
+          break
+        case 'NewPublication':
+          iconName = 'plus-circle'
           break
         case 'Chats':
           iconName = 'chat'

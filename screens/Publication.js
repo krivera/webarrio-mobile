@@ -22,6 +22,7 @@ import Avatar from '../components/Avatar'
 import WebarrioIcon from '../components/WebarrioIcon'
 import PublicationMenu from '../components/PublicationMenu'
 import Report from '../components/Report'
+import BackButton from '../components/BackButton'
 import firebase from '../api/firebase'
 import { getDate } from '../api/utils'
 
@@ -30,11 +31,7 @@ const { height: fullHeight } = Dimensions.get('window')
 class PublicationScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.publication.title,
-    headerLeft: (
-      <TouchableOpacity onPress={() => navigation.dispatch(NavigationActions.popToTop())}>
-        <Ionicons name='ios-arrow-back' size={25} color='white' />
-      </TouchableOpacity>
-    )
+    headerLeft: (<BackButton behavior='top' />)
   })
 
   constructor(props) {

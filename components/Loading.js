@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 import {
   ActivityIndicator,
   StyleSheet,
   View
-} from 'react-native';
+} from 'react-native'
 
-export default class Loading extends React.Component{
+export default class Loading extends React.Component {
   render() {
-    const { loading } = this.props;
-    const display = !loading ? { height: 0 } : {};
-    return(
+    const { loading } = this.props
+    const display = !loading ? { height: 0, display: 'none' } : {}
+    return (
       <View style={[styles.screen, display]}>
         <ActivityIndicator />
       </View>
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   }
-});
+})

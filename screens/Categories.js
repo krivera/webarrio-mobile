@@ -18,7 +18,7 @@ const size = (Dimensions.get('window').width - 30) / 3
 export default class CategoriesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Nueva Publicación',
-    headerLeft: (<BackButton />)
+    headerLeft: (<BackButton behavior='back' />)
   })
 
   constructor(props) {
@@ -35,8 +35,7 @@ export default class CategoriesScreen extends React.Component {
       this.props.navigation.navigate(
         'NewPublication',
         {
-          category,
-          pubList: this.props.navigation.state.params.pubList
+          category
         }
       )
     } else {
@@ -69,7 +68,7 @@ export default class CategoriesScreen extends React.Component {
               >
                 <WebarrioIcon
                   name={category.icon}
-                  size={size * 0.65}
+                  size={size * 0.5}
                   color={this.state.category === category.key ? 'white' : Colors.orange}
                 />
               </View>

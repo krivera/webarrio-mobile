@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  ActivityIndicator,
   DatePickerIOS,
   DatePickerAndroid,
   Image,
@@ -8,7 +7,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TimePickerAndroid,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -25,13 +23,18 @@ import Colors from '../constants/Colors'
 import BackButton from '../components/BackButton'
 import Button from '../components/Button'
 import WebarrioIcon from '../components/WebarrioIcon'
+import Loading from '../components/Loading'
 import FloatingLabelInput from '../components/FloatingLabel'
 import KeyboardAwareView from '../components/KeyboardAwareView'
 
 class NewPublicationScreen extends React.Component {
-  static navigationOptions = () => ({
+  static navigationOptions = ({ navigation }) => ({
     title: 'Nueva Publicación',
-    headerLeft: (<BackButton />)
+    headerLeft: (<BackButton behavior={
+      navigation.state.params && navigation.state.params.publication
+        ? 'back'
+        : 'pop'
+    } />)
   })
 
   constructor(props) {
@@ -49,6 +52,7 @@ class NewPublicationScreen extends React.Component {
       description: publication ? publication.description : '',
       image: publication ? publication.image_url : null,
       datePickerOpen: false,
+      timePickerOpen: false,
       loading: false
     }
     this.now = new Date()
@@ -69,14 +73,18 @@ class NewPublicationScreen extends React.Component {
     }
   }
   openTimePicker = async () => {
-    const { action, hour, minute } = await TimePickerAndroid.open({
-      hour: this.state.hours,
-      minute: this.state.minutes
-    })
-    if (action !== TimePickerAndroid.dismissedAction) {
-      this.setState({
-        hours: hour, minutes: minute
+    if (Platform.OS === 'ios') {
+      this.setState({ timePickerOpen: true })
+    } else {
+      const { action, hour, minute } = await TimePickerAndroid.open({
+        hour: this.state.hours,
+        minute: this.state.minutes
       })
+      if (action !== TimePickerAndroid.dismissedAction) {
+        this.setState({
+          hours: hour, minutes: minute
+        })
+      }
     }
   }
 
@@ -116,7 +124,11 @@ class NewPublicationScreen extends React.Component {
   }
 
   setDate = date => {
-    this.setState({ date })
+    this.setState({
+      date,
+      hours: date.getHours(),
+      minutes: date.getMinutes()
+    })
   }
 
   selectPicture = async () => {
@@ -196,7 +208,6 @@ class NewPublicationScreen extends React.Component {
           this.setState({ loading: false })
           navigation.navigate('Publication', { publication: response.data.publication })
         }
-        this.props.navigation.state.params.pubList.onRefresh()
       })
     }
   }
@@ -208,7 +219,17 @@ class NewPublicationScreen extends React.Component {
   render() {
     const show_date = ['event', 'car_pooling'].includes(this.state.publication_type)
     const is_car = ['car_pooling'].includes(this.state.publication_type)
-    const category = Categories.find(cat => cat.key === this.state.publication_type)
+    const {
+      image,
+      title,
+      description,
+      destination,
+      publication_type,
+      seats_available,
+      date,
+      loading
+    } = this.state
+    const category = Categories.find(cat => cat.key === publication_type)
     return (
       <KeyboardAwareView style={styles.screen}>
         <ScrollView ref={r => {
@@ -218,23 +239,23 @@ class NewPublicationScreen extends React.Component {
             onPress={this.selectPicture}
             style={styles.imageSection}
           >
-            {!this.state.image && (<Text>Subir una foto</Text>)}
-            {this.state.image && (
+            {!image && (<Text>Subir una foto</Text>)}
+            {image && (
               <Image
                 style={styles.image}
-                source={{ uri: this.state.image }}
+                source={{ uri: image }}
               />)}
           </TouchableOpacity>
           <View style={styles.form}>
             <View>
               <FloatingLabelInput
-                value={this.state.title}
+                value={title}
                 label='Título'
                 labelColor={Colors.subHeading}
                 onChangeText={t => this.setState({ title: t })}
                 style={styles.title}
               />
-              {this.state.title ? (
+              {title ? (
                 <TouchableOpacity
                   style={styles.clearButton}
                   onPress={() => this.clear('title')}
@@ -257,7 +278,7 @@ class NewPublicationScreen extends React.Component {
                   label='Destino'
                   labelColor={Colors.subHeading}
                   containerStyle={styles.half}
-                  value={this.state.destination}
+                  value={destination}
                   onChangeText={t => this.setState({ destination: t })}
                 />
                 <FloatingLabelInput
@@ -265,7 +286,7 @@ class NewPublicationScreen extends React.Component {
                   labelColor={Colors.subHeading}
                   containerStyle={styles.half}
                   onChangeText={t => this.setState({ seats_available: t })}
-                  value={this.state.seats_available}
+                  value={seats_available}
                   keyboardType='numeric'
                 />
               </View>
@@ -280,42 +301,65 @@ class NewPublicationScreen extends React.Component {
                 label='Detalles'
                 labelColor={Colors.subHeading}
                 onChangeText={t => this.setState({ description: t })}
-                value={this.state.description}
+                value={description}
                 multiline={true}
               />
-              
+              {description ? (
+                <TouchableOpacity
+                  style={styles.clearButton}
+                  onPress={() => this.clear('description')}
+                >
+                  <Feather name='x' size={18} color={Colors.subHeading} />
+                </TouchableOpacity>
+              ) : (<View />)}
             </View>
             <Button onPress={this.savePublication}>
               Publicar
             </Button>
           </View>
         </ScrollView>
-        {(this.state.loading || this.state.datePickerOpen) && (
+        {this.state.datePickerOpen && (
           <View style={styles.lightBoxBackground}>
-            {this.state.datePickerOpen && (
-              <View style={styles.lightBox}>
-                <DatePickerIOS
-                  date={this.state.date}
-                  minimumDate={new Date()}
-                  mode='datetime'
-                  onDateChange={this.setDate}
-                  minuteInterval={5}
-                />
-                <TouchableOpacity
-                  style={styles.lightBoxButton}
-                  onPress={() => this.setState({ datePickerOpen: false })}
-                >
-                  <Text style={styles.lightBoxOk}>
-                    Ok
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            )}
-            {this.state.loading && (
-              <ActivityIndicator />
-            )}
+            <View style={styles.lightBox}>
+              <DatePickerIOS
+                date={date}
+                minimumDate={new Date()}
+                mode='date'
+                onDateChange={this.setDate}
+                minuteInterval={5}
+              />
+              <TouchableOpacity
+                style={styles.lightBoxButton}
+                onPress={() => this.setState({ datePickerOpen: false })}
+              >
+                <Text style={styles.lightBoxOk}>
+                  Ok
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         )}
+        {this.state.timePickerOpen && (
+          <View style={styles.lightBoxBackground}>
+            <View style={styles.lightBox}>
+              <DatePickerIOS
+                date={date}
+                mode='time'
+                onDateChange={this.setDate}
+                minuteInterval={5}
+              />
+              <TouchableOpacity
+                style={styles.lightBoxButton}
+                onPress={() => this.setState({ timePickerOpen: false })}
+              >
+                <Text style={styles.lightBoxOk}>
+                  Ok
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
+        <Loading loading={loading} />
       </KeyboardAwareView>
     )
   }
@@ -374,10 +418,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 15
   },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold'
-  },
   screen: {
     flex: 1,
     backgroundColor: 'white'
@@ -423,17 +463,10 @@ const styles = StyleSheet.create({
   lightBoxButton: {
     alignSelf: 'flex-end'
   },
-  pickerPlaceholder: {
-    position: 'absolute',
-    top: 5,
-    left: 10,
-    fontSize: 12,
-    color: '#92a2a2'
-  },
   clearButton: {
     position: 'absolute',
     right: 0,
     bottom: 0,
     padding: 5
   }
-});
+})
