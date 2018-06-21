@@ -45,5 +45,5 @@ export default [
     name: 'Todos',
     icon: 'loop',
     key: 'all'
-  },
-];
+  }
+]

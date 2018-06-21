@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-} from 'react-native';
+  View
+} from 'react-native'
 
-import WebarrioIcon from './WebarrioIcon';
-import Colors from '../constants/Colors';
-import CATEGORIES from '../constants/Categories';
+import WebarrioIcon from './WebarrioIcon'
+import Colors from '../constants/Colors'
+import CATEGORIES from '../constants/Categories'
 
-const ICON_SIZE = 35;
-const ICON_COLOR = Colors.orange;
+const ICON_SIZE = 30
+const ICON_COLOR = Colors.orange
 
-export default class Categories extends React.Component{
-  render(){
-    const { callback } = this.props;
+export default class Categories extends React.Component {
+  render() {
+    const { callback } = this.props
     return (
       <View>
         {CATEGORIES.map(category =>
@@ -40,7 +40,7 @@ export default class Categories extends React.Component{
           </TouchableOpacity>))
         }
       </View>
-    );
+    )
   }
 }
 
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   adminText: {
     color: Colors.orange
   }
-});
+})

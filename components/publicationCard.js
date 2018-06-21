@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Animated,
   Image,
@@ -7,49 +7,46 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View
-} from 'react-native';
-import {
-  Feather,
-  MaterialCommunityIcons
-} from '@expo/vector-icons';
-import Categories from '../constants/Categories';
-import WebarrioIcon from './WebarrioIcon';
-import Colors from '../constants/Colors';
-import { Months } from '../constants/utils';
-import Avatar from './Avatar';
-import PublicationMenu from './PublicationMenu';
+} from 'react-native'
+import Categories from '../constants/Categories'
+import WebarrioIcon from './WebarrioIcon'
+import Colors from '../constants/Colors'
+import { Months } from '../constants/utils'
+import Avatar from './Avatar'
+import PublicationMenu from './PublicationMenu'
 
-export default class PublicationCard extends React.Component{
-  constructor(props){
-    super(props);
-    const { publication, currentUserId } = this.props;
+export default class PublicationCard extends React.Component {
+  constructor(props) {
+    super(props)
+    const { publication, currentUserId } = props
     this.state = {
       menuOpen: false,
       menuWidth: new Animated.Value(0),
       menuHeight: new Animated.Value(0),
       menuOpenHeight: currentUserId === publication.author.id ? 30 : 60
     }
-    this.category = (Categories.find(
-      category =>
-        category.key === publication.publication_type) || {icon: 'loop', name: 'Otro'});
-    this.toggleMenu = this.toggleMenu.bind(this);
+    this.category = 
+    this.toggleMenu = this.toggleMenu.bind(this)
   }
 
 
   toggleMenu = () => {
-    this.setState({menuOpen: !this.state.menuOpen})
+    this.setState({ menuOpen: !this.state.menuOpen })
   }
 
-  render(){
-    const { publication, navigate, currentUserId, report } = this.props;
-    const published = new Date(publication.created_at);
-    return(
+  render() {
+    const { publication, navigate, currentUserId, report } = this.props
+    const category = (Categories.find(
+      cat =>
+        cat.key === publication.publication_type) || { icon: 'loop', name: 'Otro' })
+    const published = new Date(publication.created_at)
+    return (
       <View style={[
         styles.layout,
-        this.category.admin && styles.adminCard
+        category.admin && styles.adminCard
       ]}>
         <View style={styles.imageSection}>
-          <Avatar source={{uri: publication.author.avatar}} name={publication.author.name} />
+          <Avatar source={{ uri: publication.author.avatar }} name={publication.author.name} />
         </View>
         <TouchableOpacity
           style={styles.content}
@@ -60,18 +57,18 @@ export default class PublicationCard extends React.Component{
           </Text>
           <View style={styles.underTitle}>
             <Text style={styles.author}>
-              por {publication.author.name} {publication.author.last_name} ● {this.category.name}{' '}
+              por {publication.author.name} {publication.author.last_name} ● {category.name}{' '}
             </Text>
-            <WebarrioIcon name={this.category.icon} size={14} color="#92a2a2" />
+            <WebarrioIcon name={category.icon} size={14} color={Colors.subHeading} />
           </View>
-          <Text style={styles.description} numberOfLines={2} ellipsizeMode="tail" >
+          <Text style={styles.description} numberOfLines={2} ellipsizeMode='tail' >
             {publication.description}
           </Text>
           {publication.image_url && (
             <Image
               style={styles.previewImage}
-              source={{uri: publication.image_url}}
-              resizeMode="contain"
+              source={{ uri: publication.image_url }}
+              resizeMode='contain'
             />
           )}
         </TouchableOpacity>
@@ -81,14 +78,18 @@ export default class PublicationCard extends React.Component{
           </TouchableWithoutFeedback>
         )}
         <View style={styles.optionsSection}>
-          <Text style={styles.date}>{published.getDate() + ' ' + Months[published.getMonth()]}</Text>
+          <Text style={styles.date}>
+            {published.getDate() + ' ' + Months[published.getMonth()]}
+          </Text>
           <PublicationMenu
             publication={publication}
             navigate={navigate}
             currentUserId={currentUserId}
             toggleMenuCallback={this.toggleMenu}
-            openDirection="bottom"
-            ref={r => this.menu = r}
+            openDirection='bottom'
+            ref={r => {
+              this.menu = r
+            }}
             report={report}
           />
         </View>
@@ -136,12 +137,12 @@ const styles = StyleSheet.create({
     height: 150,
     width: 250,
     alignSelf: 'center',
-    marginTop:10,
+    marginTop:10
   },
   optionsSection: {
     paddingTop: 10,
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    alignItems: 'flex-end'
   },
   horizontal: {
     flexDirection: 'row'
@@ -162,4 +163,4 @@ const styles = StyleSheet.create({
   adminCard: {
     backgroundColor: Colors.orangeLight
   }
-});
+})

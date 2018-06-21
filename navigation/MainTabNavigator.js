@@ -9,6 +9,7 @@ import {
 import { Notifications } from 'expo'
 import Axios from 'axios'
 import { API_URL } from 'react-native-dotenv'
+import SideMenu from 'react-native-side-menu-over'
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync'
 import { handleNotification } from '../actions/navigation'
 import { setInitialData } from '../actions/currents'
@@ -28,8 +29,10 @@ import Categories from '../screens/Categories'
 import SosScreen from '../screens/Sos'
 import PublicationScreen from '../screens/Publication'
 import WebarrioIcon from '../components/WebarrioIcon'
+import Menu from '../components/Menu'
 
 export let navigatorRef
+export let menuRef
 export let tabBarHeight = 0
 
 const getTabBarHeight = ({
@@ -170,6 +173,7 @@ const AppTabNavigator = TabNavigator(
 class MainTabNavigator extends React.Component {
   componentDidMount = () => {
     navigatorRef = this.navigator
+    menuRef = this.menu
   }
 
 
@@ -204,10 +208,19 @@ class MainTabNavigator extends React.Component {
   componentWillUnmount = () =>
     this._notificationSubscription && this._notificationSubscription.remove()
 
+
   render() {
-    return (<AppTabNavigator ref={r => {
-      this.navigator = r
-    }} />)
+    return (
+      <SideMenu
+        menu={(<Menu />)}
+        ref={r => {
+          this.menu = r
+        }}
+      >
+        <AppTabNavigator ref={r => {
+          this.navigator = r
+        }} />
+      </SideMenu>)
   }
 }
 
