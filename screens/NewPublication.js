@@ -18,6 +18,7 @@ import { ImagePicker } from 'expo'
 import { Feather, Ionicons, SimpleLineIcons } from '@expo/vector-icons'
 import { API_URL } from 'react-native-dotenv'
 import axios from 'axios'
+import { NavigationActions } from 'react-navigation'
 import Categories from '../constants/Categories'
 import Colors from '../constants/Colors'
 import BackButton from '../components/BackButton'
@@ -202,11 +203,19 @@ class NewPublicationScreen extends React.Component {
             data: formData
           }).then(response_ => {
             this.setState({ loading: false })
-            navigation.navigate('Publication', { publication: response_.data.publication })
+            navigation.dispatch(NavigationActions.pop())
+            navigation.navigate(
+              'Publication',
+              { publication: response_.data.publication }
+            )
           })
         } else {
           this.setState({ loading: false })
-          navigation.navigate('Publication', { publication: response.data.publication })
+          navigation.dispatch(NavigationActions.pop())
+          navigation.navigate(
+            'Publication',
+            { publication: response.data.publication }
+          )
         }
       })
     }

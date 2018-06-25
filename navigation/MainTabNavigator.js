@@ -184,6 +184,12 @@ class MainTabNavigator extends React.Component {
     console.log(`Push notification ${origin} with data: ${JSON.stringify(data)}`)
   };
 
+  componentDidUpdate = prevProps => {
+    if (prevProps.authToken !== this.props.authToken) {
+      this.props.navigation.navigate('AuthLoading')
+    }
+  }
+
   componentWillMount = () => {
     const { authToken, dispatch } = this.props
     Axios.get(

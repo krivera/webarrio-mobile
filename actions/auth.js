@@ -8,7 +8,7 @@ export function updateToken(authToken){
   }
 }
 
-export function closeSession(){
+export function signOut(){
   return {
     type: DESTROY_TOKEN
   }

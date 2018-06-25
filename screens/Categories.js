@@ -38,6 +38,7 @@ export default class CategoriesScreen extends React.Component {
           category
         }
       )
+      this.setState({ category: '' })
     } else {
       Toast.show(
         'Seleccione una categoría para continuar',

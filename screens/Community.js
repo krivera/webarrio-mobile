@@ -14,11 +14,8 @@ import PublicationCard from '../components/publicationCard'
 import Report from '../components/Report'
 import { Feather } from '@expo/vector-icons'
 import Categories from '../constants/Categories'
-import Colors from '../constants/Colors'
 import { menuRef } from '../navigation/MainTabNavigator'
 import { setFilter } from '../actions/feed'
-
-const { height: fullHeight } = Dimensions.get('window')
 
 class CommunityScreen extends React.Component {
   constructor(props) {

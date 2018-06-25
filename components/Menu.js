@@ -12,6 +12,7 @@ import Categories from '../components/Categories'
 import Avatar from '../components/Avatar'
 import Colors from '../constants/Colors'
 import { setFilter } from '../actions/feed'
+import { signOut } from '../actions/auth'
 import { menuRef } from '../navigation/MainTabNavigator'
 
 class Menu extends React.Component {
@@ -27,6 +28,10 @@ class Menu extends React.Component {
     menuRef.openMenu(false)
   }
 
+  signOut = () => {
+    this.props.dispatch(signOut())
+  }
+
   render() {
     const { user, apartment } = this.props
     return (
@@ -37,10 +42,10 @@ class Menu extends React.Component {
             <Text style={styles.userName}>{user.name} {user.last_name}</Text>
             <Text style={styles.apartment}>{apartment.number}</Text>
             <TouchableOpacity>
-              <Text style={styles.signout}>Cerrar Sesión</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.configBtn}>
-              <SimpleLineIcons name='settings' size={20} color={Colors.subHeading} />
+              <Text
+                style={styles.signout}
+                onPress={this.signOut}
+              >Cerrar Sesión</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -53,6 +58,12 @@ class Menu extends React.Component {
     )
   }
 }
+// TODO add settings button
+/* <TouchableOpacity
+  style={styles.configBtn}
+>
+  <SimpleLineIcons name='settings' size={20} color={Colors.subHeading} />
+</TouchableOpacity> */
 
 const mapStateToProps = state => ({
   user: state.currentsReducer.user,
