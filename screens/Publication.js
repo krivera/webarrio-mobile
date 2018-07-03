@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 import {
   ActivityIndicator,
   Dimensions,
@@ -12,37 +12,33 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { TabBar } from 'react-navigation';
-import Colors from '../constants/Colors';
-import Categories from '../constants/Categories';
-import Avatar from '../components/Avatar';
-import WebarrioIcon from '../components/WebarrioIcon';
-import PublicationMenu from '../components/PublicationMenu';
-import Report from '../components/Report';
-import firebase from '../api/firebase';
-import { getDate } from '../api/utils';
+  View
+} from 'react-native'
+import Colors from '../constants/Colors'
+import Categories from '../constants/Categories'
+import { Months } from '../constants/utils'
+import Avatar from '../components/Avatar'
+import WebarrioIcon from '../components/WebarrioIcon'
+import PublicationMenu from '../components/PublicationMenu'
+import Report from '../components/Report'
+import BackButton from '../components/BackButton'
+import firebase from '../api/firebase'
+import { getDate } from '../api/utils'
 
-const { height: fullHeight } = Dimensions.get('window');
+const { height: fullHeight } = Dimensions.get('window')
 
-class PublicationScreen extends React.Component{
+class PublicationScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.publication.title,
-    headerLeft: (
-      <TouchableOpacity onPress={navigation.popToTop}>
-        <Ionicons name="ios-arrow-back" size={25} color="white" />
-      </TouchableOpacity>
-    )
-  });
+    headerLeft: (<BackButton behavior='top' />)
+  })
 
-  constructor(props){
-    super(props);
+  constructor(props) {
+    super(props)
     this.category = Categories.find(
       category =>
-        category.filter === props.navigation.state.params.publication.publication_type)
-      || {icon: 'loop', name: 'Otros'};
+        category.key === props.navigation.state.params.publication.publication_type)
+      || { icon: 'loop', name: 'Otros' }
 
     this.state = {
       offset: 0,
@@ -52,41 +48,40 @@ class PublicationScreen extends React.Component{
       reportOpen: false,
       reportingId: ''
     }
-    this.toggleMenu = this.toggleMenu.bind(this);
-    this.report = this.report.bind(this);
-    this.closeReport = this.closeReport.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this)
+    this.report = this.report.bind(this)
+    this.closeReport = this.closeReport.bind(this)
   }
 
-  toggleMenu = () => this.setState({menuOpen: !this.state.menuOpen})
+  toggleMenu = () => this.setState({ menuOpen: !this.state.menuOpen })
 
   componentWillMount = () => {
-    const { publication } = this.props.navigation.state.params;
-    this.commentsRef = firebase.database().ref(`/comments/${publication.id}`);
+    const { publication } = this.props.navigation.state.params
+    this.commentsRef = firebase.database().ref(`/comments/${publication.id}`)
     this.commentsRef.on('value', snapshot => {
-      const comments = snapshot.val();
-      if(comments){
+      const comments = snapshot.val()
+      if (comments) {
         this.setState({
           loadingComments: false,
           comments: Object.values(comments)
-        });
+        })
+      } else {
+        this.setState({ loadingComments: false })
       }
-      else {
-        this.setState({ loadingComments: false });
-      }
-    });
+    })
   }
 
   componentWillUnmount = () => {
-    this.commentsRef.off('value');
+    this.commentsRef.off('value')
   }
 
   onLayout = ({ nativeEvent: { layout: { height } } }) => {
-    const offset = fullHeight - height - 50;
-    this.setState({ offset });
+    const offset = fullHeight - height - 50
+    this.setState({ offset })
   }
 
   comment = () => {
-    const { currentUser } = this.props;
+    const { currentUser } = this.props
     this.commentsRef.push({
       text: this.state.comment,
       createdAt: new Date().getTime(),
@@ -94,18 +89,18 @@ class PublicationScreen extends React.Component{
         id: currentUser.id,
         name: currentUser.name,
         last_name: currentUser.last_name,
-        avatar: currentUser.avatar,
+        avatar: currentUser.avatar
       }
-    }, () => this.setState({comment: ''}));
+    }, () => this.setState({ comment: '' }))
   }
 
   renderComment = ({ item: comment }) => {
-    const date = getDate(comment.createdAt);
+    const date = getDate(comment.createdAt)
     return (
       <View style={styles.comment}>
         <View style={styles.commentHeader}>
           <View style={styles.commentAuthor}>
-            <Avatar source={{uri: comment.author.avatar}} name={comment.author.name} size={25} />
+            <Avatar source={{ uri: comment.author.avatar }} name={comment.author.name} size={25} />
             <Text style={styles.commentHeaderText}>{comment.author.name}</Text>
           </View>
           <Text style={styles.commentHeaderText}>{date}</Text>
@@ -116,48 +111,63 @@ class PublicationScreen extends React.Component{
   }
 
   report = () => {
-    const { publication } = this.props.navigation.state.params;
+    const { publication } = this.props.navigation.state.params
     this.setState({
       reportOpen: true,
       reportingId: publication.id,
-      reportingType: "publication",
+      reportingType: 'publication'
     })
   }
 
   closeReport = () => {
-    this.setState({reportOpen: false});
+    this.setState({ reportOpen: false })
   }
 
-  render(){
-    const { publication } = this.props.navigation.state.params;
-    const { navigation, currentUser, currentUnit } = this.props;
-    const { menuOpen, offset, reportOpen, reportingId } = this.state;
-    const menuTop = { top: publication.image_url ? 170 : 20 };
+  render() {
+    const { publication } = this.props.navigation.state.params
+    const { navigation, currentUser, currentUnit } = this.props
+    const { menuOpen, offset, reportOpen, reportingId } = this.state
+    const menuTop = { top: publication.image_url ? 170 : 20 }
+    let date = new Date(publication.created_at)
+    date = (`0${date.getDate()}`).slice(-2) + ' ' + Months[date.getMonth()]
     return (
       <View style={styles.screen} onLayout={this.onLayout}>
         <View style={styles.screen}>
-          <ScrollView ref={r => this.sv = r}>
+          <ScrollView ref={r => {
+            this.sv = r
+          }}>
             {publication.image_url && (
-              <Image source={{uri: publication.image_url}} style={styles.image} />
+              <Image source={{ uri: publication.image_url }} style={styles.image} />
             )}
             <View style={styles.details}>
               <View style={styles.info}>
+                <View style={styles.category}>
+                  <WebarrioIcon
+                    name={this.category.icon}
+                    size={20}
+                    color={Colors.subHeading}
+                  />
+                  <Text style={styles.subHeading}>{this.category.name}</Text>
+                </View>
                 <Text style={styles.title}>{publication.title}</Text>
                 <View style={styles.author}>
-                  <Avatar source={{uri: publication.author.avatar}} name={publication.author.name} />
-                  <Text style={styles.authorName}>
-                    {publication.author.name} {publication.author.last_name}
-                  </Text>
-                </View>
-                <Text style={styles.label}>Categoría</Text>
-                <View style={styles.category}>
-                  <Text>{this.category.name} </Text>
-                  <WebarrioIcon name={this.category.icon} size={20} />
+                  <Avatar
+                    source={{ uri: publication.author.avatar }}
+                    name={publication.author.name}
+                  />
+                  <View>
+                    <Text style={styles.authorName}>
+                      {publication.author.name} {publication.author.last_name}
+                    </Text>
+                    <Text style={styles.subHeading}>
+                      {date}
+                    </Text>
+                  </View>
                 </View>
               </View>
-              <View style={styles.descriptionBox}>
-                <Text style={styles.description}>{publication.description}</Text>
-              </View>
+              <Text style={styles.description}>
+                {publication.description}
+              </Text>
             </View>
             {!this.category.admin && (
               <View style={styles.commentSection}>
@@ -172,10 +182,10 @@ class PublicationScreen extends React.Component{
                 <View style={styles.comment}>
                   <TextInput
                     multiline={true}
-                    underlineColorAndroid="transparent"
+                    underlineColorAndroid='transparent'
                     value={this.state.comment}
-                    onChangeText={t => this.setState({comment: t})}
-                    placeholder="Escribe un comentario..."
+                    onChangeText={t => this.setState({ comment: t })}
+                    placeholder='Escribe un comentario...'
                     style={styles.commentInput}
                     onFocus={() => this.sv.scrollToEnd()}
                   />
@@ -185,7 +195,10 @@ class PublicationScreen extends React.Component{
                     style={styles.commentButton}
                   >
                     <Text
-                      style={[styles.commentButtonText, this.state.comment && styles.commentButtonActive]}
+                      style={[
+                        styles.commentButtonText,
+                        this.state.comment && styles.commentButtonActive
+                      ]}
                     >
                       Comentar
                     </Text>
@@ -202,18 +215,19 @@ class PublicationScreen extends React.Component{
               <PublicationMenu
                 publication={publication}
                 currentUserId={currentUser.id}
-                navigate={navigation.navigate}
                 toggleMenuCallback={this.toggleMenu}
                 report={this.report}
-                openDirection="top"
-                ref={r => this.menu = r}
+                openDirection='top'
+                ref={r => {
+                  this.menu = r
+                }}
               />
             </View>
           </ScrollView>
           {reportOpen && (
             <Report
-              currentUser={{id: currentUser.id}}
-              resourceType="publication"
+              currentUser={{ id: currentUser.id }}
+              resourceType='publication'
               resourceId={reportingId}
               currentUnitId={currentUnit.id}
               close={this.closeReport}
@@ -221,32 +235,33 @@ class PublicationScreen extends React.Component{
           )}
         </View>
         <KeyboardAvoidingView
-            behavior="padding"
-            keyboardVerticalOffset={offset}
-          />
+          behavior='padding'
+          keyboardVerticalOffset={offset}
+        />
       </View>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => ({
   currentUser: state.currentsReducer.user,
-  currentUnit: state.currentsReducer.unit,
-});
+  currentUnit: state.currentsReducer.unit
+})
 
-export default connect(mapStateToProps)(PublicationScreen);
+export default connect(mapStateToProps)(PublicationScreen)
 
 const styles = StyleSheet.create({
   image: {
     height: 150,
-    width: Dimensions.get('window').width,
+    width: Dimensions.get('window').width
   },
   screen: {
-    flex: 1,
+    flex: 1
   },
   title: {
     fontSize: 24,
-    marginBottom: 10
+    marginBottom: 10,
+    color: Colors.orange
   },
   description: {
     marginVertical: 10,
@@ -254,10 +269,11 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch'
   },
   details: {
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   info: {
-    padding: 20
+    padding: 20,
+    paddingBottom: 10
   },
   author: {
     flexDirection: 'row',
@@ -265,7 +281,12 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   authorName: {
-    color: '#92a2a2'
+    color: Colors.subHeading,
+    fontWeight: 'bold',
+    fontSize: 16
+  },
+  subHeading: {
+    color: Colors.subHeading
   },
   category: {
     flexDirection: 'row',
@@ -273,10 +294,6 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#92a2a2'
-  },
-  descriptionBox: {
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: Colors.border
   },
   titleContainer: {
     flexDirection: 'row',
@@ -292,7 +309,7 @@ const styles = StyleSheet.create({
   },
   menu: {
     position: 'absolute',
-    right: 15,
+    right: 15
   },
   commentSection: {
     backgroundColor: 'white'
@@ -307,7 +324,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 7
   },
-  commentAuthor:{
+  commentAuthor: {
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -325,12 +342,12 @@ const styles = StyleSheet.create({
   commentButton: {
     position: 'absolute',
     bottom: 25,
-    right: 25,
+    right: 25
   },
   commentButtonText: {
-    color: "#E6EDEC",
+    color: '#E6EDEC'
   },
   commentButtonActive: {
     color: Colors.tintColor
   }
-});
+})

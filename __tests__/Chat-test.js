@@ -1,23 +1,29 @@
-import 'react-native';
-import React from 'react';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import sinon from 'sinon';
-import configureMockStore from 'redux-mock-store';
-import renderer from 'react-test-renderer';
-import { mockActionCreators, createDispatchMockImplementation } from "jest-mock-action-creators";
-import Neighbors from '../screens/Neighbors';
-import * as neighborsActions from '../actions/neighbors';
-import Chat from '../screens/Chat';
+/* global
+  it
+  beforeEach
+  jest
+  expect
+*/
+import 'react-native'
+import React from 'react'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import sinon from 'sinon'
+import configureMockStore from 'redux-mock-store'
+import renderer from 'react-test-renderer'
+import { mockActionCreators, createDispatchMockImplementation } from 'jest-mock-action-creators'
+import Neighbors from '../screens/Neighbors'
+import * as neighborsActions from '../actions/neighbors'
+import Chat from '../screens/Chat'
 
 const middlewares = [ thunk ]
-const mockStore = configureMockStore(middlewares);
+const mockStore = configureMockStore(middlewares)
 const initialState = {
-  currentsReducer:{
+  currentsReducer: {
     neighborhood: {
       id: 1,
       name: 'Test',
-      address: 'test street 123',
+      address: 'test street 123'
     },
     user: {
       id: 2,
@@ -25,7 +31,7 @@ const initialState = {
       apartments: [
         {
           id: 2,
-          number: "2"
+          number: '2'
         }
       ]
     },
@@ -42,13 +48,13 @@ const initialState = {
         last_name: 'neighbor',
         apartments: [
           {
-            number: "1",
+            number: '1',
             id: 1
           }
         ]
       }
     ],
-    isRequesting: false,
+    isRequesting: false
   },
   authReducer: {
     authToken: 'test_token'
@@ -58,22 +64,23 @@ const initialState = {
     chats: []
   }
 }
-const dispatch = jest.fn();
-let navigation, store;
+const dispatch = jest.fn()
+let navigation
+let store
 
 beforeEach(() => {
-  store = mockStore(initialState);
-  navigation = { navigate: jest.fn() };
-});
+  store = mockStore(initialState)
+  navigation = { navigate: jest.fn() }
+})
 
 it('renders the neighbors list', async () => {
   const tree = renderer.create(
     <Provider store={store}>
       <Neighbors navigation={navigation} dispatch={dispatch} />
     </Provider>
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
-});
+  ).toJSON()
+  expect(tree).toMatchSnapshot()
+})
 
 it('renders empty chat', async () => {
   navigation.state = {
@@ -83,18 +90,18 @@ it('renders empty chat', async () => {
         name: 'test',
         last_name: 'neighbor',
         apartments: [
-          {id: 1, number:'1'}
+          { id: 1, number: '1' }
         ]
       }
     }
-  };
+  }
   const tree = renderer.create(
     <Provider store={store}>
       <Chat navigation={navigation} dispatch={dispatch} />
     </Provider>
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
-});
+  ).toJSON()
+  expect(tree).toMatchSnapshot()
+})
 
 it('renders non-empty chat', async () => {
   navigation.state = {
@@ -102,7 +109,7 @@ it('renders non-empty chat', async () => {
       chatId: 'test'
     }
   }
-  store = mockStore({...initialState, chatReducer: {
+  store = mockStore({ ...initialState, chatReducer: {
     messages: {
       test: [
         {
@@ -116,14 +123,14 @@ it('renders non-empty chat', async () => {
         }
       ]
     }
-  }});
+  } })
   const tree = renderer.create(
     <Provider store={store}>
       <Chat navigation={navigation} dispatch={dispatch} />
     </Provider>
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
-});
+  ).toJSON()
+  expect(tree).toMatchSnapshot()
+})
 
 // it('stacks messages', async () => {
 //   navigation.state = {
@@ -165,18 +172,17 @@ it('renders non-empty chat', async () => {
 
 
 export function findById(tree, testID) {
-  if(tree.props && tree.props.testID === testID) {
-      return tree
+  if (tree.props && tree.props.testID === testID) {
+    return tree
   }
-  if(tree.children && tree.children.length > 0)
-  {
-      let childs = tree.children
-      for(let i = 0; i < childs.length; i++)
-      {
-          let item = findById(childs[i], testID)
-          if(typeof(item) !== 'undefined') {
-              return item
-          }
+  if (tree.children && tree.children.length > 0) {
+    let childs = tree.children
+    for (let i = 0; i < childs.length; i++) {
+      let item = findById(childs[i], testID)
+      if (typeof (item) !== 'undefined') {
+        return item
       }
+    }
   }
+  return null
 }

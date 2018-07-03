@@ -1,41 +1,61 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Platform, View } from 'react-native';
+import React from 'react'
+import { connect } from 'react-redux'
+import { View } from 'react-native'
 import {
   StackNavigator,
   TabNavigator,
   TabBarBottom
-} from 'react-navigation';
-import { Notifications } from "expo";
-import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
+} from 'react-navigation'
+import { Notifications } from 'expo'
+import Axios from 'axios'
+import { API_URL } from 'react-native-dotenv'
+import SideMenu from 'react-native-side-menu-over'
+import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync'
+import { handleNotification } from '../actions/navigation'
+import { setInitialData } from '../actions/currents'
+import { setTabbarHeight } from '../actions/layout'
 
-import Colors from '../constants/Colors';
+import Colors from '../constants/Colors'
+import Expenses from '../screens/Expenses'
+import AddExpense from '../screens/AddExpense'
+import PaymentMethods from '../screens/PaymentMethods'
+import AddPaymentMethod from '../screens/AddPaymentMethod'
+import Pay from '../screens/Pay'
+import ChatListScreen from '../screens/ChatList'
+import ChatScreen from '../screens/Chat'
+import NeighborsScreen from '../screens/Neighbors'
+import CommunityScreen from '../screens/Community'
+import NewPublication from '../screens/NewPublication'
+import Categories from '../screens/Categories'
+import SosScreen from '../screens/Sos'
+import PublicationScreen from '../screens/Publication'
+import WebarrioIcon from '../components/WebarrioIcon'
+import Menu from '../components/Menu'
 
-import HomeScreen from '../screens/HomeScreen';
-import DashboardScreen from '../screens/Dashboard';
-import ChatListScreen from '../screens/ChatList';
-import ChatScreen from '../screens/Chat';
-import NeighborsScreen from '../screens/Neighbors';
-import CommunityScreen from '../screens/Community';
-import NewPublicationScreen from '../screens/NewPublication';
-import SosScreen from '../screens/Sos';
-import PublicationScreen from '../screens/Publication';
-import WebarrioIcon from '../components/WebarrioIcon';
+export let navigatorRef
+export let menuRef
+let tabBarHeight = 0
+
+const getTabBarHeight = ({
+  nativeEvent: { layout: { height } }
+}) => {
+  tabBarHeight = height
+}
 
 const header = {
-  headerForceInset: {top: 5},
-    headerStyle: {
-      backgroundColor: Colors.orange,
-      height: 50,
-      paddingHorizontal: 10,
-    },
-    headerTitleStyle: {
-      color: 'white',
-      flex: 1,
-      textAlign: 'center',
-    },
-    headerLeft: (<View/>),
-    headerRight: (<View/>),
+  headerForceInset: { top: 5 },
+  headerStyle: {
+    backgroundColor: Colors.orange,
+    height: 50,
+    paddingHorizontal: 10
+  },
+  headerTitleStyle: {
+    color: 'white',
+    flex: 1,
+    textAlign: 'center'
+  },
+  headerLeft: (<View/>),
+  headerRight: (<View/>)
 }
 
 const ChatStack = StackNavigator(
@@ -46,14 +66,13 @@ const ChatStack = StackNavigator(
   },
   {
     headerMode: 'screen',
-    navigationOptions: header,
+    navigationOptions: header
   }
 )
 
 const CommunityStack = StackNavigator(
   {
     Feed: CommunityScreen,
-    NewPublication: NewPublicationScreen,
     Publication: PublicationScreen
   },
   {
@@ -63,64 +82,74 @@ const CommunityStack = StackNavigator(
       title: 'Comunidad'
     }
   }
-);
+)
 
-const HomeStack = StackNavigator(
+const AddPublicationStack = StackNavigator(
   {
-    Home: HomeScreen
+    Categories,
+    NewPublication
   },
   {
     headerMode: 'screen',
     navigationOptions: header
   }
-);
+)
 
 const DashboardStack = StackNavigator(
   {
-    Administration: DashboardScreen
+    Expenses,
+    AddExpense,
+    PaymentMethods,
+    AddPaymentMethod,
+    Pay
   },
   {
     headerMode: 'screen',
     navigationOptions: header
   }
-);
+)
 
 const AppTabNavigator = TabNavigator(
   {
-    //Home: HomeStack,
     Community: CommunityStack,
     Chats: ChatStack,
-    //Dashboard: DashboardStack,
+    AddPublication: AddPublicationStack,
+    Dashboard: DashboardStack,
     Sos: SosScreen
   },
   {
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused }) => {
-        const { routeName } = navigation.state;
-        let iconName;
+        const { routeName } = navigation.state
+        let iconName
         switch (routeName) {
-          case 'Home':
-            iconName = 'home';
-            break;
-          case 'Dashboard':
-            iconName = 'dashboard';
-            break;
-          case 'Chats':
-            iconName = 'chat';
-            break;
-          case 'Community':
-            iconName = 'people';
-            break;
-          case 'Sos':
-            return(
-              <View style={sosStyle}>
-                <WebarrioIcon
-                  name='sos'
-                  size={28}
-                  style={{ marginBottom: -3 }}
-                  color="white"
-                />
-              </View>);
+        case 'Home':
+          iconName = 'home'
+          break
+        case 'Dashboard':
+          iconName = 'dashboard'
+          break
+        case 'AddPublication':
+          iconName = 'plus-circle'
+          break
+        case 'Chats':
+          iconName = 'chat'
+          break
+        case 'Community':
+          iconName = 'people'
+          break
+        case 'Sos':
+          return (
+            <View style={sosStyle} onLayout={getTabBarHeight}>
+              <WebarrioIcon
+                name='sos'
+                size={28}
+                style={{ marginBottom: -3 }}
+                color='white'
+              />
+            </View>)
+        default:
+          return (<View />)
         }
         return (
           <WebarrioIcon
@@ -129,46 +158,77 @@ const AppTabNavigator = TabNavigator(
             style={{ marginBottom: -3 }}
             color={focused ? Colors.orange : Colors.tabIconDefault}
           />
-        );
-      },
+        )
+      }
     }),
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      showLabel: false,
+      showLabel: false
     },
     animationEnabled: false,
-    swipeEnabled: false,
+    swipeEnabled: false
   }
-);
+)
 
-class MainTabNavigator extends React.Component{
+class MainTabNavigator extends React.Component {
   componentDidMount = () => {
-    this._registerForPushNotifications();
+    navigatorRef = this.navigator
+    menuRef = this.menu
+    this.props.dispatch(setTabbarHeight(tabBarHeight))
   }
 
-  componentWillUnmount() {
-    this._notificationSubscription && this._notificationSubscription.remove();
-  }
-
-  _registerForPushNotifications() {
-    // Send our push token over to our backend so we can receive notifications
-    // You can comment the following line out if you want to stop receiving
-    // a notification every time you open the app. Check out the source
-    // for this function in api/registerForPushNotificationsAsync.js
-    const { currentUser, currentNeighborhood, authToken } = this.props;
-    registerForPushNotificationsAsync(currentUser.id, currentNeighborhood.id, authToken);
-
-    // Watch for incoming notifications
-    this._notificationSubscription = Notifications.addListener(this._handleNotification);
-  }
 
   _handleNotification = ({ origin, data }) => {
-    console.log(`Push notification ${origin} with data: ${JSON.stringify(data)}`);
+    if (origin === 'selected') {
+      this.props.dispatch(handleNotification(data))
+    }
+    console.log(`Push notification ${origin} with data: ${JSON.stringify(data)}`)
   };
 
-  render(){
-    return (<AppTabNavigator />)
+  componentDidUpdate = prevProps => {
+    if (prevProps.authToken !== this.props.authToken) {
+      this.props.navigation.navigate('AuthLoading')
+    }
+  }
+
+  componentWillMount = () => {
+    const { authToken, dispatch } = this.props
+    Axios.get(
+      `${API_URL}/users/me`,
+      {
+        headers: {
+          Authorization: authToken
+        }
+      }
+    ).then(response => {
+      dispatch(setInitialData(response.data))
+      // Send our push token over to our backend so we can receive notifications
+      // You can comment the following line out if you want to stop receiving
+      // a notification every time you open the app. Check out the source
+      // for this function in api/registerForPushNotificationsAsync.js
+      const { user, neighborhoods } = response.data
+      registerForPushNotificationsAsync(user.id, neighborhoods[0].id, authToken)
+      this._notificationSubscription = Notifications.addListener(this._handleNotification)
+    })
+  }
+
+  componentWillUnmount = () =>
+    this._notificationSubscription && this._notificationSubscription.remove()
+
+
+  render() {
+    return (
+      <SideMenu
+        menu={(<Menu />)}
+        ref={r => {
+          this.menu = r
+        }}
+      >
+        <AppTabNavigator ref={r => {
+          this.navigator = r
+        }} />
+      </SideMenu>)
   }
 }
 
@@ -176,9 +236,9 @@ const mapStateToProps = state => ({
   currentUser: state.currentsReducer.user,
   currentNeighborhood: state.currentsReducer.neighborhood,
   authToken: state.authReducer.authToken
-});
+})
 
-export default connect(mapStateToProps)(MainTabNavigator);
+export default connect(mapStateToProps)(MainTabNavigator)
 
 const sosStyle = {
   position: 'absolute',
@@ -189,4 +249,4 @@ const sosStyle = {
   right: 0,
   alignItems: 'center',
   justifyContent: 'center'
-};
+}

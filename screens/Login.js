@@ -19,7 +19,6 @@ import axios from 'axios';
 import FloatingLabelInput from '../components/FloatingLabel';
 import Colors from '../constants/Colors';
 import { updateToken } from '../actions/auth';
-import { setInitialData } from '../actions/currents';
 import WebarrioLogo from '../assets/icons/webarrioUnderTitle';
 import AuthContainer, { authStyles } from '../components/AuthContainer';
 
@@ -56,7 +55,6 @@ class LoginScreen extends React.Component{
       })
       .then((response) => {
         this.props.dispatch(updateToken(response.headers.authorization || response.headers.Authorization));
-        this.props.dispatch(setInitialData(response.data));
       })
       .catch(error => {
         if (error.response && error.response.status === 401)
@@ -78,6 +76,7 @@ class LoginScreen extends React.Component{
             style={authStyles.input}
             value={email}
             label="Email"
+            labelColor="#fff"
             keyboardType="email-address"
             onChangeText={t => this.setState({email: t})}
             autoCapitalize="none"
@@ -86,6 +85,7 @@ class LoginScreen extends React.Component{
             style={authStyles.input}
             value={password}
             label="Contraseña"
+            labelColor="#fff"
             onChangeText={t => this.setState({password: t})}
             secureTextEntry
           />

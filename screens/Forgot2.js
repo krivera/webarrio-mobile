@@ -1,19 +1,19 @@
-import React from 'react';
-import Axios from 'axios';
+import React from 'react'
+import Axios from 'axios'
 import {
   ActivityIndicator,
   Alert,
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
-import { API_URL } from 'react-native-dotenv';
-import AuthContainer, { authStyles } from '../components/AuthContainer';
-import FloatingLabelInput from '../components/FloatingLabel';
+} from 'react-native'
+import { API_URL } from 'react-native-dotenv'
+import AuthContainer, { authStyles } from '../components/AuthContainer'
+import FloatingLabelInput from '../components/FloatingLabel'
 
-export default class Forgot extends React.Component{
-  constructor(props){
-    super(props);
+export default class Forgot extends React.Component {
+  constructor(props) {
+    super(props)
     this.state = {
       token: '',
       password: '',
@@ -25,11 +25,11 @@ export default class Forgot extends React.Component{
   }
 
   back = () => {
-    this.props.navigation.navigate("Login");
+    this.props.navigation.navigate('Login')
   }
 
   validate = () => {
-    this.setState({loading: true, error: false});
+    this.setState({ loading: true, error: false })
     Axios.post(
       `${API_URL}/users/validate_reset_password_token`,
       {
@@ -39,21 +39,24 @@ export default class Forgot extends React.Component{
       this.setState({
         validToken: true,
         loading: false
-      });
+      })
     }).catch(error => {
       this.setState({
         error: 'Hubo un problema al validar el código',
         loading: false
-      });
+      })
     })
   }
 
   updatePassword = () => {
-    this.setState({loading: true, error: false});
-    const { password, password_confirmation, token } = this.state;
-    if(password !== password_confirmation){
-      this.setState({loading: false, error: 'Repetir contraseña y contraseña no coinciden'});
-      return;
+    this.setState({ loading: true, error: false })
+    const { password, password_confirmation, token } = this.state
+    if (password !== password_confirmation) {
+      this.setState({
+        loading: false,
+        error: 'Repetir contraseña y contraseña no coinciden'
+      })
+      return
     }
     Axios.put(
       `${API_URL}/users/password`,
@@ -66,26 +69,29 @@ export default class Forgot extends React.Component{
       }
     ).then(response => {
       this.setState({
-        loading: false,
-      });
+        loading: false
+      })
       Alert.alert(
         'Contraseña actualizada',
         'Puedes iniciar sesión con tu nueva contraseña.',
         [
           {
             text: 'Ok',
-            onPress: () => this.props.navigation.navigate("Login")
+            onPress: () => this.props.navigation.navigate('Login')
           }
         ]
       )
     }).catch(error => {
-      if(error.response && error.response.data){
-        this.setState({loading: false, error: 'No se pudo crear la contraseña.\nPosibles causas: Contraseña no segura, el código ha expirado'})
+      if (error.response && error.response.data) {
+        this.setState({
+          loading: false,
+          error: 'No se pudo crear la contraseña.\nPosibles causas: Contraseña no segura, el código ha expirado'
+        })
       }
     })
   }
 
-  render(){
+  render() {
     const {
       error,
       token,
@@ -93,29 +99,32 @@ export default class Forgot extends React.Component{
       password_confirmation,
       validToken,
       loading
-    } = this.state;
+    } = this.state
     return (
       <AuthContainer error={error}>
         <FloatingLabelInput
-          label="Código"
+          label='Código'
+          labelColor='white'
           value={token}
-          onChangeText={t => this.setState({token: t})}
+          onChangeText={t => this.setState({ token: t })}
           style={authStyles.input}
-          autoCapitalize="none"
+          autoCapitalize='none'
           disabled={validToken}
         />
         {validToken && (
           <View>
             <FloatingLabelInput
-              label="Nueva contraseña"
-              onChangeText={t => this.setState({password: t})}
+              label='Nueva contraseña'
+              labelColor='white'
+              onChangeText={t => this.setState({ password: t })}
               secureTextEntry
               style={authStyles.input}
               value={password}
             />
             <FloatingLabelInput
-              label="Repetir contraseña"
-              onChangeText={t => this.setState({password_confirmation: t})}
+              label='Repetir contraseña'
+              labelColor='white'
+              onChangeText={t => this.setState({ password_confirmation: t })}
               secureTextEntry
               style={authStyles.input}
               value={password_confirmation}
@@ -148,6 +157,6 @@ export default class Forgot extends React.Component{
           </View>
         )}
       </AuthContainer>
-    );
+    )
   }
 }

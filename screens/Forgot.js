@@ -1,17 +1,17 @@
-import React from 'react';
-import Axios from 'axios';
+import React from 'react'
+import Axios from 'axios'
 import {
   Alert,
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
-import { API_URL } from 'react-native-dotenv';
-import AuthContainer, { authStyles } from '../components/AuthContainer';
-import FloatingLabelInput from '../components/FloatingLabel';
+} from 'react-native'
+import { API_URL } from 'react-native-dotenv'
+import AuthContainer, { authStyles } from '../components/AuthContainer'
+import FloatingLabelInput from '../components/FloatingLabel'
 
-export default class Forgot extends React.Component{
-  constructor(props){
+export default class Forgot extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       email: ''
@@ -19,7 +19,7 @@ export default class Forgot extends React.Component{
   }
 
   back = () => {
-    this.props.navigation.navigate("Login");
+    this.props.navigation.navigate('Login')
   }
 
   recover = () => {
@@ -30,8 +30,7 @@ export default class Forgot extends React.Component{
           email: this.state.email
         }
       }
-    ).catch()
-    .then(response => {
+    ).catch().then(response => {
       Alert.alert(
         'Revisa tu correo',
         'Si tu email está registrado, enviaremos un correo de confirmación',
@@ -39,20 +38,21 @@ export default class Forgot extends React.Component{
           text: 'Ok',
           onPress: this.props.navigation.navigate('Forgot2')
         }
-      );
+      )
     })
   }
 
-  render(){
+  render() {
     return (
       <AuthContainer>
         <FloatingLabelInput
-          label="Email"
+          label='Email'
+          labelColor='white'
           value={this.state.email}
-          onChangeText={t => this.setState({email: t})}
-          keyboardType="email-address"
+          onChangeText={t => this.setState({ email: t })}
+          keyboardType='email-address'
           style={authStyles.input}
-          autoCapitalize="none"
+          autoCapitalize='none'
         />
         <TouchableOpacity style={authStyles.button} onPress={this.recover}>
           <Text style={authStyles.buttonText}>RECUPERAR CONTRASEÑA</Text>
@@ -62,11 +62,11 @@ export default class Forgot extends React.Component{
             <Text style={authStyles.helperText}>Volver</Text>
           </TouchableOpacity>
           <Text style={authStyles.buttonText}>  |  </Text>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate("Forgot2")}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Forgot2')}>
             <Text style={authStyles.helperText}>Ingresar código</Text>
           </TouchableOpacity>
         </View>
       </AuthContainer>
-    );
+    )
   }
 }

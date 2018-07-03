@@ -1,21 +1,17 @@
-import React from 'react';
+import React from 'react'
 import {
-  Image,
   ImageBackground,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
-  View,
-  WebView
-} from 'react-native';
-import Colors from '../constants/Colors';
-import WebarrioLogo from '../assets/icons/webarrioUnderTitle';
+  View
+} from 'react-native'
+import Colors from '../constants/Colors'
+import WebarrioLogo from '../assets/icons/webarrioUnderTitle'
 
-export default class AuthContainer extends React.Component{
-
-  render(){
+export default class AuthContainer extends React.Component {
+  render() {
     return (
       <ImageBackground
         style={authStyles.screen}
@@ -27,13 +23,15 @@ export default class AuthContainer extends React.Component{
           </View>
           {this.props.error &&
             (<View style={authStyles.errorBox}>
-              <Text style={authStyles.errorText}>{this.props.error}</Text>
+              <Text style={authStyles.errorText}>
+                {this.props.error}
+              </Text>
             </View>)
           }
           {this.props.children}
         </ScrollView>
         <KeyboardAvoidingView
-          behavior="padding"
+          behavior='padding'
           keyboardVerticalOffset={0}
         />
       </ImageBackground>
@@ -44,12 +42,12 @@ export default class AuthContainer extends React.Component{
 export const authStyles = StyleSheet.create({
   screen: {
     padding: 20,
-    flex:1,
+    flex: 1
   },
   logo: {
     alignSelf: 'center',
     marginBottom: 30,
-    marginTop: 20,
+    marginTop: 20
   },
   button: {
     backgroundColor: Colors.orange,
@@ -71,7 +69,7 @@ export const authStyles = StyleSheet.create({
   errorBox: {
     backgroundColor: Colors.errorBox,
     alignItems: 'center',
-    padding: 10,
+    padding: 10
   },
   errorText: {
     color: Colors.errorText
@@ -102,4 +100,4 @@ export const authStyles = StyleSheet.create({
     padding: 15,
     backgroundColor: 'rgba(0,0,0,0.6)'
   }
-});
+})
