@@ -83,7 +83,6 @@ export default class PublicationCard extends React.Component {
           </Text>
           <PublicationMenu
             publication={publication}
-            navigate={navigate}
             currentUserId={currentUserId}
             toggleMenuCallback={this.toggleMenu}
             openDirection='bottom'

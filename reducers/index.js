@@ -5,6 +5,7 @@ import neighborhoodReducer from './neighborhood'
 import neighborsReducer from './neighbors'
 import chatReducer from './chat'
 import feedReducer from './feed'
+import layoutReducer from './layout'
 
 export default combineReducers({
   authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   neighborhoodReducer,
   chatReducer,
   neighborsReducer,
-  feedReducer
-});
+  feedReducer,
+  layoutReducer
+})

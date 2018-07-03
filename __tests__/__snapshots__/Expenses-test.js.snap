@@ -220,10 +220,11 @@ exports[`renders expenses form 1`] = `
                 allowFontScaling={true}
                 collapsable={undefined}
                 ellipsizeMode="tail"
+                numberOfLines={1}
                 style={
                   Object {
                     "color": "rgba(170, 170, 170, 1)",
-                    "fontSize": 20,
+                    "fontSize": 18,
                     "left": 0,
                     "position": "absolute",
                     "top": 18,
@@ -244,8 +245,8 @@ exports[`renders expenses form 1`] = `
                     Object {
                       "borderBottomColor": "#94a4a4",
                       "borderBottomWidth": 1,
-                      "fontSize": 20,
-                      "height": 26,
+                      "fontSize": 18,
+                      "minHeight": 24,
                     },
                     Object {
                       "borderBottomColor": "#94a4a4",
@@ -274,10 +275,11 @@ exports[`renders expenses form 1`] = `
                 allowFontScaling={true}
                 collapsable={undefined}
                 ellipsizeMode="tail"
+                numberOfLines={1}
                 style={
                   Object {
                     "color": "rgba(170, 170, 170, 1)",
-                    "fontSize": 20,
+                    "fontSize": 18,
                     "left": 0,
                     "position": "absolute",
                     "top": 18,
@@ -298,8 +300,8 @@ exports[`renders expenses form 1`] = `
                     Object {
                       "borderBottomColor": "#94a4a4",
                       "borderBottomWidth": 1,
-                      "fontSize": 20,
-                      "height": 26,
+                      "fontSize": 18,
+                      "minHeight": 24,
                     },
                     Object {
                       "borderBottomColor": "#94a4a4",
@@ -328,10 +330,11 @@ exports[`renders expenses form 1`] = `
                 allowFontScaling={true}
                 collapsable={undefined}
                 ellipsizeMode="tail"
+                numberOfLines={1}
                 style={
                   Object {
                     "color": "rgba(170, 170, 170, 1)",
-                    "fontSize": 20,
+                    "fontSize": 18,
                     "left": 0,
                     "position": "absolute",
                     "top": 18,
@@ -352,8 +355,8 @@ exports[`renders expenses form 1`] = `
                     Object {
                       "borderBottomColor": "#94a4a4",
                       "borderBottomWidth": 1,
-                      "fontSize": 20,
-                      "height": 26,
+                      "fontSize": 18,
+                      "minHeight": 24,
                     },
                     Object {
                       "borderBottomColor": "#94a4a4",
@@ -382,10 +385,11 @@ exports[`renders expenses form 1`] = `
                 allowFontScaling={true}
                 collapsable={undefined}
                 ellipsizeMode="tail"
+                numberOfLines={1}
                 style={
                   Object {
                     "color": "rgba(170, 170, 170, 1)",
-                    "fontSize": 20,
+                    "fontSize": 18,
                     "left": 0,
                     "position": "absolute",
                     "top": 18,
@@ -406,8 +410,8 @@ exports[`renders expenses form 1`] = `
                     Object {
                       "borderBottomColor": "#94a4a4",
                       "borderBottomWidth": 1,
-                      "fontSize": 20,
-                      "height": 26,
+                      "fontSize": 18,
+                      "minHeight": 24,
                     },
                     Object {
                       "borderBottomColor": "#94a4a4",
@@ -436,10 +440,11 @@ exports[`renders expenses form 1`] = `
                 allowFontScaling={true}
                 collapsable={undefined}
                 ellipsizeMode="tail"
+                numberOfLines={1}
                 style={
                   Object {
                     "color": "rgba(170, 170, 170, 1)",
-                    "fontSize": 20,
+                    "fontSize": 18,
                     "left": 0,
                     "position": "absolute",
                     "top": 18,
@@ -460,8 +465,8 @@ exports[`renders expenses form 1`] = `
                     Object {
                       "borderBottomColor": "#94a4a4",
                       "borderBottomWidth": 1,
-                      "fontSize": 20,
-                      "height": 26,
+                      "fontSize": 18,
+                      "minHeight": 24,
                     },
                     Object {
                       "borderBottomColor": "#94a4a4",
@@ -500,6 +505,7 @@ exports[`renders expenses form 1`] = `
               allowFontScaling={true}
               collapsable={undefined}
               ellipsizeMode="tail"
+              numberOfLines={1}
               style={
                 Object {
                   "color": "rgba(0, 0, 0, 1)",
@@ -522,8 +528,8 @@ exports[`renders expenses form 1`] = `
                   Object {
                     "borderBottomColor": "#000",
                     "borderBottomWidth": 1,
-                    "fontSize": 20,
-                    "height": 26,
+                    "fontSize": 18,
+                    "minHeight": 24,
                   },
                   Array [
                     Object {
@@ -556,6 +562,7 @@ exports[`renders expenses form 1`] = `
               allowFontScaling={true}
               collapsable={undefined}
               ellipsizeMode="tail"
+              numberOfLines={1}
               style={
                 Object {
                   "color": "rgba(0, 0, 0, 1)",
@@ -578,8 +585,8 @@ exports[`renders expenses form 1`] = `
                   Object {
                     "borderBottomColor": "#000",
                     "borderBottomWidth": 1,
-                    "fontSize": 20,
-                    "height": 26,
+                    "fontSize": 18,
+                    "minHeight": 24,
                   },
                   Array [
                     Object {
@@ -672,6 +679,7 @@ exports[`renders expenses form 1`] = `
           "top": 0,
         },
         Object {
+          "display": "none",
           "height": 0,
         },
       ]

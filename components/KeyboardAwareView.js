@@ -1,10 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {
   Dimensions,
   KeyboardAvoidingView,
   View
 } from 'react-native'
-import { tabBarHeight } from '../navigation/MainTabNavigator'
 
 export default class KeyboardAwareView extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ export default class KeyboardAwareView extends React.Component {
   onLayout = ({
     nativeEvent: { layout: { height } }
   }) => {
-    this.setState({ offset: Dimensions.get('window').height - height - tabBarHeight })
+    this.setState({ offset: Dimensions.get('window').height - height - this.props.tabbarHeight })
   }
 
   render() {
@@ -31,3 +31,6 @@ export default class KeyboardAwareView extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  tabbarHeight: state.layoutReducer.tabbarHeight
+})

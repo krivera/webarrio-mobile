@@ -7,7 +7,7 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|redux-persist|redux-persist-expo-securestore|react-navigation|react-clone-referenced-element|expo|@expo/*|exponent|@exponent/*)"
+      "node_modules/(?!(jest-)?static-container|react-native|redux-persist|redux-persist-expo-securestore|react-navigation|react-clone-referenced-element|expo|@expo/*|exponent|@exponent/*)"
     ]
   },
   "dependencies": {

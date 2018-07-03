@@ -13,6 +13,7 @@ import SideMenu from 'react-native-side-menu-over'
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync'
 import { handleNotification } from '../actions/navigation'
 import { setInitialData } from '../actions/currents'
+import { setTabbarHeight } from '../actions/layout'
 
 import Colors from '../constants/Colors'
 import Expenses from '../screens/Expenses'
@@ -24,7 +25,7 @@ import ChatListScreen from '../screens/ChatList'
 import ChatScreen from '../screens/Chat'
 import NeighborsScreen from '../screens/Neighbors'
 import CommunityScreen from '../screens/Community'
-import NewPublicationScreen from '../screens/NewPublication'
+import NewPublication from '../screens/NewPublication'
 import Categories from '../screens/Categories'
 import SosScreen from '../screens/Sos'
 import PublicationScreen from '../screens/Publication'
@@ -33,7 +34,7 @@ import Menu from '../components/Menu'
 
 export let navigatorRef
 export let menuRef
-export let tabBarHeight = 0
+let tabBarHeight = 0
 
 const getTabBarHeight = ({
   nativeEvent: { layout: { height } }
@@ -83,10 +84,10 @@ const CommunityStack = StackNavigator(
   }
 )
 
-const NewPublicationStack = StackNavigator(
+const AddPublicationStack = StackNavigator(
   {
     Categories,
-    NewPublication: NewPublicationScreen
+    NewPublication
   },
   {
     headerMode: 'screen',
@@ -112,7 +113,7 @@ const AppTabNavigator = TabNavigator(
   {
     Community: CommunityStack,
     Chats: ChatStack,
-    NewPublication: NewPublicationStack,
+    AddPublication: AddPublicationStack,
     Dashboard: DashboardStack,
     Sos: SosScreen
   },
@@ -128,7 +129,7 @@ const AppTabNavigator = TabNavigator(
         case 'Dashboard':
           iconName = 'dashboard'
           break
-        case 'NewPublication':
+        case 'AddPublication':
           iconName = 'plus-circle'
           break
         case 'Chats':
@@ -174,6 +175,7 @@ class MainTabNavigator extends React.Component {
   componentDidMount = () => {
     navigatorRef = this.navigator
     menuRef = this.menu
+    this.props.dispatch(setTabbarHeight(tabBarHeight))
   }
 
 

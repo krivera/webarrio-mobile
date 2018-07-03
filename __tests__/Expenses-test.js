@@ -1,12 +1,16 @@
-import 'react-native';
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Expense from '../components/Expense';
-import { FormattedProvider } from 'react-native-globalize';
-import AddExpenseScreen from '../screens/AddExpense';
-import configStore from '../store';
+/* global
+  it
+  expect
+*/
+import 'react-native'
+import React from 'react'
+import renderer from 'react-test-renderer'
+import Expense from '../components/Expense'
+import { FormattedProvider } from 'react-native-globalize'
+import AddExpenseScreen from '../screens/AddExpense'
+import configStore from '../store'
 
-const { store, persistor } = configStore();
+const { store } = configStore()
 
 it('renders individual expense', () => {
   const expense = {
@@ -24,11 +28,11 @@ it('renders individual expense', () => {
     <FormattedProvider locale='es'>
       <Expense expense={expense} />
     </FormattedProvider>
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
-});
+  ).toJSON()
+  expect(tree).toMatchSnapshot()
+})
 
 it('renders expenses form', () => {
-  const tree = renderer.create(<AddExpenseScreen store={store} />).toJSON();
-  expect(tree).toMatchSnapshot();
-});
+  const tree = renderer.create(<AddExpenseScreen store={store} />).toJSON()
+  expect(tree).toMatchSnapshot()
+})

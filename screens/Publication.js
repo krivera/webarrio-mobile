@@ -14,10 +14,9 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native'
-import Ionicons from '@expo/vector-icons/Ionicons'
-import { NavigationActions } from 'react-navigation'
 import Colors from '../constants/Colors'
 import Categories from '../constants/Categories'
+import { Months } from '../constants/utils'
 import Avatar from '../components/Avatar'
 import WebarrioIcon from '../components/WebarrioIcon'
 import PublicationMenu from '../components/PublicationMenu'
@@ -129,6 +128,8 @@ class PublicationScreen extends React.Component {
     const { navigation, currentUser, currentUnit } = this.props
     const { menuOpen, offset, reportOpen, reportingId } = this.state
     const menuTop = { top: publication.image_url ? 170 : 20 }
+    let date = new Date(publication.created_at)
+    date = (`0${date.getDate()}`).slice(-2) + ' ' + Months[date.getMonth()]
     return (
       <View style={styles.screen} onLayout={this.onLayout}>
         <View style={styles.screen}>
@@ -140,25 +141,33 @@ class PublicationScreen extends React.Component {
             )}
             <View style={styles.details}>
               <View style={styles.info}>
+                <View style={styles.category}>
+                  <WebarrioIcon
+                    name={this.category.icon}
+                    size={20}
+                    color={Colors.subHeading}
+                  />
+                  <Text style={styles.subHeading}>{this.category.name}</Text>
+                </View>
                 <Text style={styles.title}>{publication.title}</Text>
                 <View style={styles.author}>
                   <Avatar
                     source={{ uri: publication.author.avatar }}
                     name={publication.author.name}
                   />
-                  <Text style={styles.authorName}>
-                    {publication.author.name} {publication.author.last_name}
-                  </Text>
-                </View>
-                <Text style={styles.label}>Categoría</Text>
-                <View style={styles.category}>
-                  <Text>{this.category.name} </Text>
-                  <WebarrioIcon name={this.category.icon} size={20} />
+                  <View>
+                    <Text style={styles.authorName}>
+                      {publication.author.name} {publication.author.last_name}
+                    </Text>
+                    <Text style={styles.subHeading}>
+                      {date}
+                    </Text>
+                  </View>
                 </View>
               </View>
-              <View style={styles.descriptionBox}>
-                <Text style={styles.description}>{publication.description}</Text>
-              </View>
+              <Text style={styles.description}>
+                {publication.description}
+              </Text>
             </View>
             {!this.category.admin && (
               <View style={styles.commentSection}>
@@ -206,7 +215,6 @@ class PublicationScreen extends React.Component {
               <PublicationMenu
                 publication={publication}
                 currentUserId={currentUser.id}
-                navigate={navigation.navigate}
                 toggleMenuCallback={this.toggleMenu}
                 report={this.report}
                 openDirection='top'
@@ -252,7 +260,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    marginBottom: 10
+    marginBottom: 10,
+    color: Colors.orange
   },
   description: {
     marginVertical: 10,
@@ -263,7 +272,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   info: {
-    padding: 20
+    padding: 20,
+    paddingBottom: 10
   },
   author: {
     flexDirection: 'row',
@@ -271,7 +281,12 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   authorName: {
-    color: '#92a2a2'
+    color: Colors.subHeading,
+    fontWeight: 'bold',
+    fontSize: 16
+  },
+  subHeading: {
+    color: Colors.subHeading
   },
   category: {
     flexDirection: 'row',
@@ -279,10 +294,6 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#92a2a2'
-  },
-  descriptionBox: {
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: Colors.border
   },
   titleContainer: {
     flexDirection: 'row',

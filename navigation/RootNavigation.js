@@ -18,7 +18,7 @@ const AuthStack = StackNavigator(
   {
     headerMode: 'none'
   }
-);
+)
 
 const AppStack = StackNavigator(
   {

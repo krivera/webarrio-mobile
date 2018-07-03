@@ -28,7 +28,7 @@ import Loading from '../components/Loading'
 import FloatingLabelInput from '../components/FloatingLabel'
 import KeyboardAwareView from '../components/KeyboardAwareView'
 
-class NewPublicationScreen extends React.Component {
+class NewPublication extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Nueva Publicación',
     headerLeft: (<BackButton behavior={
@@ -380,7 +380,7 @@ const mapStateToProps = state => ({
   user: state.currentsReducer.user
 })
 
-export default connect(mapStateToProps)(NewPublicationScreen)
+export default connect(mapStateToProps)(NewPublication)
 
 const styles = StyleSheet.create({
   row: {
