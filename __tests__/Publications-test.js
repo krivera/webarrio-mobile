@@ -54,7 +54,7 @@ const publication = {
     id: 1,
     avatar: null
   },
-  date: new Date(),
+  date: new Date('12/12/2018'),
   created_at: new Date('01/01/2018'),
   updated_at: new Date('01/01/2018')
 }

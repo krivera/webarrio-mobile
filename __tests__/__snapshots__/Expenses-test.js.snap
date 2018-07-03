@@ -72,7 +72,7 @@ exports[`renders expenses form 1`] = `
               ]
             }
           >
-            Junio
+            Julio
           </Text>
           <Text
             accessible={true}

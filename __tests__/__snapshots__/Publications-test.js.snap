@@ -2409,7 +2409,7 @@ exports[`renders Edit Publication screen 1`] = `
                   }
                 }
               >
-                28/06/2018
+                12/12/2018
               </Text>
               <Text
                 accessible={true}
@@ -2462,7 +2462,7 @@ exports[`renders Edit Publication screen 1`] = `
                   }
                 }
               >
-                17:45
+                00:00
               </Text>
               <Text
                 accessible={true}
