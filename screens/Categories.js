@@ -1,6 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {
   Dimensions,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -15,7 +17,7 @@ import Colors from '../constants/Colors'
 
 const size = (Dimensions.get('window').width - 30) / 3
 
-export default class CategoriesScreen extends React.Component {
+class CategoriesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Nueva Publicación',
     headerLeft: (<BackButton behavior='back' />)
@@ -51,46 +53,62 @@ export default class CategoriesScreen extends React.Component {
   }
 
   render() {
+    const { unit } = this.props
     return (
-      <View style={styles.screen}>
-        <Text style={styles.title}>Elige una Categoría</Text>
-        <View style={styles.categorySelector}>
-          {Categories.filter(category =>
-            category.key !== 'all' && !category.admin
-          ).map(category => (
-            <TouchableOpacity
-              onPress={() => this.setState({ category: category.key })}
-              style={styles.category}
-              key={category.key}
-            >
-              <View style={[
-                styles.categoryIcon,
-                this.state.category === category.key && styles.selected]}
+      <ScrollView
+        style={styles.container}
+      >
+        <View style={styles.screen}>
+          <Text style={styles.title}>Elige una Categoría</Text>
+          <View style={styles.categorySelector}>
+            {Categories.filter(category => {
+              if (category.key === 'all') {
+                return false
+              }
+              return unit.user_roles.includes('secretary')
+                || !category.admin
+            }).map(category => (
+              <TouchableOpacity
+                onPress={() => this.setState({ category: category.key })}
+                style={styles.category}
+                key={category.key}
               >
-                <WebarrioIcon
-                  name={category.icon}
-                  size={size * 0.5}
-                  color={this.state.category === category.key ? 'white' : Colors.orange}
-                />
-              </View>
-              <Text style={styles.categoryText}>
-                {category.name}
-              </Text>
-            </TouchableOpacity>
+                <View style={[
+                  styles.categoryIcon,
+                  this.state.category === category.key && styles.selected]}
+                >
+                  <WebarrioIcon
+                    name={category.icon}
+                    size={size * 0.5}
+                    color={this.state.category === category.key ? 'white' : Colors.orange}
+                  />
+                </View>
+                <Text style={styles.categoryText}>
+                  {category.name}
+                </Text>
+              </TouchableOpacity>
 
-          ))}
+            ))}
+          </View>
+          <Button onPress={this.next}>Siguiente</Button>
         </View>
-        <Button onPress={this.next}>Siguiente</Button>
-      </View>
+      </ScrollView>
     )
   }
 }
 
+const mapStateToProps = state => ({
+  unit: state.currentsReducer.unit
+})
+
+export default connect(mapStateToProps)(CategoriesScreen)
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
+  container: {
     backgroundColor: 'white',
+    flex: 1
+  },
+  screen: {
     padding: 15,
     alignItems: 'center'
   },
@@ -119,7 +137,8 @@ const styles = StyleSheet.create({
     margin: 10
   },
   categoryText: {
-    fontSize: 12
+    fontSize: 12,
+    textAlign: 'center'
   },
   selected: {
     backgroundColor: Colors.orange

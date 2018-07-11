@@ -55,8 +55,9 @@ class PublicationScreen extends React.Component {
 
   toggleMenu = () => this.setState({ menuOpen: !this.state.menuOpen })
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     const { publication } = this.props.navigation.state.params
+    const { neighborhood_units: units } = this.props.neighborhood
     this.commentsRef = firebase.database().ref(`/comments/${publication.id}`)
     this.commentsRef.on('value', snapshot => {
       const comments = snapshot.val()
@@ -68,6 +69,9 @@ class PublicationScreen extends React.Component {
       } else {
         this.setState({ loadingComments: false })
       }
+    })
+    this.setState({
+      unit: units.find(unit => unit.id === publication.neighborhood_unit_id)
     })
   }
 
@@ -100,7 +104,11 @@ class PublicationScreen extends React.Component {
       <View style={styles.comment}>
         <View style={styles.commentHeader}>
           <View style={styles.commentAuthor}>
-            <Avatar source={{ uri: comment.author.avatar }} name={comment.author.name} size={25} />
+            <Avatar
+              source={{ uri: comment.author.avatar }}
+              name={comment.author.name}
+              size={25}
+            />
             <Text style={styles.commentHeaderText}>{comment.author.name}</Text>
           </View>
           <Text style={styles.commentHeaderText}>{date}</Text>
@@ -125,7 +133,7 @@ class PublicationScreen extends React.Component {
 
   render() {
     const { publication } = this.props.navigation.state.params
-    const { navigation, currentUser, currentUnit } = this.props
+    const { currentUser, unit } = this.props
     const { menuOpen, offset, reportOpen, reportingId } = this.state
     const menuTop = { top: publication.image_url ? 170 : 20 }
     let date = new Date(publication.created_at)
@@ -149,6 +157,11 @@ class PublicationScreen extends React.Component {
                   />
                   <Text style={styles.subHeading}>{this.category.name}</Text>
                 </View>
+                {this.state.unit && (
+                  <Text style={styles.subHeading}>
+                    {this.state.unit.name}
+                  </Text>
+                )}
                 <Text style={styles.title}>{publication.title}</Text>
                 <View style={styles.author}>
                   <Avatar
@@ -229,7 +242,7 @@ class PublicationScreen extends React.Component {
               currentUser={{ id: currentUser.id }}
               resourceType='publication'
               resourceId={reportingId}
-              currentUnitId={currentUnit.id}
+              currentUnitId={unit.id}
               close={this.closeReport}
             />
           )}
@@ -245,7 +258,8 @@ class PublicationScreen extends React.Component {
 
 const mapStateToProps = state => ({
   currentUser: state.currentsReducer.user,
-  currentUnit: state.currentsReducer.unit
+  unit: state.currentsReducer.unit,
+  neighborhood: state.currentsReducer.neighborhood
 })
 
 export default connect(mapStateToProps)(PublicationScreen)

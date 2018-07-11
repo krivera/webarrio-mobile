@@ -25,7 +25,6 @@ export default class PublicationCard extends React.Component {
       menuHeight: new Animated.Value(0),
       menuOpenHeight: currentUserId === publication.author.id ? 30 : 60
     }
-    this.category = 
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
@@ -35,11 +34,14 @@ export default class PublicationCard extends React.Component {
   }
 
   render() {
-    const { publication, navigate, currentUserId, report } = this.props
+    const { publication, navigate, currentUserId, report, neighborhood } = this.props
     const category = (Categories.find(
       cat =>
         cat.key === publication.publication_type) || { icon: 'loop', name: 'Otro' })
     const published = new Date(publication.created_at)
+    const unit = neighborhood.neighborhood_units.find(
+      unt => unt.id === publication.neighborhood_unit_id
+    )
     return (
       <View style={[
         styles.layout,
@@ -61,6 +63,11 @@ export default class PublicationCard extends React.Component {
             </Text>
             <WebarrioIcon name={category.icon} size={14} color={Colors.subHeading} />
           </View>
+          {unit && (
+            <Text style={styles.author}>
+              {unit.name}
+            </Text>
+          )}
           <Text style={styles.description} numberOfLines={2} ellipsizeMode='tail' >
             {publication.description}
           </Text>
@@ -125,7 +132,7 @@ const styles = StyleSheet.create({
     color: '#92a2a2'
   },
   content: {
-    alignItems:   'flex-start',
+    alignItems: 'flex-start',
     flex: 0.75,
     paddingBottom: 15
   },

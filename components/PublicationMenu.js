@@ -143,7 +143,7 @@ export default withNavigation(PublicationMenu)
 
 PublicationMenu.propTypes = {
   publication: PropTypes.object,
-  currentUserId: PropTypes.integer,
+  currentUserId: PropTypes.number,
   openDirection: PropTypes.string,
   toggleMenuCallback: PropTypes.func,
   report: PropTypes.func

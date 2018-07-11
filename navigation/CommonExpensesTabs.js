@@ -1,28 +1,40 @@
-import React from 'react';
+import React from 'react'
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
-import { withNavigation } from 'react-navigation';
-import PropTypes from 'prop-types';
-import Colors from '../constants/Colors';
+} from 'react-native'
+import { withNavigation } from 'react-navigation'
+import PropTypes from 'prop-types'
+import Colors from '../constants/Colors'
 
-class CommonExpensesTabs extends React.Component{
+class CommonExpensesTabs extends React.Component {
   constructor(props) {
-    super(props);
-    
-    const { navigation: { navigate } } = props;
+    super(props)
+
+    const { navigation: { navigate } } = props
     this.tabs = [
-      {key: 'Expenses', label: 'Gastos Comunes', callback: () => navigate('Expenses')},
-      {key: 'PersonalExpenses', label: 'Gasto Personal', callback: () => navigate('Expenses', {personal: true})},
-      {key: 'PaymentMethods', label: 'Métodos de Pago', callback: () => navigate('PaymentMethods')},
+      {
+        key: 'Expenses',
+        label: 'Gastos Comunes',
+        callback: () => navigate('Expenses')
+      },
+      {
+        key: 'PersonalExpenses',
+        label: 'Gasto Personal',
+        callback: () => navigate('Expenses', { personal: true })
+      },
+      {
+        key: 'PaymentMethods',
+        label: 'Métodos de Pago',
+        callback: () => navigate('PaymentMethods')
+      }
     ]
-    this.state = {};
+    this.state = {}
   }
-  render(){
-    const { currentTab } = this.props;
+  render() {
+    const { currentTab } = this.props
     return (
       <View style={styles.bar}>
         {this.tabs.map(tab => (
@@ -41,7 +53,7 @@ class CommonExpensesTabs extends React.Component{
   }
 }
 
-export default withNavigation(CommonExpensesTabs);
+export default withNavigation(CommonExpensesTabs)
 
 CommonExpensesTabs.propTypes = {
   currentTab: PropTypes.string
@@ -62,6 +74,6 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   current: {
-    color: Colors.orange,
+    color: Colors.orange
   }
 })

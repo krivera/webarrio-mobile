@@ -60,13 +60,14 @@ class CommunityScreen extends React.Component {
   }
 
   renderPublication = ({ item: publication }) => {
-    const { currentUser, navigation } = this.props
+    const { currentUser, navigation, neighborhood } = this.props
     return (
       <PublicationCard
         publication={publication}
         navigate={navigation.navigate}
         currentUserId={currentUser.id}
         report={this.report}
+        neighborhood={neighborhood}
       />
     )
   }
@@ -122,6 +123,7 @@ const mapStateToProps = state => {
     authToken: state.authReducer.authToken,
     currentUnit: state.currentsReducer.unit,
     currentUser: state.currentsReducer.user,
+    neighborhood: state.currentsReducer.neighborhood,
     filter: state.feedReducer.filter
   }
 }

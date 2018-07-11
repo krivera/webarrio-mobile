@@ -165,22 +165,27 @@ class NewPublication extends React.Component {
     } = this.state
     if (title && description && publication_type) {
       this.setState({ loading: true })
-      const { authToken, currentNeighborhood, navigation } = this.props
+      const { authToken, currentNeighborhood, navigation, unit } = this.props
       const { publication } = navigation.state.params
       let date_ = new Date(date)
       date_.setHours(hours, minutes, 0)
+      let data = {
+        title,
+        description,
+        publication_type,
+        date: date_.getTime(),
+        seats_available,
+        destination
+      }
+      if (Categories.find(category => category.key === publication_type).admin) {
+        data.unit_id = unit.id
+      } else {
+        data.neighborhood = currentNeighborhood.id
+      }
       axios({
-        url: API_URL + '/publications/' + (publication ? publication.id : ''),
+        url: `${API_URL}/publications/${publication ? publication.id : ''}`,
         method: publication ? 'PATCH' : 'POST',
-        data: {
-          title,
-          description,
-          publication_type,
-          neighborhood: currentNeighborhood.id,
-          date: date_.getTime(),
-          seats_available,
-          destination
-        },
+        data,
         headers: {
           Authorization: authToken
         }
@@ -193,7 +198,7 @@ class NewPublication extends React.Component {
           let type = match ? `image/${match[1]}` : `image`
           formData.append('file', { uri: this.state.image, name: filename, type })
           axios({
-            url: API_URL + '/publications/' + response.data.publication.id + '/image',
+            url: `${API_URL}/publications/${response.data.publication.id}/image`,
             Accept: 'application/json, text/javascript, */*; q=0.01',
             method: 'POST',
             headers: {
@@ -377,6 +382,7 @@ class NewPublication extends React.Component {
 const mapStateToProps = state => ({
   authToken: state.authReducer.authToken,
   currentNeighborhood: state.currentsReducer.neighborhood,
+  unit: state.currentsReducer.unit,
   user: state.currentsReducer.user
 })
 

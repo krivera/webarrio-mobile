@@ -32,6 +32,17 @@ export function handleNotification(data) {
         })
       )
     }
+  case 'common_expenses':
+    return dispatch => {
+      navigatorRef.dispatch(
+        NavigationActions.navigate({
+          routeName: 'Expenses',
+          params: {
+            personal: true
+          }
+        })
+      )
+    }
   default:
     return {}
   }

@@ -1,23 +1,18 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 import {
-  FlatList,
   StyleSheet,
-  Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View
-} from 'react-native';
-import Axios from 'axios';
-import { API_URL } from 'react-native-dotenv';
-import { Feather } from '@expo/vector-icons';
-import RefreshingList from '../components/RefreshingList';
-import Expense from '../components/Expense';
-import WebarrioIcon from '../components/WebarrioIcon';
-import Colors from '../constants/Colors';
-import CommonExpensesTabs from '../navigation/CommonExpensesTabs';
+} from 'react-native'
+import { API_URL } from 'react-native-dotenv'
+import { Feather } from '@expo/vector-icons'
+import RefreshingList from '../components/RefreshingList'
+import Expense from '../components/Expense'
+import Colors from '../constants/Colors'
+import CommonExpensesTabs from '../navigation/CommonExpensesTabs'
 
-class ExpensesScreen extends React.Component{
+class ExpensesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Gastos Comunes',
     headerRight: (<View>
@@ -30,49 +25,53 @@ class ExpensesScreen extends React.Component{
             }
           )
         }>
-          <Feather name="plus" size={25} color="white" />
+          <Feather name='plus' size={25} color='white' />
         </TouchableOpacity>
       )}
     </View>)
   });
 
   constructor(props) {
-    super(props);
-  
-    this.state = { };
-    this.refreshList = this.refreshList.bind(this);
+    super(props)
+
+    this.state = { }
+    this.refreshList = this.refreshList.bind(this)
   }
 
   componentDidMount = () => {
-    this.props.navigation.setParams({refreshList: this.refreshList});
+    this.props.navigation.setParams({ refreshList: this.refreshList })
   }
 
   refreshList = () => {
-    this.list.onRefresh();
+    this.list.onRefresh()
   }
 
   componentWillMount = () => {
-    const { authToken, currentApartment, currentNeighborhood, navigation } = this.props;
-    const treasurer = currentNeighborhood.user_roles.includes('treasurer');
-    this.treasurerView = treasurer && !(navigation.state.params && navigation.state.params.personal);
-    this.url = `${API_URL}/${this.treasurerView ? 'neighborhoods/' + currentNeighborhood.id : 'apartments/' + currentApartment.id}/common_expenses`;
-    navigation.setParams({ treasurerView: this.treasurerView });
+    const { unit, neighborhood, navigation } = this.props
+    const treasurer = unit.user_roles.includes('treasurer')
+    this.treasurerView = treasurer && !(navigation.state.params && navigation.state.params.personal)
+    this.url = `${API_URL}/${this.treasurerView ? 'units/' + unit.id : 'neighborhoods/' + neighborhood.id}/common_expenses`
+    navigation.setParams({ treasurerView: this.treasurerView })
   }
 
-  goToPayment = expense => this.props.navigation.navigate('Pay', { total: expense.total, month: expense.month });
+  goToPayment = expense => {
+    this.props.navigation.navigate(
+      'Pay',
+      { total: expense.total, month: expense.month, unit: { id: expense.unit_id, name: expense.unit_name } })
+  }
 
-  renderExpense = ({ item: expense}) => {
+  renderExpense = ({ item: expense }) => {
     return (
       <Expense
         expense={expense}
         treasurerView={this.treasurerView}
         goToPayment={this.goToPayment}
-      />);
+      />)
   }
 
-  render(){
-    const { authToken, currentNeighborhood } = this.props;
-    const treasurer = currentNeighborhood.user_roles.includes('treasurer');
+  render() {
+    const { authToken, unit } = this.props
+    const treasurer = unit.user_roles.includes('treasurer')
     return (
       <View style={styles.screen}>
         {treasurer && (
@@ -83,22 +82,24 @@ class ExpensesScreen extends React.Component{
         <RefreshingList
           url={this.url}
           authorization={authToken}
-          dataName="common_expenses"
+          dataName='common_expenses'
           renderItem={this.renderExpense}
-          ref={r => this.list = r}
+          ref={r => {
+            this.list = r
+          }}
         />
       </View>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => ({
   authToken: state.authReducer.authToken,
-  currentApartment: state.currentsReducer.apartment,
-  currentNeighborhood: state.currentsReducer.neighborhood
-});
+  unit: state.currentsReducer.unit,
+  neighborhood: state.currentsReducer.neighborhood
+})
 
-export default connect(mapStateToProps)(ExpensesScreen);
+export default connect(mapStateToProps)(ExpensesScreen)
 
 const styles = StyleSheet.create({
   screen: {
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     position: 'absolute',
     top: 0,
-    left:0,
+    left: 0,
     bottom: 0,
     right: 0
   },
@@ -128,4 +129,4 @@ const styles = StyleSheet.create({
     width: 30,
     alignItems: 'center'
   }
-});
+})
