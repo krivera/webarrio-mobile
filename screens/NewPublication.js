@@ -5,7 +5,6 @@ import {
   Image,
   Platform,
   ScrollView,
-  StyleSheet,
   Text,
   TimePickerAndroid,
   TouchableOpacity,
@@ -19,14 +18,17 @@ import { Feather, Ionicons, SimpleLineIcons } from '@expo/vector-icons'
 import { API_URL } from 'react-native-dotenv'
 import axios from 'axios'
 import { NavigationActions } from 'react-navigation'
+import { setCurrent } from '../actions/currents'
 import Categories from '../constants/Categories'
 import Colors from '../constants/Colors'
+import UnitPicker from '../components/UnitPicker'
 import BackButton from '../components/BackButton'
 import Button from '../components/Button'
 import WebarrioIcon from '../components/WebarrioIcon'
 import Loading from '../components/Loading'
 import FloatingLabelInput from '../components/FloatingLabel'
 import KeyboardAwareView from '../components/KeyboardAwareView'
+import styles from './styles/NewPublication'
 
 class NewPublication extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -58,6 +60,20 @@ class NewPublication extends React.Component {
     }
     this.now = new Date()
     this.savePublication = this.savePublication.bind(this)
+  }
+
+  componentDidMount = () => {
+    const { unit, neighborhood, dispatch, navigation } = this.props
+    if (navigation.state.params.category.admin) {
+      if (!unit.user_roles.includes('secretary')) {
+        dispatch(setCurrent(
+          'unit',
+          neighborhood.neighborhood_units.find(
+            nUnit => nUnit.user_roles.includes('secretary')
+          )
+        ))
+      }
+    }
   }
 
   openDatePicker = async () => {
@@ -165,7 +181,7 @@ class NewPublication extends React.Component {
     } = this.state
     if (title && description && publication_type) {
       this.setState({ loading: true })
-      const { authToken, currentNeighborhood, navigation, unit } = this.props
+      const { authToken, neighborhood, navigation, unit } = this.props
       const { publication } = navigation.state.params
       let date_ = new Date(date)
       date_.setHours(hours, minutes, 0)
@@ -180,7 +196,7 @@ class NewPublication extends React.Component {
       if (Categories.find(category => category.key === publication_type).admin) {
         data.unit_id = unit.id
       } else {
-        data.neighborhood = currentNeighborhood.id
+        data.neighborhood = neighborhood.id
       }
       axios({
         url: `${API_URL}/publications/${publication ? publication.id : ''}`,
@@ -230,6 +246,15 @@ class NewPublication extends React.Component {
     this.setState({ [field]: '' })
   }
 
+  changeUnit = unitId => {
+    const { neighborhood, dispatch } = this.props
+    const nextUnit = neighborhood.neighborhood_units.find(unit => unit.id === unitId)
+    dispatch(setCurrent('unit', nextUnit))
+    if (nextUnit.apartments && nextUnit.apartments.length) {
+      dispatch(setCurrent('apartment', nextUnit.apartments))
+    }
+  }
+
   render() {
     const show_date = ['event', 'car_pooling'].includes(this.state.publication_type)
     const is_car = ['car_pooling'].includes(this.state.publication_type)
@@ -243,6 +268,8 @@ class NewPublication extends React.Component {
       date,
       loading
     } = this.state
+    const { neighborhood, unit } = this.props
+    console.log(neighborhood)
     const category = Categories.find(cat => cat.key === publication_type)
     return (
       <KeyboardAwareView style={styles.screen}>
@@ -284,8 +311,13 @@ class NewPublication extends React.Component {
                 size={23}
                 color={Colors.orange}
               />
-              <Text style={styles.categoryLabel}>{category.name}</Text>
+              <Text style={styles.categoryLabel}>
+                {category.name}
+              </Text>
             </View>
+            {category.admin && (
+              <UnitPicker role='secretary' />
+            )}
             {is_car && (
               <View style={styles.rowContainer}>
                 <FloatingLabelInput
@@ -381,107 +413,9 @@ class NewPublication extends React.Component {
 
 const mapStateToProps = state => ({
   authToken: state.authReducer.authToken,
-  currentNeighborhood: state.currentsReducer.neighborhood,
+  neighborhood: state.currentsReducer.neighborhood,
   unit: state.currentsReducer.unit,
   user: state.currentsReducer.user
 })
 
 export default connect(mapStateToProps)(NewPublication)
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  rowContainer: {
-    marginVertical: 10,
-    flexDirection: 'row',
-    flex: 1,
-    justifyContent: 'space-between'
-  },
-  half: {
-    flex: 0.48
-  },
-  category: {
-    flexDirection: 'row',
-    marginVertical: 10,
-    alignItems: 'center'
-  },
-  categoryLabel: {
-    fontSize: 20,
-    marginHorizontal: 10
-  },
-  date: {
-    flex: 0.6,
-    borderBottomColor: Colors.subHeading,
-    borderBottomWidth: 1
-  },
-  time: {
-    flex: 0.35,
-    borderBottomColor: Colors.subHeading,
-    borderBottomWidth: 1
-  },
-  datetimeText: {
-    fontSize: 18
-  },
-  horizontal: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  form: {
-    paddingHorizontal: 20,
-    paddingVertical: 15
-  },
-  screen: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  title: {
-    color: Colors.orange
-  },
-  imageSection: {
-    height: 150,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'stretch',
-    backgroundColor: '#f6f6f7'
-  },
-  image: {
-    height: 150,
-    width: 200
-  },
-  publicationType: {
-    borderBottomColor: Colors.subHeading,
-    borderBottomWidth: 1,
-    paddingBottom: 1
-  },
-  lightBoxBackground: {
-    backgroundColor: 'rgba(0,0,0,0.7)',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    padding: 10
-  },
-  lightBox: {
-    backgroundColor: 'white'
-  },
-  lightBoxOk: {
-    color: Colors.tintColor,
-    margin: 10,
-    fontWeight: 'bold'
-  },
-  lightBoxButton: {
-    alignSelf: 'flex-end'
-  },
-  clearButton: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    padding: 5
-  }
-})

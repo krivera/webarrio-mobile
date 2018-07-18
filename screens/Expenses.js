@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  StyleSheet,
   TouchableOpacity,
   View
 } from 'react-native'
@@ -9,8 +8,8 @@ import { API_URL } from 'react-native-dotenv'
 import { Feather } from '@expo/vector-icons'
 import RefreshingList from '../components/RefreshingList'
 import Expense from '../components/Expense'
-import Colors from '../constants/Colors'
 import CommonExpensesTabs from '../navigation/CommonExpensesTabs'
+import styles from './styles/Expenses'
 
 class ExpensesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -34,30 +33,56 @@ class ExpensesScreen extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { }
+    this.state = {
+      treasurerView: false
+    }
     this.refreshList = this.refreshList.bind(this)
   }
 
   componentDidMount = () => {
     this.props.navigation.setParams({ refreshList: this.refreshList })
+    this.updateView()
+  }
+
+  componetnDidUpdate = prevProps => {
+    const { neighborhood } = this.props
+    const { prevNgbrhood } = prevProps
+    if (neighborhood !== prevNgbrhood) {
+      this.updateView()
+      this.refreshList()
+    }
   }
 
   refreshList = () => {
     this.list.onRefresh()
   }
 
-  componentWillMount = () => {
-    const { unit, neighborhood, navigation } = this.props
-    const treasurer = unit.user_roles.includes('treasurer')
-    this.treasurerView = treasurer && !(navigation.state.params && navigation.state.params.personal)
-    this.url = `${API_URL}/${this.treasurerView ? 'units/' + unit.id : 'neighborhoods/' + neighborhood.id}/common_expenses`
-    navigation.setParams({ treasurerView: this.treasurerView })
+  updateView = () => {
+    const { neighborhood, navigation } = this.props
+    const treasurerUnit = neighborhood.neighborhood_units.find(
+      unit => unit.user_roles.includes('treasurer')
+    )
+    this.setState({
+      treasurerView: treasurerUnit && !(navigation.state.params && navigation.state.params.personal)
+    }, () => {
+      this.setState({
+        url: `${API_URL}/${this.state.treasurerView
+          ? 'units/' + treasurerUnit.id
+          : 'neighborhoods/' + neighborhood.id
+        }/common_expenses`
+      })
+      navigation.setParams({ treasurerView: this.state.treasurerView })
+    })
   }
 
   goToPayment = expense => {
     this.props.navigation.navigate(
       'Pay',
-      { total: expense.total, month: expense.month, unit: { id: expense.unit_id, name: expense.unit_name } })
+      {
+        total: expense.total,
+        month: expense.month,
+        unit: { id: expense.unit_id, name: expense.unit_name }
+      })
   }
 
   renderExpense = ({ item: expense }) => {
@@ -70,24 +95,29 @@ class ExpensesScreen extends React.Component {
   }
 
   render() {
-    const { authToken, unit } = this.props
-    const treasurer = unit.user_roles.includes('treasurer')
+    const { authToken, neighborhood } = this.props
+    const { treasurerView, url } = this.state
+    const treasurerUnit = neighborhood.neighborhood_units.find(
+      unit => unit.user_roles.includes('treasurer')
+    )
     return (
       <View style={styles.screen}>
-        {treasurer && (
+        {treasurerUnit && (
           <CommonExpensesTabs
-            currentTab={this.treasurerView ? 'Expenses' : 'PersonalExpenses'}
+            currentTab={treasurerView ? 'Expenses' : 'PersonalExpenses'}
           />
         )}
-        <RefreshingList
-          url={this.url}
-          authorization={authToken}
-          dataName='common_expenses'
-          renderItem={this.renderExpense}
-          ref={r => {
-            this.list = r
-          }}
-        />
+        {url && (
+          <RefreshingList
+            url={url}
+            authorization={authToken}
+            dataName='common_expenses'
+            renderItem={this.renderExpense}
+            ref={r => {
+              this.list = r
+            }}
+          />
+        )}
       </View>
     )
   }
@@ -100,33 +130,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(ExpensesScreen)
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  menu: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    backgroundColor: Colors.menubkg
-  },
-  menuOption: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10
-  },
-  menuContainer: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0
-  },
-  menuIcon: {
-    width: 30,
-    alignItems: 'center'
-  }
-})

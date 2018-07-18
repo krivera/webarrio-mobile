@@ -2,18 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { API_URL } from 'react-native-dotenv'
 import {
-  Dimensions,
-  Picker,
   Platform,
   ScrollView,
-  StyleSheet,
   Text,
   ToastAndroid,
   View
 } from 'react-native'
 import ToastIOS from 'react-native-root-toast'
-import { Picker as PickerIOS } from 'react-native-picker-dropdown'
 import Axios from 'axios'
+import { setCurrent } from '../actions/currents'
+import Picker from '../components/Picker'
+import UnitPicker from '../components/UnitPicker'
 import KeyboardAwareView from '../components/KeyboardAwareView'
 import FloatingLabelInput from '../components/FloatingLabel'
 import BackButton from '../components/BackButton'
@@ -22,7 +21,7 @@ import Loading from '../components/Loading'
 import { PaymentMethodTypes } from '../constants/utils'
 import Colors from '../constants/Colors'
 import Banks from '../constants/Banks'
-import { tabBarHeight } from '../navigation/MainTabNavigator'
+import styles from './styles/AddPaymentMethod'
 
 class AddPaymentMethod extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -41,6 +40,18 @@ class AddPaymentMethod extends React.Component {
       type_of: method ? method.type_of : 'bank_transfer',
       name: method ? method.name : '',
       offset: 0
+    }
+  }
+
+  componentDidMount = () => {
+    const { neighborhood, unit, dispatch } = this.props
+    if (!unit.user_roles.includes('treasurer')) {
+      dispatch(setCurrent(
+        'unit',
+        neighborhood.neighborhood_units.find(
+          unt => unt.user_roles.includes('treasurer')
+        )
+      ))
     }
   }
 
@@ -104,7 +115,6 @@ class AddPaymentMethod extends React.Component {
   }
 
   render() {
-    const Picker_ = Platform.OS === 'ios' ? PickerIOS : Picker
     const {
       type_of,
       name,
@@ -115,26 +125,26 @@ class AddPaymentMethod extends React.Component {
       comments,
       email,
       address,
-      offset,
       loading
     } = this.state
     return (
       <KeyboardAwareView style={styles.screen}>
         <ScrollView style={styles.form}>
           <Text>Método</Text>
-          <Picker_
+          <Picker
             onValueChange={(value, index) => this.setState({ type_of: value })}
             selectedValue={type_of}
             style={styles.picker}
           >
             {Object.keys(PaymentMethodTypes).map(key => (
-              <Picker_.Item
+              <Picker.Item
                 value={key}
                 label={PaymentMethodTypes[key].label}
                 key={key}
               />
             ))}
-          </Picker_>
+          </Picker>
+          <UnitPicker role='treasurer' />
           <View>
             <FloatingLabelInput
               value={name}
@@ -155,43 +165,43 @@ class AddPaymentMethod extends React.Component {
               </View>
               <View style={styles.formControl}>
                 <Text style={styles.label}>Banco</Text>
-                <Picker_
+                <Picker
                   style={styles.picker}
                   selectedValue={bank || ''}
                   onValueChange={(val, index) => this.setState({ bank: val })}
                 >
-                  {Banks.map((bank, index) => (
-                    <Picker_.Item
+                  {Banks.map((bankOpt, index) => (
+                    <Picker.Item
                       value={index}
                       key={`${index}`}
-                      label={bank}
+                      label={bankOpt}
                     />
                   ))}
-                </Picker_>
+                </Picker>
               </View>
               <View style={styles.row}>
                 <View>
                   <Text style={styles.label}>Tipo de Cuenta</Text>
-                  <Picker_
+                  <Picker
                     selectedValue={account_type || ''}
                     onValueChange={(val, index) => this.setState({ account_type: val })}
                     style={[styles.picker, styles.accountType]}
                     textStyle={styles.pickerIos}
                     itemStyle={styles.picker}
                   >
-                    <Picker_.Item
+                    <Picker.Item
                       value='checking'
                       label='Corriente'
                     />
-                    <Picker_.Item
+                    <Picker.Item
                       value='savings'
                       label='Ahorro'
                     />
-                    <Picker_.Item
+                    <Picker.Item
                       value='current'
                       label='Vista'
                     />
-                  </Picker_>
+                  </Picker>
                 </View>
                 <FloatingLabelInput
                   value={account_number || ''}
@@ -241,43 +251,7 @@ class AddPaymentMethod extends React.Component {
 
 const mapStateToProps = state => ({
   authToken: state.authReducer.authToken,
-  currentNeighborhood: state.currentsReducer.neighborhood
+  unit: state.currentsReducer.unit
 })
 
 export default connect(mapStateToProps)(AddPaymentMethod)
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  form: {
-    padding: 15
-  },
-  row: {
-    flexDirection: 'row',
-    flex: 1,
-    justifyContent: 'space-between',
-    marginTop: 5
-  },
-  picker: {
-    borderBottomColor: Colors.subHeading,
-    borderBottomWidth: 1,
-    height: 27
-  },
-  label: {
-    color: Colors.subHeading
-  },
-  accountType: {
-    width: 130
-  },
-  accountNumber: {
-    flex: 0.9
-  },
-  pickerIos: {
-    fontSize: 18
-  },
-  formControl: {
-    marginTop: 5
-  }
-})

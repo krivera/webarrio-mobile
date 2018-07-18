@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  StyleSheet,
   TouchableOpacity,
   View
 } from 'react-native'
@@ -14,6 +13,7 @@ import { Feather } from '@expo/vector-icons'
 import Categories from '../constants/Categories'
 import { menuRef } from '../navigation/MainTabNavigator'
 import { setFilter } from '../actions/feed'
+import styles from './styles/Community'
 
 class CommunityScreen extends React.Component {
   constructor(props) {
@@ -49,8 +49,9 @@ class CommunityScreen extends React.Component {
   }
 
   componentDidUpdate = prevProps => {
-    const { filter } = this.props
-    if (prevProps.filter !== filter) {
+    const { filter, neighborhood } = this.props
+    const { filter: prevFilter, neighborhood: prevNgbrhood } = prevProps
+    if (prevFilter !== filter || prevNgbrhood !== neighborhood) {
       this.list.onRefresh()
       const category = Categories.find(cat => cat.key === filter)
       this.props.navigation.setParams({
@@ -82,12 +83,12 @@ class CommunityScreen extends React.Component {
   closeReport = () => this.setState({ reportOpen: false });
 
   render() {
-    const { currentUser, currentUnit, authToken, filter } = this.props
+    const { currentUser, neighborhood, unit, authToken, filter } = this.props
     const {
       reportOpen,
       reportingId
     } = this.state
-    let url = `${API_URL}/units/${currentUnit.id}/publications/feed`
+    let url = `${API_URL}/neighborhoods/${neighborhood.id}/publications/feed`
     if (filter !== 'all') {
       url = `${url}/${filter}`
     }
@@ -108,7 +109,7 @@ class CommunityScreen extends React.Component {
               currentUser={{ id: currentUser.id }}
               resourceType='publication'
               resourceId={reportingId}
-              currentUnitId={currentUnit.id}
+              currentUnitId={unit.id}
               close={this.closeReport}
             />
           )}
@@ -121,7 +122,7 @@ class CommunityScreen extends React.Component {
 const mapStateToProps = state => {
   return {
     authToken: state.authReducer.authToken,
-    currentUnit: state.currentsReducer.unit,
+    unit: state.currentsReducer.unit,
     currentUser: state.currentsReducer.user,
     neighborhood: state.currentsReducer.neighborhood,
     filter: state.feedReducer.filter
@@ -129,9 +130,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(CommunityScreen)
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1
-  }
-})

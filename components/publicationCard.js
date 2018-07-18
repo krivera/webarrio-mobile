@@ -28,7 +28,6 @@ export default class PublicationCard extends React.Component {
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
-
   toggleMenu = () => {
     this.setState({ menuOpen: !this.state.menuOpen })
   }
@@ -58,16 +57,18 @@ export default class PublicationCard extends React.Component {
             {publication.title}
           </Text>
           <View style={styles.underTitle}>
-            <Text style={styles.author}>
-              por {publication.author.name} {publication.author.last_name} ● {category.name}{' '}
-            </Text>
-            <WebarrioIcon name={category.icon} size={14} color={Colors.subHeading} />
+            <View style={styles.horizontal}>
+              <Text style={styles.author}>
+                por {publication.author.name} {publication.author.last_name} ● {category.name}{' '}
+              </Text>
+              <WebarrioIcon name={category.icon} size={14} color={Colors.subHeading} />
+            </View>
+            {unit && (
+              <Text style={styles.author}>
+                {unit.name}
+              </Text>
+            )}
           </View>
-          {unit && (
-            <Text style={styles.author}>
-              {unit.name}
-            </Text>
-          )}
           <Text style={styles.description} numberOfLines={2} ellipsizeMode='tail' >
             {publication.description}
           </Text>
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
     height: 150,
     width: 250,
     alignSelf: 'center',
-    marginTop:10
+    marginTop: 10
   },
   optionsSection: {
     paddingTop: 10,
@@ -154,7 +155,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   underTitle: {
-    flexDirection: 'row',
     alignItems: 'flex-start',
     marginBottom: 10
   },

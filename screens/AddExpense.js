@@ -1,27 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  Dimensions,
   KeyboardAvoidingView,
-  Picker,
-  Platform,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native'
 import { API_URL } from 'react-native-dotenv'
-import { Picker as PickerIOS } from 'react-native-picker-dropdown'
 import Axios from 'axios'
 import { Feather } from '@expo/vector-icons'
+import { setCurrent } from '../actions/currents'
 import FloatingLabelInput from '../components/FloatingLabel'
+import Picker from '../components/Picker'
 import Loading from '../components/Loading'
 import BackButton from '../components/BackButton'
 import Button from '../components/Button'
+import UnitPicker from '../components/UnitPicker'
 import { ExpenseDetails, MonthsFull } from '../constants/utils'
 import Colors from '../constants/Colors'
 import { styles as expenseStyles } from '../components/Expense'
+import styles from './styles/AddExpense'
 
 class AddExpenseScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -38,16 +37,25 @@ class AddExpenseScreen extends React.Component {
       total: 0,
       details: [],
       portion: 0,
-      loading: false
+      loading: false,
+      prorateBy: 1
     }
     this.maxYear = now.getFullYear()
   }
 
   componentDidMount = () => {
-    const { unit } = this.props
-    console.log(unit)
-    if (unit.unit_type === 'condo') {
-      this.prorateBy = unit.number_of_homes
+    const { dispatch, neighborhood, unit } = this.props
+    let selectedUnit = unit
+    if (!unit.user_roles.includes('treasurer')) {
+      selectedUnit = neighborhood.neighborhood_units.find(
+        unt => unt.user_roles.includes('treasurer')
+      )
+      dispatch(setCurrent(
+        'unit',
+        selectedUnit
+      ))
+    }
+    if (selectedUnit.unit_type === 'condo') {
       this.setState({
         details: ExpenseDetails.reduce(
           (detailList, detail) =>
@@ -55,13 +63,28 @@ class AddExpenseScreen extends React.Component {
           []
         )
       })
+    }
+    this.setProrate(selectedUnit)
+  }
+
+  setProrate = unit => {
+    if (unit.unit_type === 'condo') {
+      this.setState({ prorateBy: unit.number_of_homes })
     } else {
-      this.prorateBy = unit.number_of_members
+      this.setState({ prorateBy: unit.number_of_members })
+    }
+  }
+
+  componentDidUpdate = prevProps => {
+    const { unit } = this.props
+    const { unit: prevUnit } = prevProps
+    if (unit !== prevUnit) {
+      this.setProrate(unit)
     }
   }
 
   handleChange = (idx, field, value) => {
-    const { details } = this.state
+    const { details, prorateBy } = this.state
     this.setState(
       { details: details.map((detail, index) =>
         index === idx ? { ...detail, [field]: value } : detail
@@ -73,7 +96,7 @@ class AddExpenseScreen extends React.Component {
           },
           0
         )
-        const portion = Math.ceil(total / this.prorateBy)
+        const portion = Math.ceil(total / prorateBy)
         this.setState({ total, portion })
       }
     )
@@ -107,40 +130,40 @@ class AddExpenseScreen extends React.Component {
 
   render() {
     const { total, portion, loading, details } = this.state
-    const Picker_ = Platform.OS === 'ios' ? PickerIOS : Picker
     return (
       <View style={styles.screen}>
         <ScrollView>
           <View style={styles.pickers}>
-            <Picker_
+            <Picker
               selectedValue={this.state.month}
               onValueChange={value => this.setState({ month: value })}
               style={[styles.monthPicker, styles.picker]}
               textStyle={styles.pickerText}
             >
               {MonthsFull.map((month, index) => (
-                <Picker_.Item
+                <Picker.Item
                   value={index + 1}
                   key={`key-${index}`}
                   label={month}
                 />
               ))}
-            </Picker_>
-            <Picker_
+            </Picker>
+            <Picker
               selectedValue={this.state.year}
               onValueChange={value => this.setState({ year: value })}
               style={[styles.yearPicker, styles.picker]}
               textStyle={styles.pickerText}
             >
               {Array(this.maxYear - 2000).fill(1).map((_, index) => (
-                <Picker_.Item
+                <Picker.Item
                   value={this.maxYear - index}
                   key={`key-${index}`}
                   label={`${this.maxYear - index}`}
                 />
               ))}
-            </Picker_>
+            </Picker>
           </View>
+          <UnitPicker role='treasurer' />
           <View style={expenseStyles.detail}>
             <Text style={expenseStyles.detailHeader}>Detalles de Gastos</Text>
             <View>
@@ -202,54 +225,9 @@ class AddExpenseScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  neighborhood: state.currentsReducer.neighborhood,
   unit: state.currentsReducer.unit,
   authToken: state.authReducer.authToken
 })
 
 export default connect(mapStateToProps)(AddExpenseScreen)
-
-const { width } = Dimensions.get('window')
-
-const styles = StyleSheet.create({
-  screen: {
-    backgroundColor: 'white',
-    flex: 1
-  },
-  pickers: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'center'
-  },
-  monthPicker: {
-    width: 160
-  },
-  yearPicker: {
-    width: 100
-  },
-  picker: {
-    marginTop: 10,
-    height: 25
-  },
-  pickerText: {
-    fontSize: 18
-  },
-  detailInput: {
-    width: Math.min(width * 0.38, 150),
-    borderBottomColor: Colors.subHeading
-  },
-  total: {
-    fontSize: 22,
-    color: Colors.orange
-  },
-  form: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    alignSelf: 'stretch',
-    alignItems: 'center'
-  },
-  addExpense: {
-    padding: 5,
-    alignSelf: 'flex-end'
-  }
-})
