@@ -32,8 +32,8 @@ class PublicationMenu extends React.Component {
   }
 
   menuChat = () => {
-    const { navigate, publication } = this.props
-    navigate('Chat', {
+    const { navigation, publication } = this.props
+    navigation.navigate('Chat', {
       user: publication.author
     })
     this.toggleMenu()

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   ActivityIndicator,
   FlatList,
@@ -6,40 +6,41 @@ import {
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
-import { connect } from 'react-redux';
-import { Feather } from '@expo/vector-icons';
-import firebase from '../api/firebase';
-import { getDate } from '../api/utils';
-import { receiveChats, requestChats } from '../actions/chat';
-import Avatar from '../components/Avatar';
-import Colors from '../constants/Colors';
+} from 'react-native'
+import { connect } from 'react-redux'
+import { Feather } from '@expo/vector-icons'
+import firebase from '../api/firebase'
+import { getDate } from '../api/utils'
+import { receiveChats, requestChats } from '../actions/chat'
+import Avatar from '../components/Avatar'
+import Colors from '../constants/Colors'
 
 class ChatListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Mensajes',
     headerRight: (
       <TouchableOpacity onPress={() => navigation.navigate('Neighbors')}>
-        <Feather name="plus" size={25} color="white" />
-      </TouchableOpacity>),
+        <Feather name='plus' size={25} color='white' />
+      </TouchableOpacity>)
   })
 
-  constructor(props){
-    super(props);
+  constructor(props) {
+    super(props)
   }
 
   componentWillMount = () => {
-    const { currentUser, currentNeighborhood, dispatch } = this.props;
-    dispatch(requestChats());
-    let ref = firebase.database().ref();
-    ref.child(`/users/${currentUser.id}/chats/${currentNeighborhood.id}`)
-    .on('value', snapshot => dispatch(receiveChats(snapshot.val())));
+    const { currentUser, currentNeighborhood, dispatch } = this.props
+    dispatch(requestChats())
+    let ref = firebase.database().ref()
+    ref.child(
+      `/users/${currentUser.id}/chats/${currentNeighborhood.id}`
+    ).on('value', snapshot => dispatch(receiveChats(snapshot.val())))
   }
 
   renderChat = ({ item }) => {
-    const chat = item;
-    const { navigation } = this.props;
-    const date = getDate(chat.updatedAt || chat.createdAt);
+    const chat = item
+    const { navigation } = this.props
+    const date = getDate(chat.updatedAt || chat.createdAt)
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate('Chat', {
@@ -47,14 +48,16 @@ class ChatListScreen extends React.Component {
             id: chat.userId,
             name: chat.personName,
             avatar: chat.personPhoto,
-            apartments: [{number: chat.personApartment}]
+            apartments: [{ number: chat.personApartment }]
           }
         })}
         style={styles.chat}
       >
-        <Avatar source={{uri: chat.personPhoto}} name={chat.personName} />
+        <Avatar source={{ uri: chat.personPhoto }} name={chat.personName} />
         <View style={styles.middle}>
-          <Text style={styles.name}>{chat.personName}{chat.personApartment ? ` de ${chat.personApartment}` : ''}</Text>
+          <Text style={styles.name}>
+            {chat.personName}{chat.personApartment ? ` de ${chat.personApartment}` : ''}
+          </Text>
           <Text style={styles.lastMessage}>{chat.lastMessage}</Text>
         </View>
         <Text style={[styles.lastMessage]}>{date}</Text>
@@ -62,8 +65,8 @@ class ChatListScreen extends React.Component {
     )
   }
 
-  render(){
-    const { chats, isRequestingChats } = this.props;
+  render() {
+    const { chats, isRequestingChats } = this.props
     return (
       <View style={styles.screen}>
         {isRequestingChats && (
@@ -80,7 +83,7 @@ class ChatListScreen extends React.Component {
           data={chats}
         />
       </View>
-    );
+    )
   }
 }
 
@@ -90,10 +93,10 @@ const mapStateToProps = state => {
     currentNeighborhood: state.currentsReducer.neighborhood,
     chats: state.chatReducer.chats,
     isRequestingChats: state.chatReducer.isRequesting
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps)(ChatListScreen);
+export default connect(mapStateToProps)(ChatListScreen)
 
 const styles = StyleSheet.create({
   chat: {
@@ -113,7 +116,7 @@ const styles = StyleSheet.create({
   },
   lastMessage: {
     color: '#92a2a2',
-    fontSize: 14,
+    fontSize: 14
   },
   screen: {
     flex: 1

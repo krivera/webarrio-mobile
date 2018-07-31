@@ -19,7 +19,7 @@ class BackButton extends React.Component {
   }
   render() {
     return (
-      <TouchableOpacity onPress={this.back}>
+      <TouchableOpacity onPress={this.back} style={{width: 50}}>
         <Ionicons name='ios-arrow-back' size={25} color='white' />
       </TouchableOpacity>
     )
