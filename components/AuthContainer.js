@@ -12,15 +12,18 @@ import WebarrioLogo from '../assets/icons/webarrioUnderTitle'
 
 export default class AuthContainer extends React.Component {
   render() {
+    const { hideLogo } = this.props
     return (
       <ImageBackground
         style={authStyles.screen}
-        source={require('../assets/images/bg-home.jpg')}
+        source={require('../assets/images/webarrio-bg.png')}
       >
         <ScrollView>
-          <View style={authStyles.logo}>
-            <WebarrioLogo />
-          </View>
+          {!hideLogo && (
+            <View style={authStyles.logo}>
+              <WebarrioLogo />
+            </View>
+          )}
           {this.props.error &&
             (<View style={authStyles.errorBox}>
               <Text style={authStyles.errorText}>
@@ -50,13 +53,13 @@ export const authStyles = StyleSheet.create({
     marginTop: 20
   },
   button: {
-    backgroundColor: Colors.orange,
+    backgroundColor: 'white',
     padding: 10,
     marginTop: 20,
     alignItems: 'center'
   },
   buttonText: {
-    color: 'white',
+    color: Colors.orange,
     fontWeight: 'bold'
   },
   input: {
@@ -82,7 +85,7 @@ export const authStyles = StyleSheet.create({
     padding: 3
   },
   helperText: {
-    color: Colors.orange,
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 14
   },

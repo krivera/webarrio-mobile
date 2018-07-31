@@ -1,15 +1,15 @@
-import React from 'react';
-import { Svg } from 'expo';
+import React from 'react'
+import { Svg } from 'expo'
 
-export default class WebarrioIcon extends React.PureComponent{
+export default class WebarrioIcon extends React.PureComponent {
   render() {
     // let { color, size } = this.props;
     // const height = size || 76;
     // const width = size * (37 / 38);
     // color = color || 'black';
-    const st0 = { fill: 'white' };
-    return(
-      <Svg width={215.4} height={118} viewBox="0 0 215.4 118">
+    const st0 = { fill: 'white' }
+    return (
+      <Svg width={215.4} height={118} viewBox="0 0 215.4 118" scale={0.6}>
         <Svg.Polygon id="XMLID_16_" {...st0} points="18.3,117.5 9.1,117.5 0,85.9 8.9,85.9 14.1,111 19.8,85.9 27.3,85.9 33.1,111 38.3,85.9 46.8,85.9 37.7,117.5 28.7,117.5 25,102.2 23.5,94.4 23.4,94.4 22,102.2 "/>
         <Svg.Path id="XMLID_36_" {...st0} d="M70.8,107.9H54.4c0.5,3.1,2.3,4.4,5,4.4c2.4,0,3.9-1,4.4-2.6l6.6,2.1c-1.4,4.2-5.5,6.3-11,6.3
         c-8.4,0-12.9-4.6-12.9-12.5c0-7.9,4.5-12.5,12.5-12.5c7.8,0,12,4.6,12,12.1C71,106,70.9,107.2,70.8,107.9 M54.4,103.5h9
@@ -32,6 +32,6 @@ export default class WebarrioIcon extends React.PureComponent{
         <Svg.Path id="XMLID_18_" {...st0} d="M133.7,0H83c-2.9,0-5.2,2.3-5.2,5.2v45.1c0,2.9,2.3,5.2,5.2,5.2h27.7l18,15l-2.9-15h4.5h3.3
         c2.9,0,5.2-2.3,5.2-5.2V5.2C138.9,2.3,136.6,0,133.7,0 M120.6,26.9v15.5H96.2V26.9h-3.3l15.5-15.7l15.5,15.7H120.6z"/>
       </Svg>
-    );
+    )
   }
 }
