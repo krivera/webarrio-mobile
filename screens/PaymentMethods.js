@@ -1,26 +1,31 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
-import { SimpleLineIcons, Feather } from '@expo/vector-icons';
-import { API_URL } from 'react-native-dotenv';
-import Colors from '../constants/Colors';
-import RefreshingList from '../components/RefreshingList';
-import CommonExpensesTabs from '../navigation/CommonExpensesTabs';
-import { PaymentMethodTypes } from '../constants/utils';
+} from 'react-native'
+import { SimpleLineIcons, Feather } from '@expo/vector-icons'
+import { API_URL } from 'react-native-dotenv'
+import Colors from '../constants/Colors'
+import RefreshingList from '../components/RefreshingList'
+import CommonExpensesTabs from '../navigation/CommonExpensesTabs'
+import { PaymentMethodTypes } from '../constants/utils'
 
-class PaymentMethods extends React.Component{
+class PaymentMethods extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: "Métodos de pago",
+    headerTitle: 'Métodos de pago',
     headerRight: (
       <TouchableOpacity
-        onPress={() => navigation.navigate('AddPaymentMethod', {methodsList: navigation.state.params.methodsList})}
+        onPress={() =>
+          navigation.navigate(
+            'AddPaymentMethod',
+            { methodsList: navigation.state.params.methodsList }
+          )
+        }
       >
-        <Feather name="plus" size={25} color="white" />
+        <Feather name='plus' size={25} color='white' />
       </TouchableOpacity>
     )
   })
@@ -33,37 +38,48 @@ class PaymentMethods extends React.Component{
             {PaymentMethodTypes[method.type_of].label}
           </Text>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('AddPaymentMethod', { method, methodsList: this.methodsList })}
+            onPress={() =>
+              this.props.navigation.navigate(
+                'AddPaymentMethod',
+                { method, methodsList: this.methodsList }
+              )
+            }
           >
-            <SimpleLineIcons name="pencil" size={20} color={Colors.orange} />
+            <SimpleLineIcons name='pencil' size={20} color={Colors.orange} />
           </TouchableOpacity>
         </View>
         <Text>{method.name}</Text>
-        {PaymentMethodTypes[method.type_of].attrs.map((attr, index) => (
-          <Text key={`${index}`}>{attr.label}: {method[attr.key]}</Text>
-        ))}
+        {PaymentMethodTypes[method.type_of].attrs.map(
+          (attr, index) => (
+            <Text key={`${index}`}>
+              {attr.label}: {method[attr.key]}
+            </Text>
+          )
+        )}
         {method.comments && (
           <Text>Comentarios: {method.comments}</Text>
         )}
       </View>
-    );
+    )
   }
 
   componentDidMount = () => {
-    this.props.navigation.setParams({methodsList: this.methodsList})
+    this.props.navigation.setParams({ methodsList: this.methodsList })
   }
 
-  render(){
-    const { authToken, currentNeighborhood } = this.props;
+  render() {
+    const { authToken, unit } = this.props
     return (
       <View style={styles.screen}>
-        <CommonExpensesTabs currentTab="PaymentMethods" />
+        <CommonExpensesTabs currentTab='PaymentMethods' />
         <RefreshingList
-          url={`${API_URL}/neighborhoods/${currentNeighborhood.id}/payment_methods`}
-          dataName="payment_methods"
+          url={`${API_URL}/units/${unit.id}/payment_methods`}
+          dataName='payment_methods'
           authorization={authToken}
           renderItem={this.renderMethod}
-          ref={r => this.methodsList = r}
+          ref={r => {
+            this.methodsList = r
+          }}
         />
       </View>
     )
@@ -72,10 +88,10 @@ class PaymentMethods extends React.Component{
 
 const mapStateToProps = state => ({
   authToken: state.authReducer.authToken,
-  currentNeighborhood: state.currentsReducer.neighborhood
+  unit: state.currentsReducer.unit
 })
 
-export default connect(mapStateToProps)(PaymentMethods);
+export default connect(mapStateToProps)(PaymentMethods)
 
 const styles = StyleSheet.create({
   screen: {
@@ -91,11 +107,11 @@ const styles = StyleSheet.create({
   },
   methodHeadText: {
     color: Colors.orange,
-    fontSize: 18,
+    fontSize: 18
   },
   method: {
     padding: 15,
     borderBottomColor: Colors.border,
     borderBottomWidth: StyleSheet.hairlineWidth
   }
-});
+})

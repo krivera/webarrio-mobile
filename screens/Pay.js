@@ -1,34 +1,35 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 import {
   StyleSheet,
   Text,
   View
-} from 'react-native';
-import Axios from 'axios';
-import { API_URL } from 'react-native-dotenv';
-import Colors from '../constants/Colors';
-import BackButton from '../components/BackButton';
-import { MonthsFull, PaymentMethodTypes } from '../constants/utils';
+} from 'react-native'
+import Axios from 'axios'
+import { API_URL } from 'react-native-dotenv'
+import Colors from '../constants/Colors'
+import BackButton from '../components/BackButton'
+import { MonthsFull, PaymentMethodTypes } from '../constants/utils'
 
-class Pay extends React.Component{
+class Pay extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Gastos Comunes',
     headerLeft: (<BackButton />)
   });
 
   constructor(props) {
-    super(props);
-  
+    super(props)
+
     this.state = {
       paymentMethods: []
-    };
+    }
   }
 
   componentWillMount = () => {
-    const { authToken, neighborhood } = this.props;
+    const { authToken } = this.props
+    const { unit } = this.props.navigation.state.params
     Axios.get(
-      `${API_URL}/neighborhoods/${neighborhood.id}/payment_methods`,
+      `${API_URL}/units/${unit.id}/payment_methods`,
       {
         headers: {
           Authorization: authToken
@@ -37,13 +38,13 @@ class Pay extends React.Component{
     ).then(response => {
       this.setState({
         paymentMethods: response.data.payment_methods
-      });
+      })
     })
   }
 
-  render(){
-    const { total, month } = this.props.navigation.state.params;
-    const { paymentMethods } = this.state;
+  render() {
+    const { total, month, unit } = this.props.navigation.state.params
+    const { paymentMethods } = this.state
     return (
       <View style={styles.screen}>
         <Text>Monto</Text>
@@ -54,6 +55,7 @@ class Pay extends React.Component{
         <Text style={styles.methodHead}>
           Gastos Comunes {MonthsFull[month]}
         </Text>
+        <Text style={styles.unitName}>{unit.name}</Text>
         <Text style={styles.methodSection}>Métodos de pago</Text>
         {paymentMethods.map(method => (
           <View key={method.id} style={styles.method}>
@@ -74,11 +76,10 @@ class Pay extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  authToken: state.authReducer.authToken,
-  neighborhood: state.currentsReducer.neighborhood,
-});
+  authToken: state.authReducer.authToken
+})
 
-export default connect(mapStateToProps)(Pay);
+export default connect(mapStateToProps)(Pay)
 
 const styles = StyleSheet.create({
   screen: {
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
   },
   method: {
     alignItems: 'center',
-    margin: 10,
+    margin: 10
   },
   methodHead: {
     color: Colors.orange
@@ -104,5 +105,9 @@ const styles = StyleSheet.create({
   methodSection: {
     fontWeight: 'bold',
     marginTop: 30
+  },
+  unitName: {
+    color: Colors.subHeading,
+    fontSize: 12
   }
-});
+})

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Animated,
   Easing,
@@ -6,27 +6,25 @@ import {
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
-import Collapsible from 'react-native-collapsible';
-import { Ionicons, Foundation, SimpleLineIcons } from '@expo/vector-icons';
-import { withGlobalize } from 'react-native-globalize';
-import { Bar as ProgressBar } from 'react-native-progress';
-import WebarrioIcon from '../components/WebarrioIcon';
-import Button from '../components/Button';
-import Colors from '../constants/Colors';
-import { MonthsFull, ExpenseDetails } from '../constants/utils';
+} from 'react-native'
+import Collapsible from 'react-native-collapsible'
+import { Ionicons } from '@expo/vector-icons'
+import { withGlobalize } from 'react-native-globalize'
+import { Bar as ProgressBar } from 'react-native-progress'
+import Button from '../components/Button'
+import Colors from '../constants/Colors'
+import { MonthsFull } from '../constants/utils'
 
-const ICON_SIZE = 25;
+const ICON_SIZE = 25
 
-class Expense extends React.Component{
+class Expense extends React.Component {
   constructor(props) {
-    super(props);
-  
+    super(props)
     this.state = {
       collapsed: true,
       flip: new Animated.Value(0)
-    };
-    this.goToPayment = this.goToPayment.bind(this);
+    }
+    this.goToPayment = this.goToPayment.bind(this)
   }
 
   toggleCollapse = () => {
@@ -38,30 +36,47 @@ class Expense extends React.Component{
         duration: 300,
         easing: Easing.linear
       }).start()
-    );
+    )
   }
 
   goToPayment = () => {
-    this.props.goToPayment(this.props.expense);
+    this.props.goToPayment(this.props.expense)
   }
 
-  render(){
-    const { expense, globalize, treasurerView } = this.props;
-    const formatter = globalize.getNumberFormatter({});
-    let checkmark = 'ios-checkmark-circle';
+  getDetailIcon = detail => {
+    switch (detail.toLowerCase()) {
+    case 'electricity':
+    case 'luz':
+      return 'ios-bulb-outline'
+    case 'water':
+    case 'agua':
+      return 'ios-water-outline'
+    case 'gas':
+      return 'ios-flame-outline'
+    case 'staff':
+    case 'personal':
+      return 'ios-people-outline'
+    default:
+      return 'ios-add-circle-outline'
+    }
+  }
+
+  render() {
+    const { expense, globalize, treasurerView } = this.props
+    const formatter = globalize.getNumberFormatter({})
+    let checkmark = 'ios-checkmark-circle'
     const spin = this.state.flip.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '180deg'],
       useNativeDriver: true
-    });
-    let percentCollected = 0;
-    if(!expense.paid){
-      checkmark += '-outline'
+    })
+    let percentCollected = 0
+    if (!expense.paid) {
+      checkmark = `${checkmark}-outline`
     }
-    if(treasurerView){
-      percentCollected = expense.collected / expense.total;
+    if (treasurerView) {
+      percentCollected = expense.collected / expense.total
     }
-
     return (
       <View style={styles.expense}>
         <TouchableOpacity
@@ -76,9 +91,12 @@ class Expense extends React.Component{
               style={styles.collapseButton}
             />
           )}
-          <Text style={styles.month}>{MonthsFull[parseInt(expense.month) - 1]}</Text>
-          <Animated.View style={{transform: [{rotateX: spin}]}}>
-            <Ionicons name="ios-arrow-down" size={20} />
+          <View>
+            <Text style={styles.month}>{MonthsFull[parseInt(expense.month, 10) - 1]}</Text>
+            <Text style={styles.subHeading}>{expense.unit_name}</Text>
+          </View>
+          <Animated.View style={{ transform: [{ rotateX: spin }] }}>
+            <Ionicons name='ios-arrow-down' size={20} />
           </Animated.View>
           <Text style={[styles.number, styles.total]}>
             $ {formatter(expense.total)}
@@ -86,18 +104,26 @@ class Expense extends React.Component{
         </TouchableOpacity>
         <Collapsible collapsed={this.state.collapsed}>
           <View style={styles.detail}>
-            <Text style={styles.detailHeader}>Detalle de gastos</Text>
-            {ExpenseDetails.map(detail => (
-              <View style={styles.row} key={detail.key}>
-                <View style={styles.iContainer}>
-                  <Ionicons name={detail.icon} color={Colors.subHeading} size={ICON_SIZE} />
-                </View>
-                <Text style={styles.detailText}>{detail.label}</Text>
-                <Text style={styles.number}>
-                  ${formatter(expense[`${detail.key}`])}
-                </Text>
-              </View>
-            ))}
+            {expense.details &&
+              (<View>
+                <Text style={styles.detailHeader}>Detalle de gastos</Text>
+                {Object.keys(expense.details).map((detail, index) => (
+                  <View style={styles.row} key={`${index}`}>
+                    <View style={styles.iContainer}>
+                      <Ionicons
+                        name={this.getDetailIcon(detail)}
+                        color={Colors.subHeading}
+                        size={ICON_SIZE}
+                      />
+                    </View>
+                    <Text style={styles.detailText}>{detail}</Text>
+                    <Text style={styles.number}>
+                      ${formatter(expense.details[detail])}
+                    </Text>
+                  </View>
+                ))}
+              </View>)
+            }
             {treasurerView && (
               <View style={styles.treasurer}>
                 <View style={styles.row}>
@@ -108,7 +134,7 @@ class Expense extends React.Component{
                 </View>
                 <View style={styles.progress}>
                   <Text
-                    style={[styles.progressPercent, {width: 300 * percentCollected}]}
+                    style={[styles.progressPercent, { width: 300 * percentCollected }]}
                     numberOfLines={1}
                   >
                     {formatter(Math.round(100 * percentCollected))}%
@@ -133,11 +159,11 @@ class Expense extends React.Component{
           </View>
         </Collapsible>
       </View>
-    );
+    )
   }
 }
 
-export default withGlobalize(Expense);
+export default withGlobalize(Expense)
 
 export const styles = StyleSheet.create({
   header: {
@@ -150,9 +176,13 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     marginRight: 10
   },
+  subHeading: {
+    color: Colors.subHeading,
+    fontSize: 12
+  },
   number: {
     flex: 1,
-    textAlign: 'right',
+    textAlign: 'right'
   },
   total: {
     color: Colors.orange,
@@ -164,10 +194,10 @@ export const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   iContainer: {
-    width: 30, 
+    width: 30,
     alignItems: 'center',
     marginLeft: -7
   },
@@ -190,7 +220,7 @@ export const styles = StyleSheet.create({
     borderBottomColor: Colors.border
   },
   progress: {
-    alignSelf: 'center',
+    alignSelf: 'center'
   },
   progressPercent: {
     color: Colors.orange,
@@ -201,4 +231,4 @@ export const styles = StyleSheet.create({
   treasurer: {
     paddingTop: 15
   }
-});
+})

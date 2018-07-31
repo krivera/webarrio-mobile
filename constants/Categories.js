@@ -32,15 +32,15 @@ export default [
   {
     name: 'Anuncios administración',
     icon: 'admin-announcement',
-    key: 'admin-announcement',
+    key: 'notice',
     admin: true
   },
-  {
-    name: 'Asambleas',
-    icon: 'poll',
-    key: 'poll',
-    admin: true
-  },
+  // {
+  //   name: 'Asambleas',
+  //   icon: 'poll',
+  //   key: 'poll',
+  //   admin: true
+  // },
   {
     name: 'Todos',
     icon: 'loop',

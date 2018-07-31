@@ -25,21 +25,22 @@ export default class PublicationCard extends React.Component {
       menuHeight: new Animated.Value(0),
       menuOpenHeight: currentUserId === publication.author.id ? 30 : 60
     }
-    this.category = 
     this.toggleMenu = this.toggleMenu.bind(this)
   }
-
 
   toggleMenu = () => {
     this.setState({ menuOpen: !this.state.menuOpen })
   }
 
   render() {
-    const { publication, navigate, currentUserId, report } = this.props
+    const { publication, navigate, currentUserId, report, neighborhood } = this.props
     const category = (Categories.find(
       cat =>
         cat.key === publication.publication_type) || { icon: 'loop', name: 'Otro' })
     const published = new Date(publication.created_at)
+    const unit = neighborhood.neighborhood_units.find(
+      unt => unt.id === publication.neighborhood_unit_id
+    )
     return (
       <View style={[
         styles.layout,
@@ -56,10 +57,17 @@ export default class PublicationCard extends React.Component {
             {publication.title}
           </Text>
           <View style={styles.underTitle}>
-            <Text style={styles.author}>
-              por {publication.author.name} {publication.author.last_name} ● {category.name}{' '}
-            </Text>
-            <WebarrioIcon name={category.icon} size={14} color={Colors.subHeading} />
+            <View style={styles.horizontal}>
+              <Text style={styles.author}>
+                por {publication.author.name} {publication.author.last_name} ● {category.name}{' '}
+              </Text>
+              <WebarrioIcon name={category.icon} size={14} color={Colors.subHeading} />
+            </View>
+            {unit && (
+              <Text style={styles.author}>
+                {unit.name}
+              </Text>
+            )}
           </View>
           <Text style={styles.description} numberOfLines={2} ellipsizeMode='tail' >
             {publication.description}
@@ -125,7 +133,7 @@ const styles = StyleSheet.create({
     color: '#92a2a2'
   },
   content: {
-    alignItems:   'flex-start',
+    alignItems: 'flex-start',
     flex: 0.75,
     paddingBottom: 15
   },
@@ -136,7 +144,7 @@ const styles = StyleSheet.create({
     height: 150,
     width: 250,
     alignSelf: 'center',
-    marginTop:10
+    marginTop: 10
   },
   optionsSection: {
     paddingTop: 10,
@@ -147,7 +155,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   underTitle: {
-    flexDirection: 'row',
     alignItems: 'flex-start',
     marginBottom: 10
   },
