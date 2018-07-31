@@ -7,12 +7,13 @@ import {
   View
 } from 'react-native'
 import { API_URL } from 'react-native-dotenv'
+import { Octicons } from '@expo/vector-icons'
 import AuthContainer, { authStyles } from '../components/AuthContainer'
 import FloatingLabelInput from '../components/FloatingLabel'
 
 export default class Forgot extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       email: ''
     }
@@ -44,7 +45,16 @@ export default class Forgot extends React.Component {
 
   render() {
     return (
-      <AuthContainer>
+      <AuthContainer hideLogo={true}>
+        <View style={styles.center}>
+          <Octicons name='key' size={45} color='white' />
+          <Text style={authStyles.helperText}>
+            ¿Olvidaste tu contraseña?
+          </Text>
+          <Text style={styles.text}>
+            Ingresa tu correo electrónico y te mandaremos las instrucciones para restablecer tu contraseña
+          </Text>
+        </View>
         <FloatingLabelInput
           label='Email'
           labelColor='white'
@@ -61,12 +71,24 @@ export default class Forgot extends React.Component {
           <TouchableOpacity onPress={this.back}>
             <Text style={authStyles.helperText}>Volver</Text>
           </TouchableOpacity>
-          <Text style={authStyles.buttonText}>  |  </Text>
+          <Text style={authStyles.helperText}>  |  </Text>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Forgot2')}>
             <Text style={authStyles.helperText}>Ingresar código</Text>
           </TouchableOpacity>
         </View>
       </AuthContainer>
     )
+  }
+}
+
+const styles = {
+  center: {
+    marginTop: 100,
+    alignItems: 'center'
+  },
+  text: {
+    color: 'white',
+    textAlign: 'center',
+    marginHorizontal: 40
   }
 }

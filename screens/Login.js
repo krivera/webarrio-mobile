@@ -67,7 +67,7 @@ class LoginScreen extends React.Component {
         <FloatingLabelInput
           style={authStyles.input}
           value={email}
-          label='Email'
+          label='E-mail'
           labelColor='#fff'
           keyboardType='email-address'
           onChangeText={t => this.setState({ email: t })}
@@ -88,7 +88,7 @@ class LoginScreen extends React.Component {
           <TouchableOpacity onPress={() => navigate('Forgot')}>
             <Text style={authStyles.helperText}>Olvidé mi clave</Text>
           </TouchableOpacity>
-          <Text style={authStyles.buttonText}>  |  </Text>
+          <Text style={authStyles.helperText}>  |  </Text>
           <TouchableOpacity onPress={() => navigate('Forgot2')}>
             <Text style={authStyles.helperText}>Tengo una invitación</Text>
           </TouchableOpacity>
