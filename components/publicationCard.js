@@ -51,7 +51,10 @@ export default class PublicationCard extends React.Component {
         </View>
         <TouchableOpacity
           style={styles.content}
-          onPress={() => navigate('Publication', { publication })}
+          onPress={() => navigate('Publication', {
+            publication_id: publication.id,
+            publication_title: publication.title
+          })}
         >
           <Text style={styles.title}>
             {publication.title}

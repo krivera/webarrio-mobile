@@ -7,13 +7,16 @@ import {
   Image,
   KeyboardAvoidingView,
   ScrollView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View
 } from 'react-native'
+import RadioForm from 'react-native-simple-radio-button'
+import Axios from 'axios'
+import { API_URL } from 'react-native-dotenv'
+import { Bar as ProgressBar } from 'react-native-progress'
 import Colors from '../constants/Colors'
 import Categories from '../constants/Categories'
 import { Months } from '../constants/utils'
@@ -22,23 +25,22 @@ import WebarrioIcon from '../components/WebarrioIcon'
 import PublicationMenu from '../components/PublicationMenu'
 import Report from '../components/Report'
 import BackButton from '../components/BackButton'
+import Button from '../components/Button'
+import Loading from '../components/Loading'
 import firebase from '../api/firebase'
 import { getDate } from '../api/utils'
+import styles from './styles/Publication'
 
 const { height: fullHeight } = Dimensions.get('window')
 
 class PublicationScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.publication.title,
+    title: navigation.state.params.publication_title,
     headerLeft: (<BackButton behavior='top' />)
   })
 
   constructor(props) {
     super(props)
-    this.category = Categories.find(
-      category =>
-        category.key === props.navigation.state.params.publication.publication_type)
-      || { icon: 'loop', name: 'Otros' }
 
     this.state = {
       offset: 0,
@@ -46,7 +48,12 @@ class PublicationScreen extends React.Component {
       loadingComments: true,
       comments: [],
       reportOpen: false,
-      reportingId: ''
+      reportingId: '',
+      vote: null,
+      voted: false,
+      publication: null,
+      laoding: false,
+      total: 1
     }
     this.toggleMenu = this.toggleMenu.bind(this)
     this.report = this.report.bind(this)
@@ -56,22 +63,51 @@ class PublicationScreen extends React.Component {
   toggleMenu = () => this.setState({ menuOpen: !this.state.menuOpen })
 
   componentDidMount = () => {
-    const { publication } = this.props.navigation.state.params
-    const { neighborhood_units: units } = this.props.neighborhood
-    this.commentsRef = firebase.database().ref(`/comments/${publication.id}`)
-    this.commentsRef.on('value', snapshot => {
-      const comments = snapshot.val()
-      if (comments) {
-        this.setState({
-          loadingComments: false,
-          comments: Object.values(comments)
-        })
-      } else {
-        this.setState({ loadingComments: false })
+    const { publication_id } = this.props.navigation.state.params
+    const { authToken } = this.props
+    Axios.get(
+      `${API_URL}/publications/${publication_id}`,
+      {
+        headers: { Authorization: authToken }
       }
-    })
-    this.setState({
-      unit: units.find(unit => unit.id === publication.neighborhood_unit_id)
+    ).then(response => {
+      this.setState(
+        { publication: response.data.publication },
+        () => {
+          const { neighborhood_units: units } = this.props.neighborhood
+          const { publication } = this.state
+          this.category = Categories.find(
+            category =>
+              category.key === publication.publication_type)
+            || { icon: 'loop', name: 'Otros' }
+          this.commentsRef = firebase.database().ref(`/comments/${publication.id}`)
+          this.commentsRef.on('value', snapshot => {
+            const comments = snapshot.val()
+            if (comments) {
+              this.setState({
+                loadingComments: false,
+                comments: Object.values(comments)
+              })
+            } else {
+              this.setState({ loadingComments: false })
+            }
+          })
+          this.setState({
+            unit: units.find(unit => unit.id === publication.neighborhood_unit_id)
+          }, () => {
+            if (publication.publication_type === 'poll') {
+              const { unit } = this.state
+              this.setState({
+                voted: publication.voted,
+                results: publication.voted ? publication.options : null,
+                total: unit.unit_type === 'condo'
+                  ? unit.number_of_homes
+                  : unit.number_of_members
+              })
+            }
+          })
+        }
+      )
     })
   }
 
@@ -98,6 +134,25 @@ class PublicationScreen extends React.Component {
     }, () => this.setState({ comment: '' }))
   }
 
+  vote = () => {
+    const { publication, vote } = this.state
+    const { authToken } = this.props
+    this.setState({ loading: true })
+    Axios.post(
+      `${API_URL}/publications/${publication.id}/vote`,
+      { vote },
+      {
+        headers: { Authorization: authToken }
+      }
+    ).then(response => {
+      this.setState({
+        voted: true,
+        results: response.data.results,
+        loading: false
+      })
+    })
+  }
+
   renderComment = ({ item: comment }) => {
     const date = getDate(comment.createdAt)
     return (
@@ -119,7 +174,7 @@ class PublicationScreen extends React.Component {
   }
 
   report = () => {
-    const { publication } = this.props.navigation.state.params
+    const { publication } = this.state
     this.setState({
       reportOpen: true,
       reportingId: publication.id,
@@ -132,9 +187,15 @@ class PublicationScreen extends React.Component {
   }
 
   render() {
-    const { publication } = this.props.navigation.state.params
+    const { publication } = this.state
+    if (!publication) {
+      return (
+        <View style={styles.screen}>
+          <Loading loading={true} />
+        </View>)
+    }
     const { currentUser, unit } = this.props
-    const { menuOpen, offset, reportOpen, reportingId } = this.state
+    const { menuOpen, offset, reportOpen, reportingId, voted, results, loading, total } = this.state
     const menuTop = { top: publication.image_url ? 170 : 20 }
     let date = new Date(publication.created_at)
     date = (`0${date.getDate()}`).slice(-2) + ' ' + Months[date.getMonth()]
@@ -149,14 +210,16 @@ class PublicationScreen extends React.Component {
             )}
             <View style={styles.details}>
               <View style={styles.info}>
-                <View style={styles.category}>
-                  <WebarrioIcon
-                    name={this.category.icon}
-                    size={20}
-                    color={Colors.subHeading}
-                  />
-                  <Text style={styles.subHeading}>{this.category.name}</Text>
-                </View>
+                {this.category && (
+                  <View style={styles.category}>
+                    <WebarrioIcon
+                      name={this.category.icon}
+                      size={20}
+                      color={Colors.subHeading}
+                    />
+                    <Text style={styles.subHeading}>{this.category.name}</Text>
+                  </View>
+                )}
                 {this.state.unit && (
                   <Text style={styles.subHeading}>
                     {this.state.unit.name}
@@ -181,8 +244,40 @@ class PublicationScreen extends React.Component {
               <Text style={styles.description}>
                 {publication.description}
               </Text>
+              {publication.publication_type === 'poll' && !voted && (
+                <View>
+                  <RadioForm
+                    radio_props={publication.options.map(
+                      (option, idx) => ({ label: option.label, value: idx })
+                    )}
+                    wrapStyle={styles.options}
+                    buttonColor={Colors.orange}
+                    initial={-1}
+                    onPress={vote => this.setState({ vote })}
+                  />
+                  <Button onPress={this.vote}>Votar</Button>
+                </View>
+              )}
+              {publication.publication_type === 'poll' && voted && (
+                <View style={styles.info}>
+                  {results.map((option, idx) => (
+                    <View key={`${idx}`}>
+                      <Text>{option.label}: </Text>
+                      <ProgressBar
+                        progress={option.votes / total}
+                        width={300}
+                        height={10}
+                        borderRadius={0}
+                        borderWidth={0}
+                        color={Colors.orange}
+                        unfilledColor={'#e9efef'}
+                      />
+                    </View>
+                  ))}
+                </View>
+              )}
             </View>
-            {!this.category.admin && (
+            {this.category && !this.category.admin && (
               <View style={styles.commentSection}>
                 {this.state.loadingComments && (
                   <ActivityIndicator />
@@ -251,12 +346,14 @@ class PublicationScreen extends React.Component {
           behavior='padding'
           keyboardVerticalOffset={offset}
         />
+        <Loading loading={loading} />
       </View>
     )
   }
 }
 
 const mapStateToProps = state => ({
+  authToken: state.authReducer.authToken,
   currentUser: state.currentsReducer.user,
   unit: state.currentsReducer.unit,
   neighborhood: state.currentsReducer.neighborhood
@@ -264,104 +361,3 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps)(PublicationScreen)
 
-const styles = StyleSheet.create({
-  image: {
-    height: 150,
-    width: Dimensions.get('window').width
-  },
-  screen: {
-    flex: 1
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 10,
-    color: Colors.orange
-  },
-  description: {
-    marginVertical: 10,
-    marginHorizontal: 20,
-    alignSelf: 'stretch'
-  },
-  details: {
-    backgroundColor: 'white'
-  },
-  info: {
-    padding: 20,
-    paddingBottom: 10
-  },
-  author: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 5
-  },
-  authorName: {
-    color: Colors.subHeading,
-    fontWeight: 'bold',
-    fontSize: 16
-  },
-  subHeading: {
-    color: Colors.subHeading
-  },
-  category: {
-    flexDirection: 'row',
-    alignItems: 'flex-start'
-  },
-  label: {
-    color: '#92a2a2'
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  menuClose: {
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    position: 'absolute',
-    backgroundColor: 'transparent'
-  },
-  menu: {
-    position: 'absolute',
-    right: 15
-  },
-  commentSection: {
-    backgroundColor: 'white'
-  },
-  comment: {
-    marginVertical: StyleSheet.hairlineWidth,
-    padding: 20,
-    backgroundColor: '#E6EDEC'
-  },
-  commentHeader: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    marginBottom: 7
-  },
-  commentAuthor: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  commentHeaderText: {
-    color: '#92A2A2',
-    fontSize: 12
-  },
-  commentInput: {
-    backgroundColor: 'white',
-    alignSelf: 'stretch',
-    padding: 5,
-    paddingBottom: 20,
-    minHeight: 40
-  },
-  commentButton: {
-    position: 'absolute',
-    bottom: 25,
-    right: 25
-  },
-  commentButtonText: {
-    color: '#E6EDEC'
-  },
-  commentButtonActive: {
-    color: Colors.tintColor
-  }
-})

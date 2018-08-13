@@ -1,10 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import {
   Dimensions,
   KeyboardAvoidingView,
+  Platform,
   View
 } from 'react-native'
+
+const TABBARHEIGHT = Platform.isPad ? 49 : 29
 
 export default class KeyboardAwareView extends React.Component {
   constructor(props) {
@@ -15,7 +17,7 @@ export default class KeyboardAwareView extends React.Component {
   onLayout = ({
     nativeEvent: { layout: { height } }
   }) => {
-    this.setState({ offset: Dimensions.get('window').height - height - this.props.tabbarHeight })
+    this.setState({ offset: Dimensions.get('window').height - height - TABBARHEIGHT })
   }
 
   render() {
@@ -31,6 +33,3 @@ export default class KeyboardAwareView extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  tabbarHeight: state.layoutReducer.tabbarHeight
-})

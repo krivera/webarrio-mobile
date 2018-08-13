@@ -1,7 +1,7 @@
 import SET_TABBAR_HEIGHT from '../actions/layout'
 
 const initialState = {
-  height: 0
+  tabBarHeight: 0
 }
 
 export default (state = initialState, action) => {
@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
   case SET_TABBAR_HEIGHT:
     return {
       ...state,
-      height: action.type
+      tabBarHeight: action.height
     }
   default:
     return state

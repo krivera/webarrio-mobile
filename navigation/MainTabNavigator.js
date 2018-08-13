@@ -13,7 +13,6 @@ import SideMenu from 'react-native-side-menu-over'
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync'
 import { handleNotification } from '../actions/navigation'
 import { setInitialData } from '../actions/currents'
-import { setTabbarHeight } from '../actions/layout'
 
 import Colors from '../constants/Colors'
 import Expenses from '../screens/Expenses'
@@ -34,13 +33,6 @@ import Menu from '../components/Menu'
 
 export let navigatorRef
 export let menuRef
-let tabBarHeight = 0
-
-const getTabBarHeight = ({
-  nativeEvent: { layout: { height } }
-}) => {
-  tabBarHeight = height
-}
 
 const header = {
   headerForceInset: { top: 5 },
@@ -140,7 +132,7 @@ const AppTabNavigator = TabNavigator(
           break
         case 'Sos':
           return (
-            <View style={sosStyle} onLayout={getTabBarHeight}>
+            <View style={sosStyle}>
               <WebarrioIcon
                 name='sos'
                 size={28}
@@ -175,7 +167,6 @@ class MainTabNavigator extends React.Component {
   componentDidMount = () => {
     navigatorRef = this.navigator
     menuRef = this.menu
-    this.props.dispatch(setTabbarHeight(tabBarHeight))
   }
 
 
@@ -225,9 +216,11 @@ class MainTabNavigator extends React.Component {
           this.menu = r
         }}
       >
-        <AppTabNavigator ref={r => {
-          this.navigator = r
-        }} />
+        <AppTabNavigator
+          ref={r => {
+            this.navigator = r
+          }}
+        />
       </SideMenu>)
   }
 }

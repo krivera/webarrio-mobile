@@ -35,12 +35,12 @@ export default [
     key: 'notice',
     admin: true
   },
-  // {
-  //   name: 'Asambleas',
-  //   icon: 'poll',
-  //   key: 'poll',
-  //   admin: true
-  // },
+  {
+    name: 'Asambleas',
+    icon: 'poll',
+    key: 'poll',
+    admin: true
+  },
   {
     name: 'Todos',
     icon: 'loop',

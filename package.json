@@ -2,6 +2,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
+    "build:watch": "babel actions -d build/actions reducers -d build/reducers constants -d build/constants --source-maps --watch",
     "test": "node ./node_modules/jest/bin/jest.js --watchAll"
   },
   "jest": {
@@ -28,6 +29,7 @@
     "react-native-progress": "^3.5.0",
     "react-native-root-toast": "^3.0.1",
     "react-native-side-menu-over": "0.0.2",
+    "react-native-simple-radio-button": "^2.7.2",
     "react-navigation": "^1.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",

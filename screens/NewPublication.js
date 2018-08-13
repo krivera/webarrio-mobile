@@ -53,6 +53,7 @@ class NewPublication extends React.Component {
       seats_available: publication ? publication.spaces : '',
       destination: publication ? publication.destination : '',
       description: publication ? publication.description : '',
+      options: ['Sí', 'No'],
       image: publication ? publication.image_url : null,
       datePickerOpen: false,
       timePickerOpen: false,
@@ -64,7 +65,8 @@ class NewPublication extends React.Component {
 
   componentDidMount = () => {
     const { unit, neighborhood, dispatch, navigation } = this.props
-    if (navigation.state.params.category.admin) {
+    const { params } = navigation.state
+    if (params.category && params.category.admin) {
       if (!unit.user_roles.includes('secretary')) {
         dispatch(setCurrent(
           'unit',
@@ -172,6 +174,7 @@ class NewPublication extends React.Component {
     const {
       title,
       description,
+      options,
       publication_type,
       date,
       hours,
@@ -189,9 +192,13 @@ class NewPublication extends React.Component {
         title,
         description,
         publication_type,
+        options,
         date: date_.getTime(),
         seats_available,
         destination
+      }
+      if (publication_type === 'poll') {
+        data.end = data.date
       }
       if (Categories.find(category => category.key === publication_type).admin) {
         data.unit_id = unit.id
@@ -227,7 +234,10 @@ class NewPublication extends React.Component {
             navigation.dispatch(NavigationActions.pop())
             navigation.navigate(
               'Publication',
-              { publication: response_.data.publication }
+              {
+                publication_id: response.data.publication.id,
+                publication_title: response.data.publication.title
+              }
             )
           })
         } else {
@@ -235,7 +245,10 @@ class NewPublication extends React.Component {
           navigation.dispatch(NavigationActions.pop())
           navigation.navigate(
             'Publication',
-            { publication: response.data.publication }
+            {
+              publication_id: response.data.publication.id,
+              publication_title: response.data.publication.title
+            }
           )
         }
       })
@@ -255,21 +268,41 @@ class NewPublication extends React.Component {
     }
   }
 
+  setOption = (index, option) => {
+    this.setState({
+      options: this.state.options.map((opt, idx) =>
+        idx === index ? option : opt
+      )
+    })
+  }
+
+  removeOption = index => {
+    this.setState({
+      options: this.state.options.filter((option, idx) => idx !== index)
+    })
+  }
+
+  addOption = () => {
+    this.setState({
+      options: this.state.options.concat('')
+    })
+  }
+
   render() {
-    const show_date = ['event', 'car_pooling'].includes(this.state.publication_type)
-    const is_car = ['car_pooling'].includes(this.state.publication_type)
     const {
       image,
       title,
       description,
       destination,
+      options,
       publication_type,
       seats_available,
       date,
       loading
     } = this.state
-    const { neighborhood, unit } = this.props
-    console.log(neighborhood)
+    const show_date = ['event', 'car_pooling', 'poll'].includes(publication_type)
+    const is_car = ['car_pooling'].includes(publication_type)
+    const { neighborhood } = this.props
     const category = Categories.find(cat => cat.key === publication_type)
     return (
       <KeyboardAwareView style={styles.screen}>
@@ -338,8 +371,13 @@ class NewPublication extends React.Component {
               </View>
             )}
             {show_date && (
-              <View style={styles.row}>
-                {this.datePicker()}
+              <View>
+                {publication_type === 'poll' && (
+                  <Text>Cierre de las votaciones:</Text>
+                )}
+                <View style={styles.row}>
+                  {this.datePicker()}
+                </View>
               </View>
             )}
             <View>
@@ -359,6 +397,32 @@ class NewPublication extends React.Component {
                 </TouchableOpacity>
               ) : (<View />)}
             </View>
+            {publication_type === 'poll' && (
+              <View>
+                <Text>Opciones</Text>
+                {options.map((option, index) => (
+                  <View key={`${index}`}>
+                    <FloatingLabelInput
+                      label='Opción'
+                      labelColor={Colors.subHeading}
+                      onChangeText={t => this.setOption(index, t)}
+                      value={option}
+                    />
+                    <TouchableOpacity
+                      onPress={() => this.removeOption(index)}
+                      style={styles.clearButton}
+                    >
+                      <Feather name='x' size={18} color={Colors.subHeading} />
+                    </TouchableOpacity>
+                  </View>
+                ))}
+                <TouchableOpacity
+                  onPress={this.addOption}
+                >
+                  <Feather name='plus' color={Colors.subHeading} size={20} />
+                </TouchableOpacity>
+              </View>
+            )}
             <Button onPress={this.savePublication}>
               Publicar
             </Button>
