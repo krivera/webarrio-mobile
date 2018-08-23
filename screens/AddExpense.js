@@ -63,16 +63,14 @@ class AddExpenseScreen extends React.Component {
           []
         )
       })
+    } else {
+      this.setState({ details: [{ label: 'Cuota', ammount: '' }] })
     }
     this.setProrate(selectedUnit)
   }
 
   setProrate = unit => {
-    if (unit.unit_type === 'condo') {
-      this.setState({ prorateBy: unit.number_of_homes })
-    } else {
-      this.setState({ prorateBy: unit.number_of_members })
-    }
+    this.setState({ prorateBy: unit.number_of_homes })
   }
 
   componentDidUpdate = prevProps => {

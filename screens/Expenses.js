@@ -89,7 +89,7 @@ class ExpensesScreen extends React.Component {
     return (
       <Expense
         expense={expense}
-        treasurerView={this.treasurerView}
+        treasurerView={this.state.treasurerView}
         goToPayment={this.goToPayment}
       />)
   }

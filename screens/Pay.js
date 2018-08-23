@@ -1,15 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  StyleSheet,
   Text,
   View
 } from 'react-native'
 import Axios from 'axios'
 import { API_URL } from 'react-native-dotenv'
-import Colors from '../constants/Colors'
 import BackButton from '../components/BackButton'
 import { MonthsFull, PaymentMethodTypes } from '../constants/utils'
+import styles from './styles/Pay'
 
 class Pay extends React.Component {
   static navigationOptions = () => ({
@@ -25,7 +24,7 @@ class Pay extends React.Component {
     }
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     const { authToken } = this.props
     const { unit } = this.props.navigation.state.params
     Axios.get(
@@ -80,34 +79,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(Pay)
-
-const styles = StyleSheet.create({
-  screen: {
-    backgroundColor: 'white',
-    alignItems: 'center',
-    padding: 15,
-    flex: 1
-  },
-  total: {
-    color: Colors.orange,
-    fontSize: 20,
-    borderBottomColor: Colors.subHeading,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    marginBottom: 10
-  },
-  method: {
-    alignItems: 'center',
-    margin: 10
-  },
-  methodHead: {
-    color: Colors.orange
-  },
-  methodSection: {
-    fontWeight: 'bold',
-    marginTop: 30
-  },
-  unitName: {
-    color: Colors.subHeading,
-    fontSize: 12
-  }
-})
