@@ -119,7 +119,7 @@ class CommunityScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     authToken: state.authReducer.authToken,
     unit: state.currentsReducer.unit,

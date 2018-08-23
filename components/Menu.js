@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-// import { SimpleLineIcons } from '@expo/vector-icons'
 import Categories from '../components/Categories'
 import Avatar from '../components/Avatar'
 import Picker from '../components/Picker'
@@ -37,13 +36,13 @@ class Menu extends React.Component {
       neighborhood
     ))
     dispatch(setCurrent(
-      'neighborhood_unit',
+      'unit',
       neighborhood.neighborhood_units[0]
     ))
     const condo = neighborhood.neighborhood_units.find(unit => unit.unit_type === 'condo')
     dispatch(setCurrent(
       'apartment',
-      condo ? condo.apartments[0] : null
+      condo && condo.apartments && condo.apartments.length ? condo.apartments[0] : null
     ))
   }
 

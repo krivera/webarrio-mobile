@@ -1,4 +1,4 @@
-const tintColor = '#2f95dc';
+const tintColor = '#2f95dc'
 
 export default {
   tintColor,
@@ -17,5 +17,6 @@ export default {
   inputBorder: '#92a2a2',
   border: '#92a2a2',
   placeholder: '#E6EDEC',
-  menubkg: '#f6f6f7'
-};
+  menubkg: '#f6f6f7',
+  no: '#484848'
+}

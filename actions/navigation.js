@@ -43,6 +43,18 @@ export function handleNotification(data) {
         })
       )
     }
+  case 'publication':
+    return dispatch => {
+      navigatorRef.dispatch(
+        NavigationActions.navigate({
+          routeName: 'Publication',
+          params: {
+            publication_id: data.resource_id,
+            publication_title: data.text
+          }
+        })
+      )
+    }
   default:
     return {}
   }

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {
   ActivityIndicator,
+  Alert,
   Dimensions,
   FlatList,
   Image,
@@ -13,10 +14,10 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native'
-import RadioForm from 'react-native-simple-radio-button'
 import Axios from 'axios'
 import { API_URL } from 'react-native-dotenv'
 import { Bar as ProgressBar } from 'react-native-progress'
+import { EvilIcons } from '@expo/vector-icons'
 import Colors from '../constants/Colors'
 import Categories from '../constants/Categories'
 import { Months } from '../constants/utils'
@@ -138,19 +139,28 @@ class PublicationScreen extends React.Component {
     const { publication, vote } = this.state
     const { authToken } = this.props
     this.setState({ loading: true })
-    Axios.post(
-      `${API_URL}/publications/${publication.id}/vote`,
-      { vote },
-      {
-        headers: { Authorization: authToken }
-      }
-    ).then(response => {
-      this.setState({
-        voted: true,
-        results: response.data.results,
-        loading: false
-      })
-    })
+    Alert.alert(
+      'Votar',
+      `Votar por la opción "${publication.options[vote].label}"`,
+      [
+        { text: 'Cancelar', onPress: () => this.setState({ loading: false }) },
+        { text: 'Aceptar', onPress: () => {
+          Axios.post(
+            `${API_URL}/publications/${publication.id}/vote`,
+            { vote },
+            {
+              headers: { Authorization: authToken }
+            }
+          ).then(response => {
+            this.setState({
+              voted: true,
+              results: response.data.results,
+              loading: false
+            })
+          })
+        } }
+      ]
+    )
   }
 
   renderComment = ({ item: comment }) => {
@@ -225,55 +235,70 @@ class PublicationScreen extends React.Component {
                     {this.state.unit.name}
                   </Text>
                 )}
+                {publication.publication_type === 'poll' && (
+                  <Text style={styles.subHeading}>
+                    CIERRA EL {getDate(publication.end)}
+                  </Text>
+                )}
                 <Text style={styles.title}>{publication.title}</Text>
-                <View style={styles.author}>
-                  <Avatar
-                    source={{ uri: publication.author.avatar }}
-                    name={publication.author.name}
-                  />
-                  <View>
-                    <Text style={styles.authorName}>
-                      {publication.author.name} {publication.author.last_name}
-                    </Text>
-                    <Text style={styles.subHeading}>
-                      {date}
-                    </Text>
+                {publication.publication_type !== 'poll' && (
+                  <View style={styles.author}>
+                    <Avatar
+                      source={{ uri: publication.author.avatar }}
+                      name={publication.author.name}
+                    />
+                    <View>
+                      <Text style={styles.authorName}>
+                        {publication.author.name} {publication.author.last_name}
+                      </Text>
+                      <Text style={styles.subHeading}>
+                        {date}
+                      </Text>
+                    </View>
                   </View>
-                </View>
+                )}
               </View>
               <Text style={styles.description}>
                 {publication.description}
               </Text>
               {publication.publication_type === 'poll' && !voted && (
-                <View>
-                  <RadioForm
-                    radio_props={publication.options.map(
-                      (option, idx) => ({ label: option.label, value: idx })
-                    )}
-                    wrapStyle={styles.options}
-                    buttonColor={Colors.orange}
-                    initial={-1}
-                    onPress={vote => this.setState({ vote })}
-                  />
-                  <Button onPress={this.vote}>Votar</Button>
+                <View style={styles.voteSection}>
+                  <TouchableOpacity
+                    style={[styles.optionBox, styles.yes]}
+                    onPress={() => this.setState({ vote: 0 }, this.vote)}
+                  >
+                    <EvilIcons name='like' size={40} color='white' />
+                    <Text style={styles.optionText}>SI</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[styles.optionBox, styles.no]}
+                    onPress={() => this.setState({ vote: 1 }, this.vote)}
+                  >
+                    <EvilIcons style={styles.iconNo} name='like' size={40} color='white' />
+                    <Text style={styles.optionText}>NO</Text>
+                  </TouchableOpacity>
                 </View>
               )}
               {publication.publication_type === 'poll' && voted && (
-                <View style={styles.info}>
-                  {results.map((option, idx) => (
-                    <View key={`${idx}`}>
-                      <Text>{option.label}: </Text>
-                      <ProgressBar
-                        progress={option.votes / total}
-                        width={300}
-                        height={10}
-                        borderRadius={0}
-                        borderWidth={0}
-                        color={Colors.orange}
-                        unfilledColor={'#e9efef'}
-                      />
-                    </View>
-                  ))}
+                <View style={styles.voteSection}>
+                  <View
+                    style={[
+                      styles.row,
+                      results[1].votes < results[0].votes && styles.winner
+                    ]}
+                  >
+                    <EvilIcons name='like' size={40} color={Colors.orange} />
+                    <Text style={styles.orange}>SI ({results[0].votes})</Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.row,
+                      results[1].votes > results[0].votes && styles.winner
+                    ]}
+                  >
+                    <EvilIcons name='like' size={40} color={Colors.no} style={styles.iconNo} />
+                    <Text>NO ({results[1].votes})</Text>
+                  </View>
                 </View>
               )}
             </View>
@@ -360,4 +385,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(PublicationScreen)
-

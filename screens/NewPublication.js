@@ -18,6 +18,7 @@ import { Feather, Ionicons, SimpleLineIcons } from '@expo/vector-icons'
 import { API_URL } from 'react-native-dotenv'
 import axios from 'axios'
 import { NavigationActions } from 'react-navigation'
+import { focusInput } from '../api/utils'
 import { setCurrent } from '../actions/currents'
 import Categories from '../constants/Categories'
 import Colors from '../constants/Colors'
@@ -259,15 +260,6 @@ class NewPublication extends React.Component {
     this.setState({ [field]: '' })
   }
 
-  changeUnit = unitId => {
-    const { neighborhood, dispatch } = this.props
-    const nextUnit = neighborhood.neighborhood_units.find(unit => unit.id === unitId)
-    dispatch(setCurrent('unit', nextUnit))
-    if (nextUnit.apartments && nextUnit.apartments.length) {
-      dispatch(setCurrent('apartment', nextUnit.apartments))
-    }
-  }
-
   setOption = (index, option) => {
     this.setState({
       options: this.state.options.map((opt, idx) =>
@@ -383,8 +375,12 @@ class NewPublication extends React.Component {
             <View>
               <FloatingLabelInput
                 label='Detalles'
+                ref={ref => {
+                  this.description = ref
+                }}
                 labelColor={Colors.subHeading}
                 onChangeText={t => this.setState({ description: t })}
+                onFocus={() => focusInput(this.scrollview, this.description)}
                 value={description}
                 multiline={true}
               />
@@ -397,32 +393,6 @@ class NewPublication extends React.Component {
                 </TouchableOpacity>
               ) : (<View />)}
             </View>
-            {publication_type === 'poll' && (
-              <View>
-                <Text>Opciones</Text>
-                {options.map((option, index) => (
-                  <View key={`${index}`}>
-                    <FloatingLabelInput
-                      label='Opción'
-                      labelColor={Colors.subHeading}
-                      onChangeText={t => this.setOption(index, t)}
-                      value={option}
-                    />
-                    <TouchableOpacity
-                      onPress={() => this.removeOption(index)}
-                      style={styles.clearButton}
-                    >
-                      <Feather name='x' size={18} color={Colors.subHeading} />
-                    </TouchableOpacity>
-                  </View>
-                ))}
-                <TouchableOpacity
-                  onPress={this.addOption}
-                >
-                  <Feather name='plus' color={Colors.subHeading} size={20} />
-                </TouchableOpacity>
-              </View>
-            )}
             <Button onPress={this.savePublication}>
               Publicar
             </Button>

@@ -30,6 +30,7 @@ class UnitPicker extends React.Component {
   }
 
   componentDidMount = () => {
+    console.log(this.props.unit.id)
     this.updateUnitList()
   }
 

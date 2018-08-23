@@ -97,6 +97,7 @@ class LoginScreen extends React.Component {
     )
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     authToken: state.authReducer.authToken

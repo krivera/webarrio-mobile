@@ -1,5 +1,6 @@
 export default [
   'Banco de Chile / Edwards',
+  'BancoEstado',
   'Banco Internacional',
   'Scotiabank',
   'Banco de Crédito e Inversiones',

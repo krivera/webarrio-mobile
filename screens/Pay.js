@@ -12,7 +12,7 @@ import BackButton from '../components/BackButton'
 import { MonthsFull, PaymentMethodTypes } from '../constants/utils'
 
 class Pay extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     headerTitle: 'Gastos Comunes',
     headerLeft: (<BackButton />)
   });

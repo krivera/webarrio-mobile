@@ -28,7 +28,7 @@ class ExpensesScreen extends React.Component {
         </TouchableOpacity>
       )}
     </View>)
-  });
+  })
 
   constructor(props) {
     super(props)

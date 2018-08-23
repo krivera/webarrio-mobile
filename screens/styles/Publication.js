@@ -63,6 +63,11 @@ export default StyleSheet.create({
   details: {
     backgroundColor: 'white'
   },
+  iconNo: {
+    transform: [{
+      rotateX: '180deg'
+    }]
+  },
   image: {
     height: 150,
     width: Dimensions.get('window').width
@@ -86,9 +91,32 @@ export default StyleSheet.create({
     position: 'absolute',
     backgroundColor: 'transparent'
   },
+  no: {
+    backgroundColor: Colors.no
+  },
+  optionBox: {
+    margin: 10,
+    flex: 0.5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10
+  },
   options: {
     alignItems: 'flex-start',
     alignSelf: 'stretch'
+  },
+  optionText: {
+    color: 'white',
+    fontSize: 20
+  },
+  orange: {
+    color: Colors.orange
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 20
   },
   screen: {
     flex: 1,
@@ -105,5 +133,19 @@ export default StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  voteSection: {
+    flexDirection: 'row',
+    marginHorizontal: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  winner: {
+    transform: [
+      { scale: 1.5 }
+    ]
+  },
+  yes: {
+    backgroundColor: Colors.orange
   }
 })

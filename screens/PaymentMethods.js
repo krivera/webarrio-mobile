@@ -13,6 +13,7 @@ import RefreshingList from '../components/RefreshingList'
 import CommonExpensesTabs from '../navigation/CommonExpensesTabs'
 import { PaymentMethodTypes } from '../constants/utils'
 
+
 class PaymentMethods extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Métodos de pago',
@@ -85,6 +86,7 @@ class PaymentMethods extends React.Component {
     )
   }
 }
+
 
 const mapStateToProps = state => ({
   authToken: state.authReducer.authToken,

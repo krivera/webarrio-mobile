@@ -132,7 +132,7 @@ class AddPaymentMethod extends React.Component {
         <ScrollView style={styles.form}>
           <Text>Método</Text>
           <Picker
-            onValueChange={(value, index) => this.setState({ type_of: value })}
+            onValueChange={(value) => this.setState({ type_of: value })}
             selectedValue={type_of}
             style={styles.picker}
           >
