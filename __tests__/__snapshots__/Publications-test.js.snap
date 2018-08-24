@@ -537,225 +537,140 @@ exports[`renders Add Publication screen 1`] = `
 `;
 
 exports[`renders Category selector screen 1`] = `
-<View
+<RCTScrollView
   style={
     Object {
-      "alignItems": "center",
       "backgroundColor": "white",
       "flex": 1,
-      "padding": 15,
     }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "color": "#f76913",
-        "fontSize": 25,
-        "margin": 20,
-      }
-    }
-  >
-    Elige una Categoría
-  </Text>
-  <View
-    style={
-      Object {
-        "flexDirection": "row",
-        "flexWrap": "wrap",
-        "marginBottom": 20,
-      }
-    }
-  >
+  <View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
-          "maxWidth": 120,
-          "minWidth": 80,
-          "opacity": 1,
-          "width": 240,
+          "padding": 15,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
-      <View
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
         style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderRadius": 96,
-              "height": 192,
-              "justifyContent": "center",
-              "margin": 10,
-              "width": 192,
-            },
-            false,
-          ]
+          Object {
+            "color": "#f76913",
+            "fontSize": 25,
+            "margin": 20,
+          }
         }
       >
-        <RNSVGSvgView
-          align="xMidYMid"
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
-          style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-              },
-              undefined,
-              false,
-              Object {
-                "flex": 0,
-                "height": 120,
-                "width": 120,
-              },
-            ]
+        Elige una Categoría
+      </Text>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "marginBottom": 20,
           }
-          vbHeight={120}
-          vbWidth={120}
+        }
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "maxWidth": 120,
+              "minWidth": 80,
+              "opacity": 1,
+              "width": 240,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
         >
-          <RNSVGGroup
-            fill={null}
-            fillOpacity={1}
-            fillRule={1}
-            font={Object {}}
-            matrix={
+          <View
+            style={
               Array [
-                2.3529411764705883,
-                0,
-                0,
-                2.3529411764705883,
-                0,
-                0,
+                Object {
+                  "alignItems": "center",
+                  "borderRadius": 96,
+                  "height": 192,
+                  "justifyContent": "center",
+                  "margin": 10,
+                  "width": 192,
+                },
+                false,
               ]
             }
-            name="Page-1"
-            opacity={1}
-            originX={0}
-            originY={0}
-            propList={
-              Array [
-                "stroke",
-                "fill",
-              ]
-            }
-            rotation={0}
-            scaleX={2.3529411764705883}
-            scaleY={2.3529411764705883}
-            skewX={0}
-            skewY={0}
-            stroke={null}
-            strokeDasharray={null}
-            strokeDashoffset={null}
-            strokeLinecap={0}
-            strokeLinejoin={0}
-            strokeMiterlimit={4}
-            strokeOpacity={1}
-            strokeWidth="1"
-            x={0}
-            y={0}
           >
-            <RNSVGGroup
-              fill={
+            <RNSVGSvgView
+              align="xMidYMid"
+              meetOrSlice={0}
+              minX={0}
+              minY={0}
+              style={
                 Array [
-                  0,
-                  0.9686274509803922,
-                  0.4117647058823529,
-                  0.07450980392156863,
-                  1,
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "flex": 0,
+                    "height": 120,
+                    "width": 120,
+                  },
                 ]
               }
-              fillOpacity={1}
-              fillRule={1}
-              font={Object {}}
-              matrix={
-                Array [
-                  1,
-                  0,
-                  0,
-                  1,
-                  0,
-                  0,
-                ]
-              }
-              name="Artboard"
-              opacity={1}
-              originX={0}
-              originY={0}
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-              rotation={0}
-              scaleX={1}
-              scaleY={1}
-              skewX={0}
-              skewY={0}
-              stroke={null}
-              strokeDasharray={null}
-              strokeDashoffset={null}
-              strokeLinecap={0}
-              strokeLinejoin={0}
-              strokeMiterlimit={4}
-              strokeOpacity={1}
-              strokeWidth="1"
-              x={0}
-              y={0}
+              vbHeight={120}
+              vbWidth={120}
             >
-              <RNSVGPath
-                d="M41.3058299,23.1888128 L41.3058299,23.1888128 L41.3058299,16.7925419 L9.44990022,16.7925419 L9.44990022,23.1888128 L9.44990022,38.5436367 L9.44990022,42.3851729 L41.3058299,42.3851729 L41.3058299,38.5436367 L41.3058299,23.1888128 Z M31.5062291,9.11324315 L31.5062291,10.3924973 C31.5062291,11.1019362 32.0518558,11.6717515 32.7311792,11.6717515 C33.4032757,11.6717515 33.9561293,11.1019362 33.9561293,10.3924973 L33.9561293,9.11324315 L41.3058299,9.11324315 L41.3058299,14.2340335 L9.44990022,14.2340335 L9.44990022,9.11324315 L16.7996009,9.11324315 L16.7996009,10.3924973 C16.7996009,11.1019362 17.3488411,11.6717515 18.0281644,11.6717515 C18.7038744,11.6717515 19.2531145,11.1019362 19.2531145,10.3924973 L19.2531145,9.11324315 L31.5062291,9.11324315 Z M31.5062291,6.55850838 L31.5062291,5.27925419 C31.5062291,4.56981529 32.0518558,4 32.7311792,4 C33.4032757,4 33.9561293,4.56981529 33.9561293,5.27925419 L33.9561293,6.55850838 L41.3058299,6.55850838 C42.6572498,6.55850838 43.7557302,7.70191257 43.7557302,9.11324315 L43.7557302,42.3851729 C43.7557302,43.7965035 42.6572498,44.9399077 41.3058299,44.9399077 L9.44990022,44.9399077 C8.09486691,44.9399077 7,43.7965035 7,42.3851729 L7,9.11324315 C7,7.70191257 8.09486691,6.55850838 9.44990022,6.55850838 L16.7996009,6.55850838 L16.7996009,5.27925419 C16.7996009,4.56981529 17.3488411,4 18.0281644,4 C18.7038744,4 19.2531145,4.56981529 19.2531145,5.27925419 L19.2531145,6.55850838 L31.5062291,6.55850838 Z"
-                fill={
-                  Array [
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                  ]
-                }
+              <RNSVGGroup
+                fill={null}
                 fillOpacity={1}
                 fillRule={1}
+                font={Object {}}
                 matrix={
                   Array [
-                    1,
+                    2.3529411764705883,
                     0,
                     0,
-                    1,
+                    2.3529411764705883,
                     0,
                     0,
                   ]
                 }
-                name="Fill-604"
+                name="Page-1"
                 opacity={1}
                 originX={0}
                 originY={0}
-                propList={Array []}
+                propList={
+                  Array [
+                    "stroke",
+                    "fill",
+                  ]
+                }
                 rotation={0}
-                scaleX={1}
-                scaleY={1}
+                scaleX={2.3529411764705883}
+                scaleY={2.3529411764705883}
                 skewX={0}
                 skewY={0}
                 stroke={null}
@@ -768,226 +683,8 @@ exports[`renders Category selector screen 1`] = `
                 strokeWidth="1"
                 x={0}
                 y={0}
-              />
-            </RNSVGGroup>
-          </RNSVGGroup>
-        </RNSVGSvgView>
-      </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "fontSize": 12,
-          }
-        }
-      >
-        Eventos
-      </Text>
-    </View>
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "maxWidth": 120,
-          "minWidth": 80,
-          "opacity": 1,
-          "width": 240,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderRadius": 96,
-              "height": 192,
-              "justifyContent": "center",
-              "margin": 10,
-              "width": 192,
-            },
-            false,
-          ]
-        }
-      >
-        <RNSVGSvgView
-          align="xMidYMid"
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
-          style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-              },
-              undefined,
-              false,
-              Object {
-                "flex": 0,
-                "height": 120,
-                "width": 120,
-              },
-            ]
-          }
-          vbHeight={120}
-          vbWidth={120}
-        >
-          <RNSVGGroup
-            fill={null}
-            fillOpacity={1}
-            fillRule={1}
-            font={Object {}}
-            matrix={
-              Array [
-                2.3529411764705883,
-                0,
-                0,
-                2.3529411764705883,
-                0,
-                0,
-              ]
-            }
-            name="Page-1"
-            opacity={1}
-            originX={0}
-            originY={0}
-            propList={
-              Array [
-                "stroke",
-                "fill",
-              ]
-            }
-            rotation={0}
-            scaleX={2.3529411764705883}
-            scaleY={2.3529411764705883}
-            skewX={0}
-            skewY={0}
-            stroke={null}
-            strokeDasharray={null}
-            strokeDashoffset={null}
-            strokeLinecap={0}
-            strokeLinejoin={0}
-            strokeMiterlimit={4}
-            strokeOpacity={1}
-            strokeWidth="1"
-            x={0}
-            y={0}
-          >
-            <RNSVGGroup
-              fill={
-                Array [
-                  0,
-                  0.9686274509803922,
-                  0.4117647058823529,
-                  0.07450980392156863,
-                  1,
-                ]
-              }
-              fillOpacity={1}
-              fillRule={1}
-              font={Object {}}
-              matrix={
-                Array [
-                  1,
-                  0,
-                  0,
-                  1,
-                  0,
-                  0,
-                ]
-              }
-              name="Artboard"
-              opacity={1}
-              originX={0}
-              originY={0}
-              propList={
-                Array [
-                  "stroke",
-                  "fill",
-                ]
-              }
-              rotation={0}
-              scaleX={1}
-              scaleY={1}
-              skewX={0}
-              skewY={0}
-              stroke={null}
-              strokeDasharray={null}
-              strokeDashoffset={null}
-              strokeLinecap={0}
-              strokeLinejoin={0}
-              strokeMiterlimit={4}
-              strokeOpacity={1}
-              strokeWidth="1"
-              x={0}
-              y={0}
-            >
-              <RNSVGGroup
-                fill={
-                  Array [
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                  ]
-                }
-                fillOpacity={1}
-                fillRule={1}
-                font={Object {}}
-                matrix={
-                  Array [
-                    1,
-                    0,
-                    0,
-                    1,
-                    4,
-                    1,
-                  ]
-                }
-                name="Group"
-                opacity={1}
-                originX={0}
-                originY={0}
-                propList={Array []}
-                rotation={0}
-                scaleX={1}
-                scaleY={1}
-                skewX={0}
-                skewY={0}
-                stroke={null}
-                strokeDasharray={null}
-                strokeDashoffset={null}
-                strokeLinecap={0}
-                strokeLinejoin={0}
-                strokeMiterlimit={4}
-                strokeOpacity={1}
-                strokeWidth="1"
-                x={4}
-                y={1}
               >
-                <RNSVGPath
-                  d="M16.9603487,6.70194041 C16.2159838,6.70194041 15.6125423,7.33590709 15.6125423,8.10949738 C15.6125423,8.88686129 16.2159838,9.51705435 16.9603487,9.51705435 C17.7047137,9.51705435 18.3081552,8.88686129 18.3081552,8.10949738 C18.3081552,7.33590709 17.7047137,6.70194041 16.9603487,6.70194041"
+                <RNSVGGroup
                   fill={
                     Array [
                       0,
@@ -999,6 +696,7 @@ exports[`renders Category selector screen 1`] = `
                   }
                   fillOpacity={1}
                   fillRule={1}
+                  font={Object {}}
                   matrix={
                     Array [
                       1,
@@ -1009,7 +707,224 @@ exports[`renders Category selector screen 1`] = `
                       0,
                     ]
                   }
-                  name="Fill-618"
+                  name="Artboard"
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={
+                    Array [
+                      "fill",
+                    ]
+                  }
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                >
+                  <RNSVGPath
+                    d="M41.3058299,23.1888128 L41.3058299,23.1888128 L41.3058299,16.7925419 L9.44990022,16.7925419 L9.44990022,23.1888128 L9.44990022,38.5436367 L9.44990022,42.3851729 L41.3058299,42.3851729 L41.3058299,38.5436367 L41.3058299,23.1888128 Z M31.5062291,9.11324315 L31.5062291,10.3924973 C31.5062291,11.1019362 32.0518558,11.6717515 32.7311792,11.6717515 C33.4032757,11.6717515 33.9561293,11.1019362 33.9561293,10.3924973 L33.9561293,9.11324315 L41.3058299,9.11324315 L41.3058299,14.2340335 L9.44990022,14.2340335 L9.44990022,9.11324315 L16.7996009,9.11324315 L16.7996009,10.3924973 C16.7996009,11.1019362 17.3488411,11.6717515 18.0281644,11.6717515 C18.7038744,11.6717515 19.2531145,11.1019362 19.2531145,10.3924973 L19.2531145,9.11324315 L31.5062291,9.11324315 Z M31.5062291,6.55850838 L31.5062291,5.27925419 C31.5062291,4.56981529 32.0518558,4 32.7311792,4 C33.4032757,4 33.9561293,4.56981529 33.9561293,5.27925419 L33.9561293,6.55850838 L41.3058299,6.55850838 C42.6572498,6.55850838 43.7557302,7.70191257 43.7557302,9.11324315 L43.7557302,42.3851729 C43.7557302,43.7965035 42.6572498,44.9399077 41.3058299,44.9399077 L9.44990022,44.9399077 C8.09486691,44.9399077 7,43.7965035 7,42.3851729 L7,9.11324315 C7,7.70191257 8.09486691,6.55850838 9.44990022,6.55850838 L16.7996009,6.55850838 L16.7996009,5.27925419 C16.7996009,4.56981529 17.3488411,4 18.0281644,4 C18.7038744,4 19.2531145,4.56981529 19.2531145,5.27925419 L19.2531145,6.55850838 L31.5062291,6.55850838 Z"
+                    fill={
+                      Array [
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                      ]
+                    }
+                    fillOpacity={1}
+                    fillRule={1}
+                    matrix={
+                      Array [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                      ]
+                    }
+                    name="Fill-604"
+                    opacity={1}
+                    originX={0}
+                    originY={0}
+                    propList={Array []}
+                    rotation={0}
+                    scaleX={1}
+                    scaleY={1}
+                    skewX={0}
+                    skewY={0}
+                    stroke={null}
+                    strokeDasharray={null}
+                    strokeDashoffset={null}
+                    strokeLinecap={0}
+                    strokeLinejoin={0}
+                    strokeMiterlimit={4}
+                    strokeOpacity={1}
+                    strokeWidth="1"
+                    x={0}
+                    y={0}
+                  />
+                </RNSVGGroup>
+              </RNSVGGroup>
+            </RNSVGSvgView>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontSize": 12,
+                "textAlign": "center",
+              }
+            }
+          >
+            Eventos
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "maxWidth": 120,
+              "minWidth": 80,
+              "opacity": 1,
+              "width": 240,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "borderRadius": 96,
+                  "height": 192,
+                  "justifyContent": "center",
+                  "margin": 10,
+                  "width": 192,
+                },
+                false,
+              ]
+            }
+          >
+            <RNSVGSvgView
+              align="xMidYMid"
+              meetOrSlice={0}
+              minX={0}
+              minY={0}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "flex": 0,
+                    "height": 120,
+                    "width": 120,
+                  },
+                ]
+              }
+              vbHeight={120}
+              vbWidth={120}
+            >
+              <RNSVGGroup
+                fill={null}
+                fillOpacity={1}
+                fillRule={1}
+                font={Object {}}
+                matrix={
+                  Array [
+                    2.3529411764705883,
+                    0,
+                    0,
+                    2.3529411764705883,
+                    0,
+                    0,
+                  ]
+                }
+                name="Page-1"
+                opacity={1}
+                originX={0}
+                originY={0}
+                propList={
+                  Array [
+                    "stroke",
+                    "fill",
+                  ]
+                }
+                rotation={0}
+                scaleX={2.3529411764705883}
+                scaleY={2.3529411764705883}
+                skewX={0}
+                skewY={0}
+                stroke={null}
+                strokeDasharray={null}
+                strokeDashoffset={null}
+                strokeLinecap={0}
+                strokeLinejoin={0}
+                strokeMiterlimit={4}
+                strokeOpacity={1}
+                strokeWidth="1"
+                x={0}
+                y={0}
+              >
+                <RNSVGGroup
+                  fill={
+                    Array [
+                      0,
+                      0.9686274509803922,
+                      0.4117647058823529,
+                      0.07450980392156863,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  font={Object {}}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  name="Artboard"
                   opacity={1}
                   originX={0}
                   originY={0}
@@ -1034,9 +949,1782 @@ exports[`renders Category selector screen 1`] = `
                   strokeWidth="1"
                   x={0}
                   y={0}
-                />
+                >
+                  <RNSVGGroup
+                    fill={
+                      Array [
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                      ]
+                    }
+                    fillOpacity={1}
+                    fillRule={1}
+                    font={Object {}}
+                    matrix={
+                      Array [
+                        1,
+                        0,
+                        0,
+                        1,
+                        4,
+                        1,
+                      ]
+                    }
+                    name="Group"
+                    opacity={1}
+                    originX={0}
+                    originY={0}
+                    propList={Array []}
+                    rotation={0}
+                    scaleX={1}
+                    scaleY={1}
+                    skewX={0}
+                    skewY={0}
+                    stroke={null}
+                    strokeDasharray={null}
+                    strokeDashoffset={null}
+                    strokeLinecap={0}
+                    strokeLinejoin={0}
+                    strokeMiterlimit={4}
+                    strokeOpacity={1}
+                    strokeWidth="1"
+                    x={4}
+                    y={1}
+                  >
+                    <RNSVGPath
+                      d="M16.9603487,6.70194041 C16.2159838,6.70194041 15.6125423,7.33590709 15.6125423,8.10949738 C15.6125423,8.88686129 16.2159838,9.51705435 16.9603487,9.51705435 C17.7047137,9.51705435 18.3081552,8.88686129 18.3081552,8.10949738 C18.3081552,7.33590709 17.7047137,6.70194041 16.9603487,6.70194041"
+                      fill={
+                        Array [
+                          0,
+                          0.9686274509803922,
+                          0.4117647058823529,
+                          0.07450980392156863,
+                          1,
+                        ]
+                      }
+                      fillOpacity={1}
+                      fillRule={1}
+                      matrix={
+                        Array [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0,
+                        ]
+                      }
+                      name="Fill-618"
+                      opacity={1}
+                      originX={0}
+                      originY={0}
+                      propList={
+                        Array [
+                          "stroke",
+                          "fill",
+                        ]
+                      }
+                      rotation={0}
+                      scaleX={1}
+                      scaleY={1}
+                      skewX={0}
+                      skewY={0}
+                      stroke={null}
+                      strokeDasharray={null}
+                      strokeDashoffset={null}
+                      strokeLinecap={0}
+                      strokeLinejoin={0}
+                      strokeMiterlimit={4}
+                      strokeOpacity={1}
+                      strokeWidth="1"
+                      x={0}
+                      y={0}
+                    />
+                    <RNSVGPath
+                      d="M21.2848924,39.8380202 L21.2848924,30.6266353 C21.2848924,30.3738033 21.2198508,30.124745 21.093381,29.9096492 L17.498026,23.6454546 L20.8874159,23.524699 C21.6281675,23.4982838 22.2099284,22.8492226 22.1846345,22.0756324 C22.1593405,21.3284573 21.555899,20.7209059 20.8404414,20.7209059 L20.8404414,20.486942 L20.836828,20.486942 L20.7970804,20.7209059 L8.13564915,21.1624184 L4.53306726,19.5020295 L4.51500015,19.3737267 C4.12475055,16.97371 3.63693856,13.9472739 3.30450372,11.8189572 L3.28643661,11.7019752 L3.36954532,11.6151822 L6.55297024,8.29063072 C6.610785,8.22647933 6.65775948,8.16610155 6.70112055,8.10195016 L6.75532188,8.01893072 L6.84927086,8.00006266 L11.4527707,7.17741542 C11.669576,7.13967931 11.8791545,7.04156542 12.0525988,6.90194181 L16.4176127,3.33210563 L20.5838885,3.33210563 L20.5585945,3.59625841 C20.3706966,5.60004595 20.3201087,9.35101546 22.0581647,11.9132975 C22.1340466,12.0265058 22.2207687,12.1246197 22.3219445,12.2038655 C22.8242102,12.6189627 25.4403279,14.6869017 27.6589691,14.6869017 C27.6951033,14.6831281 27.752918,14.6869017 27.8035059,14.6831281 C30.9363429,14.5548253 32.4865011,12.0944308 33.2380929,10.0566808 L33.39347,9.63026269 L41.0141773,21.419024 L40.891321,21.5586476 L22.7085807,41.6418063 L21.2848924,39.8380202 Z M23.2614343,3.54342786 L23.2867282,3.33210563 L27.6806496,3.33210563 L31.2796181,6.60382652 L31.2651644,6.7321293 C31.073653,8.24534739 30.3473551,11.7661266 27.6987167,11.879335 L27.6951033,11.879335 C26.6580511,11.879335 24.945289,10.7510252 24.1792435,10.1585683 L24.1250422,10.0906433 C22.9109323,8.07176127 23.1168974,4.8415501 23.2614343,3.54342786 L23.2614343,3.54342786 Z M22.6399257,45.1663592 C23.0048813,45.1663592 23.3626101,45.0078675 23.6155497,44.7286203 L43.7061768,22.5322393 C44.1434009,22.0492171 44.2012157,21.332231 43.8471003,20.7850573 L33.7945599,5.23023205 C33.7801062,5.21891122 33.7620391,5.19626955 33.7475854,5.1774015 C33.7078377,5.12079733 33.6572498,5.05664594 33.5994351,5.00004177 L33.556074,4.95475844 L29.0645903,0.871711144 C28.822491,0.649068085 28.5081233,0.524538916 28.1829153,0.524538916 L15.9550947,0.524538916 C15.6587941,0.524538916 15.3661069,0.630200029 15.127621,0.82642781 L10.6072299,4.48305704 L3.61164461,5.73589595 L3.02627022,5.79250012 C2.96122862,5.80004734 2.89618702,5.81136818 2.83114542,5.83023623 C1.30266785,6.23023902 0.240321737,7.65666404 0.240321737,9.2981849 C0.240321737,9.44912935 0.240321737,9.9057363 2.00728517,20.7171323 C2.08316704,21.1775129 2.37585423,21.5699685 2.79139778,21.7624226 L7.33346943,23.8605504 C7.49968685,23.9397963 7.6875848,23.9775324 7.8827096,23.9775324 L14.4266171,23.7511157 L18.6001197,31.0153172 L18.6001197,40.3399105 C18.6001197,40.6682146 18.7085224,40.9814244 18.9036472,41.2304827 L21.6028735,44.653148 C21.8449728,44.9625841 22.206315,45.1512647 22.5929512,45.1625855 L22.6399257,45.4040967 L22.6399257,45.4040967 L22.6399257,45.1663592 Z"
+                      fill={
+                        Array [
+                          0,
+                          0.9686274509803922,
+                          0.4117647058823529,
+                          0.07450980392156863,
+                          1,
+                        ]
+                      }
+                      fillOpacity={1}
+                      fillRule={1}
+                      matrix={
+                        Array [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0,
+                        ]
+                      }
+                      name="Fill-616"
+                      opacity={1}
+                      originX={0}
+                      originY={0}
+                      propList={
+                        Array [
+                          "stroke",
+                          "fill",
+                        ]
+                      }
+                      rotation={0}
+                      scaleX={1}
+                      scaleY={1}
+                      skewX={0}
+                      skewY={0}
+                      stroke={null}
+                      strokeDasharray={null}
+                      strokeDashoffset={null}
+                      strokeLinecap={0}
+                      strokeLinejoin={0}
+                      strokeMiterlimit={4}
+                      strokeOpacity={1}
+                      strokeWidth="1"
+                      x={0}
+                      y={0}
+                    />
+                  </RNSVGGroup>
+                </RNSVGGroup>
+              </RNSVGGroup>
+            </RNSVGSvgView>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontSize": 12,
+                "textAlign": "center",
+              }
+            }
+          >
+            Mascotas
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "maxWidth": 120,
+              "minWidth": 80,
+              "opacity": 1,
+              "width": 240,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "borderRadius": 96,
+                  "height": 192,
+                  "justifyContent": "center",
+                  "margin": 10,
+                  "width": 192,
+                },
+                false,
+              ]
+            }
+          >
+            <RNSVGSvgView
+              align="xMidYMid"
+              meetOrSlice={0}
+              minX={0}
+              minY={0}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "flex": 0,
+                    "height": 120,
+                    "width": 120,
+                  },
+                ]
+              }
+              vbHeight={120}
+              vbWidth={120}
+            >
+              <RNSVGGroup
+                fill={null}
+                fillOpacity={1}
+                fillRule={0}
+                font={Object {}}
+                matrix={
+                  Array [
+                    2.3529411764705883,
+                    0,
+                    0,
+                    2.3529411764705883,
+                    0,
+                    3,
+                  ]
+                }
+                name="Page-1"
+                opacity={1}
+                originX={0}
+                originY={0}
+                propList={
+                  Array [
+                    "stroke",
+                    "strokeWidth",
+                    "fill",
+                    "fillRule",
+                  ]
+                }
+                rotation={0}
+                scaleX={2.3529411764705883}
+                scaleY={2.3529411764705883}
+                skewX={0}
+                skewY={0}
+                stroke={null}
+                strokeDasharray={null}
+                strokeDashoffset={null}
+                strokeLinecap={0}
+                strokeLinejoin={0}
+                strokeMiterlimit={4}
+                strokeOpacity={1}
+                strokeWidth="1"
+                x={0}
+                y={3}
+              >
+                <RNSVGGroup
+                  fill={
+                    Array [
+                      0,
+                      0.9686274509803922,
+                      0.4117647058823529,
+                      0.07450980392156863,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  font={Object {}}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  name="Artboard"
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={
+                    Array [
+                      "fill",
+                    ]
+                  }
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                >
+                  <RNSVGPath
+                    d="M35.772821,7.81888755 C31.1512541,7.81888755 27.3680011,11.5547626 27.0211126,16.2944183 L26.9885918,16.2944183 C26.9885918,17.0717822 26.3779234,17.7057488 25.6335584,17.7057488 C24.8855801,17.7057488 24.2821386,17.0717822 24.2821386,16.2944183 L24.2496178,16.2944183 C23.8991158,11.5547626 20.1194762,7.81888755 15.4942959,7.81888755 C10.8691155,7.81888755 7.08586252,11.5547626 6.73897399,16.2944183 L6.70645319,16.2944183 C6.70645319,18.21896 7.32434838,19.9963308 8.35778712,21.4189822 C9.8392902,23.449185 14.2585055,27.5661948 13.9838854,27.5435532 L25.6335584,39.7096756 L37.2868449,27.5435532 C37.0086114,27.5661948 40.7774107,23.7888101 42.2516869,22.2152142 C43.6789887,20.6869017 44.5606637,18.6000947 44.5606637,16.2944183 L44.5245295,16.2944183 C44.1812544,11.5547626 40.4016148,7.81888755 35.772821,7.81888755 L35.772821,7.81888755 Z M47.2635035,16.2944183 L47.2635035,16.2944183 C47.2635035,19.4114211 46.0566205,22.2340822 44.0945322,24.2793795 L44.1631873,24.3510781 L26.5911153,42.7059229 C26.3454026,42.9587548 26.0057409,43.1172465 25.6335584,43.1172465 C25.2649894,43.1172465 24.9253277,42.9587548 24.679615,42.7059229 L7.10031621,24.3510781 L7.16897123,24.2793795 C5.21049642,22.2340822 4,19.4114211 4,16.2944183 L4.03974764,16.2944183 C4.38663617,9.99248759 9.37677217,5 15.4942959,5 C19.8882172,5 23.6967642,7.56982921 25.6335584,11.3547612 C27.5667393,7.56982921 31.3825131,5 35.772821,5 C41.8939581,5 46.8768673,9.99248759 47.2309827,16.2944183 L47.2635035,16.2944183 Z"
+                    fill={
+                      Array [
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                      ]
+                    }
+                    fillOpacity={1}
+                    fillRule={1}
+                    matrix={
+                      Array [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                      ]
+                    }
+                    name="Fill-607"
+                    opacity={1}
+                    originX={0}
+                    originY={0}
+                    propList={Array []}
+                    rotation={0}
+                    scaleX={1}
+                    scaleY={1}
+                    skewX={0}
+                    skewY={0}
+                    stroke={null}
+                    strokeDasharray={null}
+                    strokeDashoffset={null}
+                    strokeLinecap={0}
+                    strokeLinejoin={0}
+                    strokeMiterlimit={4}
+                    strokeOpacity={1}
+                    strokeWidth="1"
+                    x={0}
+                    y={0}
+                  />
+                </RNSVGGroup>
+              </RNSVGGroup>
+            </RNSVGSvgView>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontSize": 12,
+                "textAlign": "center",
+              }
+            }
+          >
+            Recomendaciones
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "maxWidth": 120,
+              "minWidth": 80,
+              "opacity": 1,
+              "width": 240,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "borderRadius": 96,
+                  "height": 192,
+                  "justifyContent": "center",
+                  "margin": 10,
+                  "width": 192,
+                },
+                false,
+              ]
+            }
+          >
+            <RNSVGSvgView
+              align="xMidYMid"
+              meetOrSlice={0}
+              minX={0}
+              minY={0}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "flex": 0,
+                    "height": 120,
+                    "width": 120,
+                  },
+                ]
+              }
+              vbHeight={120}
+              vbWidth={120}
+            >
+              <RNSVGGroup
+                fill={null}
+                fillOpacity={1}
+                fillRule={1}
+                font={Object {}}
+                matrix={
+                  Array [
+                    2.3529411764705883,
+                    0,
+                    0,
+                    2.3529411764705883,
+                    0,
+                    0,
+                  ]
+                }
+                name="Page-1"
+                opacity={1}
+                originX={0}
+                originY={0}
+                propList={
+                  Array [
+                    "stroke",
+                    "strokeWidth",
+                    "fill",
+                  ]
+                }
+                rotation={0}
+                scaleX={2.3529411764705883}
+                scaleY={2.3529411764705883}
+                skewX={0}
+                skewY={0}
+                stroke={null}
+                strokeDasharray={null}
+                strokeDashoffset={null}
+                strokeLinecap={0}
+                strokeLinejoin={0}
+                strokeMiterlimit={4}
+                strokeOpacity={1}
+                strokeWidth="1"
+                x={0}
+                y={0}
+              >
+                <RNSVGGroup
+                  fill={
+                    Array [
+                      0,
+                      0.9686274509803922,
+                      0.4117647058823529,
+                      0.07450980392156863,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  font={Object {}}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  name="Artboard"
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={
+                    Array [
+                      "fill",
+                    ]
+                  }
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                >
+                  <RNSVGPath
+                    d="M2.41737942,22.1548086 L8.90347219,11.4453 L30.6056857,11.4453 L36.6581678,20.7510252 L43.9392134,21.8944294 C46.3385257,21.8944294 48.2897737,23.9321794 48.2897737,26.4378573 L48.2897737,31.8152532 L47.6574248,31.8152532 C47.0901175,28.6001365 44.398118,26.2152142 41.2580542,26.2152142 C38.038495,26.2152142 35.3428821,28.6001365 34.8514567,31.8152532 L16.8782949,31.8152532 C16.3109876,28.6001365 13.6189881,26.2152142 10.4789243,26.2152142 C7.25936511,26.2152142 4.56375218,28.6001365 4.06871335,31.8152532 L2.42099284,31.8152532 L2.42099284,22.1661294 L2.41737942,22.1548086 Z M10.399429,28.7397601 C12.7120191,28.7397601 14.5909987,30.7058115 14.5909987,33.1322435 C14.6271329,34.2492324 14.2224296,35.320938 13.4563841,36.1473588 C12.6578178,37.0077422 11.5448838,37.4983116 10.399429,37.4983116 C8.08683878,37.4983116 6.20785926,35.5322602 6.20785926,33.1209226 C6.20785926,30.7058115 8.08683878,28.7397601 10.399429,28.7397601 L10.399429,28.7397601 Z M41.2580542,28.7397601 C43.5670309,28.7397601 45.4496239,30.7058115 45.4496239,33.1209226 C45.4496239,35.5322602 43.5670309,37.4983116 41.2580542,37.4983116 C38.945464,37.4983116 37.0628711,35.5322602 37.0628711,33.1209226 C37.0628711,30.7058115 38.945464,28.7397601 41.2580542,28.7397601 L41.2580542,28.7397601 Z M43.9356,19.4566766 L43.9247597,19.4566766 L37.8144629,18.3698766 L31.7186197,9 L7.7796979,9 L0,21.3887655 L0,34.2605532 L4.00005833,34.2605532 C4.56375218,37.4794436 7.25936511,39.8605922 10.399429,39.8605922 C13.6189881,39.8605922 16.314601,37.4794436 16.8060264,34.2605532 L34.7791882,34.2605532 C35.3428821,37.4794436 38.038495,39.8605922 41.1785589,39.8605922 C44.398118,39.8605922 47.093731,37.4794436 47.5851564,34.2605532 L50.551776,34.2605532 L50.551776,26.4378573 C50.551776,22.5887739 47.556249,19.4566766 43.9356,19.4566766 L43.9356,19.4566766 Z"
+                    fill={
+                      Array [
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                      ]
+                    }
+                    fillOpacity={1}
+                    fillRule={1}
+                    matrix={
+                      Array [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                      ]
+                    }
+                    name="Fill-621"
+                    opacity={1}
+                    originX={0}
+                    originY={0}
+                    propList={Array []}
+                    rotation={0}
+                    scaleX={1}
+                    scaleY={1}
+                    skewX={0}
+                    skewY={0}
+                    stroke={null}
+                    strokeDasharray={null}
+                    strokeDashoffset={null}
+                    strokeLinecap={0}
+                    strokeLinejoin={0}
+                    strokeMiterlimit={4}
+                    strokeOpacity={1}
+                    strokeWidth="1"
+                    x={0}
+                    y={0}
+                  />
+                </RNSVGGroup>
+              </RNSVGGroup>
+            </RNSVGSvgView>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontSize": 12,
+                "textAlign": "center",
+              }
+            }
+          >
+            Compartir Auto
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "maxWidth": 120,
+              "minWidth": 80,
+              "opacity": 1,
+              "width": 240,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "borderRadius": 96,
+                  "height": 192,
+                  "justifyContent": "center",
+                  "margin": 10,
+                  "width": 192,
+                },
+                false,
+              ]
+            }
+          >
+            <RNSVGSvgView
+              align="xMidYMid"
+              meetOrSlice={0}
+              minX={0}
+              minY={0}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "flex": 0,
+                    "height": 120,
+                    "width": 120,
+                  },
+                ]
+              }
+              vbHeight={120}
+              vbWidth={120}
+            >
+              <RNSVGGroup
+                fill={null}
+                fillOpacity={1}
+                fillRule={1}
+                font={Object {}}
+                matrix={
+                  Array [
+                    2.3529411764705883,
+                    0,
+                    0,
+                    2.3529411764705883,
+                    0,
+                    0,
+                  ]
+                }
+                name="Page-1"
+                opacity={1}
+                originX={0}
+                originY={0}
+                propList={
+                  Array [
+                    "stroke",
+                    "strokeWidth",
+                    "fill",
+                  ]
+                }
+                rotation={0}
+                scaleX={2.3529411764705883}
+                scaleY={2.3529411764705883}
+                skewX={0}
+                skewY={0}
+                stroke={null}
+                strokeDasharray={null}
+                strokeDashoffset={null}
+                strokeLinecap={0}
+                strokeLinejoin={0}
+                strokeMiterlimit={4}
+                strokeOpacity={1}
+                strokeWidth="1"
+                x={0}
+                y={0}
+              >
+                <RNSVGGroup
+                  fill={
+                    Array [
+                      0,
+                      0.9686274509803922,
+                      0.4117647058823529,
+                      0.07450980392156863,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  font={Object {}}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  name="Artboard"
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={
+                    Array [
+                      "fill",
+                    ]
+                  }
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                >
+                  <RNSVGPath
+                    d="M33.118675,27.1435643 L17.703816,27.1435643 C16.9991987,27.1435643 16.4210512,26.5435601 16.4210512,25.8001587 C16.4210512,25.0643046 16.9991987,24.4605268 17.703816,24.4605268 L33.118675,24.4605268 C33.8305191,24.4605268 34.4014398,25.0643046 34.4014398,25.8001587 C34.4014398,26.5435601 33.8305191,27.1435643 33.118675,27.1435643 L33.118675,27.1435643 Z M30.5495318,32.5096394 L20.2729592,32.5096394 C19.561115,32.5096394 18.9901943,31.9134088 18.9901943,31.1700074 C18.9901943,30.426606 19.561115,29.8266019 20.2729592,29.8266019 L30.5495318,29.8266019 C31.261376,29.8266019 31.8322967,30.426606 31.8322967,31.1700074 C31.8322967,31.9134088 31.261376,32.5096394 30.5495318,32.5096394 L30.5495318,32.5096394 Z M33.118675,37.8719409 L17.703816,37.8719409 C16.9991987,37.8719409 16.4210512,37.2757103 16.4210512,36.5360825 C16.4210512,35.7926811 16.9991987,35.192677 17.703816,35.192677 L33.118675,35.192677 C33.8305191,35.192677 34.4014398,35.7926811 34.4014398,36.5360825 C34.4014398,37.2757103 33.8305191,37.8719409 33.118675,37.8719409 L33.118675,37.8719409 Z M38.2569613,16.4114141 L30.5495318,16.4114141 C29.1294569,16.4114141 27.9803886,15.2114058 27.9803886,13.7283766 L27.9803886,5.68303755 L12.5691432,5.68303755 L12.5691432,43.2417896 L38.2569613,43.2417896 L38.2569613,16.4114141 Z M30.5495318,5.68303755 L30.5495318,13.7283766 L38.2569613,13.7283766 L30.5495318,5.68303755 Z M38.2569613,45.9248271 L12.5691432,45.9248271 C11.1454548,45.9248271 10,44.7210452 10,43.2417896 L10,5.68303755 C10,4.20378197 11.1454548,3 12.5691432,3 L27.9803886,3 L30.5495318,3 L40.822491,13.7283766 L40.822491,16.4114141 L40.822491,20.4378573 L40.822491,43.2417896 C40.822491,44.7210452 39.6770362,45.9248271 38.2569613,45.9248271 L38.2569613,45.9248271 Z"
+                    fill={
+                      Array [
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                      ]
+                    }
+                    fillOpacity={1}
+                    fillRule={1}
+                    matrix={
+                      Array [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                      ]
+                    }
+                    name="Fill-610"
+                    opacity={1}
+                    originX={0}
+                    originY={0}
+                    propList={Array []}
+                    rotation={0}
+                    scaleX={1}
+                    scaleY={1}
+                    skewX={0}
+                    skewY={0}
+                    stroke={null}
+                    strokeDasharray={null}
+                    strokeDashoffset={null}
+                    strokeLinecap={0}
+                    strokeLinejoin={0}
+                    strokeMiterlimit={4}
+                    strokeOpacity={1}
+                    strokeWidth="1"
+                    x={0}
+                    y={0}
+                  />
+                </RNSVGGroup>
+              </RNSVGGroup>
+            </RNSVGSvgView>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontSize": 12,
+                "textAlign": "center",
+              }
+            }
+          >
+            Anuncios
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "maxWidth": 120,
+              "minWidth": 80,
+              "opacity": 1,
+              "width": 240,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "borderRadius": 96,
+                  "height": 192,
+                  "justifyContent": "center",
+                  "margin": 10,
+                  "width": 192,
+                },
+                false,
+              ]
+            }
+          >
+            <RNSVGSvgView
+              align="xMidYMid"
+              meetOrSlice={0}
+              minX={0}
+              minY={0}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "flex": 0,
+                    "height": 120,
+                    "width": 120,
+                  },
+                ]
+              }
+              vbHeight={120}
+              vbWidth={120}
+            >
+              <RNSVGGroup
+                fill={null}
+                fillOpacity={1}
+                fillRule={1}
+                font={Object {}}
+                matrix={
+                  Array [
+                    2.3529411764705883,
+                    0,
+                    0,
+                    2.3529411764705883,
+                    0,
+                    0,
+                  ]
+                }
+                name="Page-1"
+                opacity={1}
+                originX={0}
+                originY={0}
+                propList={
+                  Array [
+                    "stroke",
+                    "fill",
+                  ]
+                }
+                rotation={0}
+                scaleX={2.3529411764705883}
+                scaleY={2.3529411764705883}
+                skewX={0}
+                skewY={0}
+                stroke={null}
+                strokeDasharray={null}
+                strokeDashoffset={null}
+                strokeLinecap={0}
+                strokeLinejoin={0}
+                strokeMiterlimit={4}
+                strokeOpacity={1}
+                strokeWidth="1"
+                x={0}
+                y={0}
+              >
+                <RNSVGGroup
+                  fill={
+                    Array [
+                      0,
+                      0.9686274509803922,
+                      0.4117647058823529,
+                      0.07450980392156863,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  font={Object {}}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  name="Artboard"
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={
+                    Array [
+                      "fill",
+                    ]
+                  }
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                >
+                  <RNSVGPath
+                    d="M31.8350505,39.007777 C35.5785558,39.007777 38.6066036,35.8417172 38.6066036,31.9360296 C38.6066036,28.0265684 35.5785558,24.8605087 31.8350505,24.8605087 C28.0951585,24.8605087 25.0634974,28.0265684 25.0634974,31.9360296 C25.0634974,35.8417172 28.0951585,39.007777 31.8350505,39.007777 L31.8350505,39.007777 Z M31.8350505,22.5057753 C36.8251865,22.5057753 40.8649924,26.7246726 40.8649924,31.9360296 C40.8649924,34.1134033 40.1495349,36.1134172 38.960719,37.7096547 L42.7945599,41.7134562 C43.0005249,41.9210048 43.1233813,42.2153465 43.1233813,42.5474243 C43.1233813,43.1927118 42.6211156,43.7247909 41.9959936,43.7247909 C41.6852393,43.7247909 41.3997789,43.5889409 41.1974273,43.3813923 L37.3671998,39.3775909 C35.8351088,40.6191089 33.9199951,41.366284 31.8350505,41.366284 C26.8449145,41.366284 22.8051085,37.1436131 22.8051085,31.9360296 C22.8051085,26.7246726 26.8449145,22.5057753 31.8350505,22.5057753 L31.8350505,22.5057753 Z M17.1573297,10.7132404 C17.7824517,10.7132404 18.2883308,11.2415459 18.2883308,11.890607 C18.2883308,12.5434418 17.7824517,13.0717473 17.1573297,13.0717473 C16.5358211,13.0717473 16.029942,12.5434418 16.029942,11.890607 C16.029942,11.2415459 16.5358211,10.7132404 17.1573297,10.7132404 L17.1573297,10.7132404 Z M12.6441654,10.7132404 C13.265674,10.7132404 13.7751665,11.2415459 13.7751665,11.890607 C13.7751665,12.5434418 13.265674,13.0717473 12.6441654,13.0717473 C12.0190434,13.0717473 11.5167777,12.5434418 11.5167777,11.890607 C11.5167777,11.2415459 12.0190434,10.7132404 12.6441654,10.7132404 L12.6441654,10.7132404 Z M40.8649924,8.35850699 L9.25838885,8.35850699 L9.25838885,15.4302543 L40.8649924,15.4302543 L40.8649924,8.35850699 Z M40.8649924,24.8605087 L40.8649924,17.7887613 L9.25838885,17.7887613 L9.25838885,24.8605087 L22.8195622,24.8605087 C22.295616,25.5888156 21.8439382,26.3775004 21.4934363,27.2190157 L9.25838885,27.2190157 L9.25838885,34.290763 L20.7707518,34.290763 C20.9333558,35.1134102 21.1790685,35.8983214 21.4934363,36.64927 L9.25838885,36.64927 C8.0117582,36.64927 7,35.5964325 7,34.290763 L7,8.35850699 C7,7.05661113 8.0117582,6 9.25838885,6 L40.8649924,6 C42.1116231,6 43.1233813,7.05661113 43.1233813,8.35850699 L43.1233813,31.9360296 C43.1233813,29.2794074 42.2742271,26.8303337 40.8505388,24.8605087 L40.8649924,24.8605087 Z M16.029942,30.7548893 C16.029942,30.1020546 16.5358211,29.5775226 17.1573297,29.5775226 C17.7824517,29.5775226 18.2883308,30.1020546 18.2883308,30.7548893 C18.2883308,31.4039504 17.7824517,31.9360296 17.1573297,31.9360296 C16.5358211,31.9360296 16.029942,31.4039504 16.029942,30.7548893 L16.029942,30.7548893 Z M11.5167777,30.7548893 C11.5167777,30.1020546 12.0190434,29.5775226 12.6441654,29.5775226 C13.265674,29.5775226 13.7751665,30.1020546 13.7751665,30.7548893 C13.7751665,31.4039504 13.265674,31.9360296 12.6441654,31.9360296 C12.0190434,31.9360296 11.5167777,31.4039504 11.5167777,30.7548893 L11.5167777,30.7548893 Z M16.029942,21.324635 C16.029942,20.6718003 16.5358211,20.1472683 17.1573297,20.1472683 C17.7824517,20.1472683 18.2883308,20.6718003 18.2883308,21.324635 C18.2883308,21.9736961 17.7824517,22.5057753 17.1573297,22.5057753 C16.5358211,22.5057753 16.029942,21.9736961 16.029942,21.324635 L16.029942,21.324635 Z M11.5167777,21.324635 C11.5167777,20.6718003 12.0190434,20.1472683 12.6441654,20.1472683 C13.265674,20.1472683 13.7751665,20.6718003 13.7751665,21.324635 C13.7751665,21.9736961 13.265674,22.5057753 12.6441654,22.5057753 C12.0190434,22.5057753 11.5167777,21.9736961 11.5167777,21.324635 L11.5167777,21.324635 Z"
+                    fill={
+                      Array [
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                      ]
+                    }
+                    fillOpacity={1}
+                    fillRule={1}
+                    matrix={
+                      Array [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                      ]
+                    }
+                    name="Fill-613"
+                    opacity={1}
+                    originX={0}
+                    originY={0}
+                    propList={Array []}
+                    rotation={0}
+                    scaleX={1}
+                    scaleY={1}
+                    skewX={0}
+                    skewY={0}
+                    stroke={null}
+                    strokeDasharray={null}
+                    strokeDashoffset={null}
+                    strokeLinecap={0}
+                    strokeLinejoin={0}
+                    strokeMiterlimit={4}
+                    strokeOpacity={1}
+                    strokeWidth="1"
+                    x={0}
+                    y={0}
+                  />
+                </RNSVGGroup>
+              </RNSVGGroup>
+            </RNSVGSvgView>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontSize": 12,
+                "textAlign": "center",
+              }
+            }
+          >
+            Compra / Vende
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "maxWidth": 120,
+              "minWidth": 80,
+              "opacity": 1,
+              "width": 240,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "borderRadius": 96,
+                  "height": 192,
+                  "justifyContent": "center",
+                  "margin": 10,
+                  "width": 192,
+                },
+                false,
+              ]
+            }
+          >
+            <RNSVGSvgView
+              align="xMidYMid"
+              meetOrSlice={0}
+              minX={0}
+              minY={0}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "flex": 0,
+                    "height": 120,
+                    "width": 120,
+                  },
+                ]
+              }
+              vbHeight={120}
+              vbWidth={120}
+            >
+              <RNSVGGroup
+                fill={
+                  Array [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                  ]
+                }
+                fillOpacity={1}
+                fillRule={1}
+                font={Object {}}
+                matrix={
+                  Array [
+                    2.3076923076923075,
+                    0,
+                    0,
+                    2.3076923076923075,
+                    0,
+                    0,
+                  ]
+                }
+                opacity={1}
+                originX={0}
+                originY={0}
+                propList={Array []}
+                rotation={0}
+                scaleX={2.3076923076923075}
+                scaleY={2.3076923076923075}
+                skewX={0}
+                skewY={0}
+                stroke={null}
+                strokeDasharray={null}
+                strokeDashoffset={null}
+                strokeLinecap={0}
+                strokeLinejoin={0}
+                strokeMiterlimit={4}
+                strokeOpacity={1}
+                strokeWidth="1"
+                x={0}
+                y={0}
+              >
+                <RNSVGGroup
+                  fill={
+                    Array [
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  font={Object {}}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={Array []}
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                >
+                  <RNSVGPath
+                    d="M10.8,32c-1.2,0.4-2.4,0.7-3.7,1.1c0.5,0.3,0.9,0.5,1.4,0.8c-1-3.5-2.1-7-3.1-10.5c-0.3,0.5-0.5,0.9-0.8,1.4 C5.8,24.4,7,24,8.2,23.7c-0.5-0.3-0.9-0.5-1.4-0.8c1,3.5,2.1,7,3.1,10.5c0.4,1.4,2.5,0.8,2.1-0.6c-1-3.5-2.1-7-3.1-10.5 c-0.2-0.6-0.8-0.9-1.4-0.8c-1.2,0.4-2.4,0.7-3.7,1.1C3.4,22.8,3,23.4,3.2,24c1,3.5,2.1,7,3.1,10.5c0.2,0.6,0.8,0.9,1.4,0.8 c1.2-0.4,2.4-0.7,3.7-1.1C12.7,33.8,12.1,31.6,10.8,32z"
+                    fill={
+                      Array [
+                        0,
+                        0.9686274509803922,
+                        0.4117647058823529,
+                        0.07450980392156863,
+                        1,
+                      ]
+                    }
+                    fillOpacity={1}
+                    fillRule={1}
+                    matrix={
+                      Array [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                      ]
+                    }
+                    opacity={1}
+                    originX={0}
+                    originY={0}
+                    propList={
+                      Array [
+                        "fill",
+                      ]
+                    }
+                    rotation={0}
+                    scaleX={1}
+                    scaleY={1}
+                    skewX={0}
+                    skewY={0}
+                    stroke={null}
+                    strokeDasharray={null}
+                    strokeDashoffset={null}
+                    strokeLinecap={0}
+                    strokeLinejoin={0}
+                    strokeMiterlimit={4}
+                    strokeOpacity={1}
+                    strokeWidth="1"
+                    x={0}
+                    y={0}
+                  />
+                  <RNSVGPath
+                    d="M8.5,23.6C15.7,19.3,22.8,15,30,10.7c-0.5-0.2-1.1-0.4-1.6-0.7c2.1,7.2,4.3,14.3,6.4,21.5 c0.4-0.5,0.7-0.9,1.1-1.4c-8.3,0.6-16.5,1.3-24.8,1.9c-1.4,0.1-1.4,2.3,0,2.2c8.3-0.6,16.5-1.3,24.8-1.9c0.7-0.1,1.3-0.7,1.1-1.4 c-2.1-7.2-4.3-14.3-6.4-21.5c-0.2-0.7-1-1-1.6-0.7C21.7,13,14.5,17.4,7.4,21.7C6.2,22.4,7.3,24.3,8.5,23.6L8.5,23.6z"
+                    fill={
+                      Array [
+                        0,
+                        0.9686274509803922,
+                        0.4117647058823529,
+                        0.07450980392156863,
+                        1,
+                      ]
+                    }
+                    fillOpacity={1}
+                    fillRule={1}
+                    matrix={
+                      Array [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                      ]
+                    }
+                    opacity={1}
+                    originX={0}
+                    originY={0}
+                    propList={
+                      Array [
+                        "fill",
+                      ]
+                    }
+                    rotation={0}
+                    scaleX={1}
+                    scaleY={1}
+                    skewX={0}
+                    skewY={0}
+                    stroke={null}
+                    strokeDasharray={null}
+                    strokeDashoffset={null}
+                    strokeLinecap={0}
+                    strokeLinejoin={0}
+                    strokeMiterlimit={4}
+                    strokeOpacity={1}
+                    strokeWidth="1"
+                    x={0}
+                    y={0}
+                  />
+                  <RNSVGPath
+                    d="M7.9,34.6c2.7,2.9,5.5,5.7,8.2,8.6c0.3,0.3,0.7,0.4,1.1,0.3c1-0.3,2-0.6,3.1-0.9c0.7-0.2,1.1-1,0.7-1.6 c-1.9-2.9-3.7-5.8-5.6-8.6c-0.2-0.3-0.6-0.6-1-0.5c-2.2,0.2-4,0.4-6,1c-1.4,0.4-0.8,2.5,0.6,2.1c2-0.6,3.2-0.7,5.4-0.9 c-0.3-0.2-0.6-0.4-1-0.5c1.9,2.9,3.7,5.8,5.6,8.6c0.2-0.5,0.4-1.1,0.7-1.6c-1,0.3-2,0.6-3.1,0.9c0.4,0.1,0.7,0.2,1.1,0.3 c-2.7-2.9-5.5-5.7-8.2-8.6C8.5,32,7,33.6,7.9,34.6z"
+                    fill={
+                      Array [
+                        0,
+                        0.9686274509803922,
+                        0.4117647058823529,
+                        0.07450980392156863,
+                        1,
+                      ]
+                    }
+                    fillOpacity={1}
+                    fillRule={1}
+                    matrix={
+                      Array [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                      ]
+                    }
+                    opacity={1}
+                    originX={0}
+                    originY={0}
+                    propList={
+                      Array [
+                        "fill",
+                      ]
+                    }
+                    rotation={0}
+                    scaleX={1}
+                    scaleY={1}
+                    skewX={0}
+                    skewY={0}
+                    stroke={null}
+                    strokeDasharray={null}
+                    strokeDashoffset={null}
+                    strokeLinecap={0}
+                    strokeLinejoin={0}
+                    strokeMiterlimit={4}
+                    strokeOpacity={1}
+                    strokeWidth="1"
+                    x={0}
+                    y={0}
+                  />
+                </RNSVGGroup>
+                <RNSVGGroup
+                  fill={
+                    Array [
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  font={Object {}}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={Array []}
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                >
+                  <RNSVGGroup
+                    fill={
+                      Array [
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                      ]
+                    }
+                    fillOpacity={1}
+                    fillRule={1}
+                    font={Object {}}
+                    matrix={
+                      Array [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                      ]
+                    }
+                    opacity={1}
+                    originX={0}
+                    originY={0}
+                    propList={Array []}
+                    rotation={0}
+                    scaleX={1}
+                    scaleY={1}
+                    skewX={0}
+                    skewY={0}
+                    stroke={null}
+                    strokeDasharray={null}
+                    strokeDashoffset={null}
+                    strokeLinecap={0}
+                    strokeLinejoin={0}
+                    strokeMiterlimit={4}
+                    strokeOpacity={1}
+                    strokeWidth="1"
+                    x={0}
+                    y={0}
+                  >
+                    <RNSVGPath
+                      d="M42.7,21.7c0.3-1.2,0.2-2.3-0.2-3.4c-0.4-1.1-1.1-2-2.1-2.7c-1-0.7-2-1.1-3.2-1.1c-0.2,0-0.4,0-0.6,0.1 c-0.4,0.1-0.7,0.4-0.8,0.8c-0.2,0.4-0.2,0.7,0,1.1c0.1,0.3,0.3,0.5,0.5,0.7c0.3,0.1,0.5,0.3,0.8,0.3c0.3,0.1,0.6,0.1,0.9,0.2 c0.3,0.1,0.6,0.3,0.9,0.5c0.3,0.3,0.5,0.7,0.7,1.1c0.2,0.5,0.2,0.9,0.2,1.3c-0.1,0.4-0.2,0.7-0.3,1c-0.2,0.3-0.4,0.5-0.6,0.8 c-0.2,0.2-0.3,0.5-0.4,0.8c-0.1,0.3-0.1,0.6,0,0.9c0.1,0.4,0.4,0.7,0.8,0.8c0.4,0.2,0.7,0.2,1.1,0c0.2-0.1,0.4-0.2,0.5-0.3 C41.9,23.9,42.5,22.9,42.7,21.7z"
+                      fill={
+                        Array [
+                          0,
+                          0.9686274509803922,
+                          0.4117647058823529,
+                          0.07450980392156863,
+                          1,
+                        ]
+                      }
+                      fillOpacity={1}
+                      fillRule={1}
+                      matrix={
+                        Array [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0,
+                        ]
+                      }
+                      opacity={1}
+                      originX={0}
+                      originY={0}
+                      propList={
+                        Array [
+                          "fill",
+                        ]
+                      }
+                      rotation={0}
+                      scaleX={1}
+                      scaleY={1}
+                      skewX={0}
+                      skewY={0}
+                      stroke={null}
+                      strokeDasharray={null}
+                      strokeDashoffset={null}
+                      strokeLinecap={0}
+                      strokeLinejoin={0}
+                      strokeMiterlimit={4}
+                      strokeOpacity={1}
+                      strokeWidth="1"
+                      x={0}
+                      y={0}
+                    />
+                    <RNSVGPath
+                      d="M40,25.3c-0.2,0-0.5-0.1-0.7-0.2c-0.4-0.2-0.7-0.5-0.9-1c-0.1-0.4-0.1-0.7,0-1c0.1-0.3,0.3-0.6,0.5-0.8 c0.2-0.2,0.4-0.5,0.5-0.8c0.2-0.2,0.3-0.5,0.3-0.9c0-0.4,0-0.8-0.2-1.2c-0.2-0.5-0.4-0.8-0.7-1c-0.3-0.2-0.5-0.4-0.8-0.5 c-0.3-0.1-0.6-0.2-0.9-0.2c-0.3-0.1-0.6-0.2-0.9-0.3c-0.3-0.2-0.5-0.4-0.7-0.8c-0.2-0.5-0.1-0.9,0.1-1.3c0.2-0.4,0.5-0.7,1-0.9 c0.3-0.1,0.5-0.1,0.7-0.1c1.2,0,2.3,0.4,3.3,1.2c1,0.8,1.7,1.7,2.1,2.9c0.4,1.1,0.5,2.3,0.2,3.6c-0.3,1.2-0.9,2.3-1.8,3.1 c-0.1,0.1-0.3,0.3-0.6,0.4C40.4,25.3,40.2,25.3,40,25.3z M37.2,14.7c-0.1,0-0.3,0-0.4,0.1c-0.3,0.1-0.5,0.3-0.7,0.6 c-0.1,0.3-0.2,0.6,0,0.9c0.1,0.3,0.2,0.4,0.4,0.5c0.2,0.1,0.5,0.2,0.8,0.3c0.3,0.1,0.6,0.1,0.9,0.2c0.4,0.1,0.7,0.3,1,0.6 c0.3,0.3,0.6,0.7,0.8,1.2c0.2,0.5,0.3,1,0.2,1.5c-0.1,0.4-0.2,0.8-0.4,1.1c-0.2,0.3-0.4,0.5-0.6,0.8c-0.2,0.2-0.3,0.5-0.4,0.7 c-0.1,0.2-0.1,0.4,0,0.7c0.1,0.3,0.3,0.6,0.6,0.7c0.3,0.1,0.6,0.2,0.9,0c0.2-0.1,0.3-0.1,0.4-0.2c0.8-0.8,1.4-1.7,1.6-2.8 c0.3-1.1,0.2-2.2-0.2-3.3c-0.4-1.1-1.1-1.9-2-2.6C39.4,15.1,38.4,14.7,37.2,14.7C37.2,14.7,37.2,14.7,37.2,14.7z"
+                      fill={
+                        Array [
+                          0,
+                          1,
+                          1,
+                          1,
+                          1,
+                        ]
+                      }
+                      fillOpacity={1}
+                      fillRule={1}
+                      matrix={
+                        Array [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0,
+                        ]
+                      }
+                      opacity={1}
+                      originX={0}
+                      originY={0}
+                      propList={
+                        Array [
+                          "fill",
+                        ]
+                      }
+                      rotation={0}
+                      scaleX={1}
+                      scaleY={1}
+                      skewX={0}
+                      skewY={0}
+                      stroke={null}
+                      strokeDasharray={null}
+                      strokeDashoffset={null}
+                      strokeLinecap={0}
+                      strokeLinejoin={0}
+                      strokeMiterlimit={4}
+                      strokeOpacity={1}
+                      strokeWidth="1"
+                      x={0}
+                      y={0}
+                    />
+                  </RNSVGGroup>
+                  <RNSVGGroup
+                    fill={
+                      Array [
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                      ]
+                    }
+                    fillOpacity={1}
+                    fillRule={1}
+                    font={Object {}}
+                    matrix={
+                      Array [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                      ]
+                    }
+                    opacity={1}
+                    originX={0}
+                    originY={0}
+                    propList={Array []}
+                    rotation={0}
+                    scaleX={1}
+                    scaleY={1}
+                    skewX={0}
+                    skewY={0}
+                    stroke={null}
+                    strokeDasharray={null}
+                    strokeDashoffset={null}
+                    strokeLinecap={0}
+                    strokeLinejoin={0}
+                    strokeMiterlimit={4}
+                    strokeOpacity={1}
+                    strokeWidth="1"
+                    x={0}
+                    y={0}
+                  >
+                    <RNSVGPath
+                      d="M37.6,8.5c-0.2,0-0.4,0-0.6,0.1c-0.4,0.1-0.7,0.4-0.8,0.8c-0.2,0.4-0.2,0.8-0.1,1.1c0.2,0.6,0.6,0.9,1.3,1 c1,0.1,1.6,0.2,2,0.3c1.4,0.4,2.6,1.1,3.6,2c1,1,1.8,2.1,2.3,3.4c0.5,1.3,0.7,2.7,0.5,4.1c-0.2,1.4-0.6,2.7-1.4,3.9 c-0.2,0.3-0.6,0.8-1.3,1.6c-0.5,0.5-0.6,1-0.4,1.6c0.1,0.4,0.4,0.7,0.8,0.8c0.4,0.2,0.8,0.2,1.2,0c0.2-0.1,0.3-0.2,0.5-0.3 c1.7-1.6,2.8-3.6,3.4-5.9c0.5-2.3,0.4-4.6-0.4-6.8c-0.8-2.2-2.2-4-4.1-5.5C42.1,9.4,39.9,8.6,37.6,8.5z"
+                      fill={
+                        Array [
+                          0,
+                          0.9686274509803922,
+                          0.4117647058823529,
+                          0.07450980392156863,
+                          1,
+                        ]
+                      }
+                      fillOpacity={1}
+                      fillRule={1}
+                      matrix={
+                        Array [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0,
+                        ]
+                      }
+                      opacity={1}
+                      originX={0}
+                      originY={0}
+                      propList={
+                        Array [
+                          "fill",
+                        ]
+                      }
+                      rotation={0}
+                      scaleX={1}
+                      scaleY={1}
+                      skewX={0}
+                      skewY={0}
+                      stroke={null}
+                      strokeDasharray={null}
+                      strokeDashoffset={null}
+                      strokeLinecap={0}
+                      strokeLinejoin={0}
+                      strokeMiterlimit={4}
+                      strokeOpacity={1}
+                      strokeWidth="1"
+                      x={0}
+                      y={0}
+                    />
+                    <RNSVGPath
+                      d="M44.1,29.6c-0.2,0-0.5-0.1-0.7-0.2c-0.4-0.2-0.7-0.5-0.9-1c-0.2-0.7-0.1-1.3,0.4-1.9 c0.6-0.7,1.1-1.2,1.3-1.5c0.8-1.1,1.2-2.4,1.4-3.8c0.2-1.4,0-2.7-0.5-4c-0.5-1.3-1.2-2.4-2.2-3.3c-1-0.9-2.2-1.6-3.5-2 c-0.4-0.1-1-0.2-2-0.3c-0.8-0.1-1.3-0.5-1.5-1.1c-0.2-0.4-0.1-0.9,0.1-1.3c0.2-0.4,0.5-0.7,1-0.9c0.2-0.1,0.5-0.1,0.7-0.1l0,0 c2.4,0.1,4.6,0.9,6.5,2.3c2,1.4,3.4,3.3,4.2,5.6c0.8,2.3,1,4.6,0.4,7c-0.6,2.4-1.7,4.4-3.5,6c-0.2,0.2-0.4,0.3-0.6,0.4 C44.5,29.6,44.3,29.6,44.1,29.6z M37.6,8.8c-0.2,0-0.3,0-0.5,0.1c-0.3,0.1-0.5,0.3-0.7,0.6c-0.1,0.3-0.2,0.6,0,0.9 c0.2,0.5,0.5,0.7,1.1,0.8c1,0.1,1.7,0.2,2,0.4c1.4,0.4,2.6,1.1,3.7,2.1c1.1,1,1.9,2.2,2.4,3.5c0.5,1.4,0.7,2.8,0.5,4.2 c-0.2,1.4-0.7,2.8-1.5,4c-0.2,0.3-0.6,0.9-1.3,1.6c-0.4,0.4-0.5,0.9-0.3,1.3c0.1,0.3,0.3,0.5,0.6,0.7s0.6,0.2,1,0 c0.1-0.1,0.3-0.1,0.4-0.3c1.7-1.6,2.8-3.5,3.3-5.8c0.5-2.3,0.4-4.5-0.4-6.7c-0.8-2.2-2.1-4-4-5.3C42,9.6,39.9,8.9,37.6,8.8 C37.6,8.8,37.6,8.8,37.6,8.8z"
+                      fill={
+                        Array [
+                          0,
+                          1,
+                          1,
+                          1,
+                          1,
+                        ]
+                      }
+                      fillOpacity={1}
+                      fillRule={1}
+                      matrix={
+                        Array [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0,
+                        ]
+                      }
+                      opacity={1}
+                      originX={0}
+                      originY={0}
+                      propList={
+                        Array [
+                          "fill",
+                        ]
+                      }
+                      rotation={0}
+                      scaleX={1}
+                      scaleY={1}
+                      skewX={0}
+                      skewY={0}
+                      stroke={null}
+                      strokeDasharray={null}
+                      strokeDashoffset={null}
+                      strokeLinecap={0}
+                      strokeLinejoin={0}
+                      strokeMiterlimit={4}
+                      strokeOpacity={1}
+                      strokeWidth="1"
+                      x={0}
+                      y={0}
+                    />
+                  </RNSVGGroup>
+                </RNSVGGroup>
+              </RNSVGGroup>
+            </RNSVGSvgView>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontSize": 12,
+                "textAlign": "center",
+              }
+            }
+          >
+            Anuncios administración
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "maxWidth": 120,
+              "minWidth": 80,
+              "opacity": 1,
+              "width": 240,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "borderRadius": 96,
+                  "height": 192,
+                  "justifyContent": "center",
+                  "margin": 10,
+                  "width": 192,
+                },
+                false,
+              ]
+            }
+          >
+            <RNSVGSvgView
+              align="xMidYMid"
+              meetOrSlice={0}
+              minX={0}
+              minY={0}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "flex": 0,
+                    "height": 120,
+                    "width": 120,
+                  },
+                ]
+              }
+              vbHeight={120}
+              vbWidth={120}
+            >
+              <RNSVGGroup
+                fill={
+                  Array [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                  ]
+                }
+                fillOpacity={1}
+                fillRule={1}
+                font={Object {}}
+                matrix={
+                  Array [
+                    2.3076923076923075,
+                    0,
+                    0,
+                    2.3076923076923075,
+                    0,
+                    0,
+                  ]
+                }
+                opacity={1}
+                originX={0}
+                originY={0}
+                propList={Array []}
+                rotation={0}
+                scaleX={2.3076923076923075}
+                scaleY={2.3076923076923075}
+                skewX={0}
+                skewY={0}
+                stroke={null}
+                strokeDasharray={null}
+                strokeDashoffset={null}
+                strokeLinecap={0}
+                strokeLinejoin={0}
+                strokeMiterlimit={4}
+                strokeOpacity={1}
+                strokeWidth="1"
+                x={0}
+                y={0}
+              >
                 <RNSVGPath
-                  d="M21.2848924,39.8380202 L21.2848924,30.6266353 C21.2848924,30.3738033 21.2198508,30.124745 21.093381,29.9096492 L17.498026,23.6454546 L20.8874159,23.524699 C21.6281675,23.4982838 22.2099284,22.8492226 22.1846345,22.0756324 C22.1593405,21.3284573 21.555899,20.7209059 20.8404414,20.7209059 L20.8404414,20.486942 L20.836828,20.486942 L20.7970804,20.7209059 L8.13564915,21.1624184 L4.53306726,19.5020295 L4.51500015,19.3737267 C4.12475055,16.97371 3.63693856,13.9472739 3.30450372,11.8189572 L3.28643661,11.7019752 L3.36954532,11.6151822 L6.55297024,8.29063072 C6.610785,8.22647933 6.65775948,8.16610155 6.70112055,8.10195016 L6.75532188,8.01893072 L6.84927086,8.00006266 L11.4527707,7.17741542 C11.669576,7.13967931 11.8791545,7.04156542 12.0525988,6.90194181 L16.4176127,3.33210563 L20.5838885,3.33210563 L20.5585945,3.59625841 C20.3706966,5.60004595 20.3201087,9.35101546 22.0581647,11.9132975 C22.1340466,12.0265058 22.2207687,12.1246197 22.3219445,12.2038655 C22.8242102,12.6189627 25.4403279,14.6869017 27.6589691,14.6869017 C27.6951033,14.6831281 27.752918,14.6869017 27.8035059,14.6831281 C30.9363429,14.5548253 32.4865011,12.0944308 33.2380929,10.0566808 L33.39347,9.63026269 L41.0141773,21.419024 L40.891321,21.5586476 L22.7085807,41.6418063 L21.2848924,39.8380202 Z M23.2614343,3.54342786 L23.2867282,3.33210563 L27.6806496,3.33210563 L31.2796181,6.60382652 L31.2651644,6.7321293 C31.073653,8.24534739 30.3473551,11.7661266 27.6987167,11.879335 L27.6951033,11.879335 C26.6580511,11.879335 24.945289,10.7510252 24.1792435,10.1585683 L24.1250422,10.0906433 C22.9109323,8.07176127 23.1168974,4.8415501 23.2614343,3.54342786 L23.2614343,3.54342786 Z M22.6399257,45.1663592 C23.0048813,45.1663592 23.3626101,45.0078675 23.6155497,44.7286203 L43.7061768,22.5322393 C44.1434009,22.0492171 44.2012157,21.332231 43.8471003,20.7850573 L33.7945599,5.23023205 C33.7801062,5.21891122 33.7620391,5.19626955 33.7475854,5.1774015 C33.7078377,5.12079733 33.6572498,5.05664594 33.5994351,5.00004177 L33.556074,4.95475844 L29.0645903,0.871711144 C28.822491,0.649068085 28.5081233,0.524538916 28.1829153,0.524538916 L15.9550947,0.524538916 C15.6587941,0.524538916 15.3661069,0.630200029 15.127621,0.82642781 L10.6072299,4.48305704 L3.61164461,5.73589595 L3.02627022,5.79250012 C2.96122862,5.80004734 2.89618702,5.81136818 2.83114542,5.83023623 C1.30266785,6.23023902 0.240321737,7.65666404 0.240321737,9.2981849 C0.240321737,9.44912935 0.240321737,9.9057363 2.00728517,20.7171323 C2.08316704,21.1775129 2.37585423,21.5699685 2.79139778,21.7624226 L7.33346943,23.8605504 C7.49968685,23.9397963 7.6875848,23.9775324 7.8827096,23.9775324 L14.4266171,23.7511157 L18.6001197,31.0153172 L18.6001197,40.3399105 C18.6001197,40.6682146 18.7085224,40.9814244 18.9036472,41.2304827 L21.6028735,44.653148 C21.8449728,44.9625841 22.206315,45.1512647 22.5929512,45.1625855 L22.6399257,45.4040967 L22.6399257,45.4040967 L22.6399257,45.1663592 Z"
+                  d="M12,37.3h7.2l1-5.9h-7L12,37.3z M14.4,32.8h4.2L18,35.9h-4.3L14.4,32.8z"
                   fill={
                     Array [
                       0,
@@ -1058,13 +2746,293 @@ exports[`renders Category selector screen 1`] = `
                       0,
                     ]
                   }
-                  name="Fill-616"
                   opacity={1}
                   originX={0}
                   originY={0}
                   propList={
                     Array [
-                      "stroke",
+                      "fill",
+                    ]
+                  }
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                />
+                <RNSVGPath
+                  d="M21.1 25.6 19.6 26.5 19.5 27.3 15.4 27.3 16 24.5 19.4 24.5 21.5 23.2 21.5 23.1 15 23.1 13.8 28.7 20.6 28.7 z"
+                  fill={
+                    Array [
+                      0,
+                      0.9686274509803922,
+                      0.4117647058823529,
+                      0.07450980392156863,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={
+                    Array [
+                      "fill",
+                    ]
+                  }
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                />
+                <RNSVGPath
+                  d="M21.9 23.5 18.3 25.6 17.3 24.7 16.4 25.2 18 27 22.7 24.2 z"
+                  fill={
+                    Array [
+                      0,
+                      0.9686274509803922,
+                      0.4117647058823529,
+                      0.07450980392156863,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={
+                    Array [
+                      "fill",
+                    ]
+                  }
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                />
+                <RNSVGPath
+                  d="M46.2,11.5l-1.8-2.1c-0.5-0.5-1.3-0.6-1.8-0.2l-1.5,1.3l3.4,4.1l1.5-1.3C46.6,12.9,46.6,12.1,46.2,11.5z"
+                  fill={
+                    Array [
+                      0,
+                      0.9686274509803922,
+                      0.4117647058823529,
+                      0.07450980392156863,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={
+                    Array [
+                      "fill",
+                    ]
+                  }
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                />
+                <RNSVGPath
+                  d="M39.7 19.7 38.2 21 43.1 41.3 7.8 41.3 13 19.7 29 19.7 31.1 18 11.6 18 5.5 43 45.3 43 z"
+                  fill={
+                    Array [
+                      0,
+                      0.9686274509803922,
+                      0.4117647058823529,
+                      0.07450980392156863,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={
+                    Array [
+                      "fill",
+                    ]
+                  }
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                />
+                <RNSVGPath
+                  d="M40.4 11.1 26.5 22.8 30 26.9 37.8 20.3 37.8 20.3 39.5 18.9 43.8 15.2 z"
+                  fill={
+                    Array [
+                      0,
+                      0.9686274509803922,
+                      0.4117647058823529,
+                      0.07450980392156863,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={
+                    Array [
+                      "fill",
+                    ]
+                  }
+                  rotation={0}
+                  scaleX={1}
+                  scaleY={1}
+                  skewX={0}
+                  skewY={0}
+                  stroke={null}
+                  strokeDasharray={null}
+                  strokeDashoffset={null}
+                  strokeLinecap={0}
+                  strokeLinejoin={0}
+                  strokeMiterlimit={4}
+                  strokeOpacity={1}
+                  strokeWidth="1"
+                  x={0}
+                  y={0}
+                />
+                <RNSVGPath
+                  d="M23.7 28.8 29.1 27.5 25.8 23.6 z"
+                  fill={
+                    Array [
+                      0,
+                      0.9686274509803922,
+                      0.4117647058823529,
+                      0.07450980392156863,
+                      1,
+                    ]
+                  }
+                  fillOpacity={1}
+                  fillRule={1}
+                  matrix={
+                    Array [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                    ]
+                  }
+                  opacity={1}
+                  originX={0}
+                  originY={0}
+                  propList={
+                    Array [
                       "fill",
                     ]
                   }
@@ -1085,937 +3053,70 @@ exports[`renders Category selector screen 1`] = `
                   y={0}
                 />
               </RNSVGGroup>
-            </RNSVGGroup>
-          </RNSVGGroup>
-        </RNSVGSvgView>
-      </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "fontSize": 12,
-          }
-        }
-      >
-        Mascotas
-      </Text>
-    </View>
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "maxWidth": 120,
-          "minWidth": 80,
-          "opacity": 1,
-          "width": 240,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderRadius": 96,
-              "height": 192,
-              "justifyContent": "center",
-              "margin": 10,
-              "width": 192,
-            },
-            false,
-          ]
-        }
-      >
-        <RNSVGSvgView
-          align="xMidYMid"
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
-          style={
-            Array [
+            </RNSVGSvgView>
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
               Object {
-                "backgroundColor": "transparent",
-              },
-              undefined,
-              false,
-              Object {
-                "flex": 0,
-                "height": 120,
-                "width": 120,
-              },
-            ]
-          }
-          vbHeight={120}
-          vbWidth={120}
-        >
-          <RNSVGGroup
-            fill={null}
-            fillOpacity={1}
-            fillRule={0}
-            font={Object {}}
-            matrix={
-              Array [
-                2.3529411764705883,
-                0,
-                0,
-                2.3529411764705883,
-                0,
-                3,
-              ]
+                "fontSize": 12,
+                "textAlign": "center",
+              }
             }
-            name="Page-1"
-            opacity={1}
-            originX={0}
-            originY={0}
-            propList={
-              Array [
-                "stroke",
-                "strokeWidth",
-                "fill",
-                "fillRule",
-              ]
-            }
-            rotation={0}
-            scaleX={2.3529411764705883}
-            scaleY={2.3529411764705883}
-            skewX={0}
-            skewY={0}
-            stroke={null}
-            strokeDasharray={null}
-            strokeDashoffset={null}
-            strokeLinecap={0}
-            strokeLinejoin={0}
-            strokeMiterlimit={4}
-            strokeOpacity={1}
-            strokeWidth="1"
-            x={0}
-            y={3}
           >
-            <RNSVGGroup
-              fill={
-                Array [
-                  0,
-                  0.9686274509803922,
-                  0.4117647058823529,
-                  0.07450980392156863,
-                  1,
-                ]
-              }
-              fillOpacity={1}
-              fillRule={1}
-              font={Object {}}
-              matrix={
-                Array [
-                  1,
-                  0,
-                  0,
-                  1,
-                  0,
-                  0,
-                ]
-              }
-              name="Artboard"
-              opacity={1}
-              originX={0}
-              originY={0}
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-              rotation={0}
-              scaleX={1}
-              scaleY={1}
-              skewX={0}
-              skewY={0}
-              stroke={null}
-              strokeDasharray={null}
-              strokeDashoffset={null}
-              strokeLinecap={0}
-              strokeLinejoin={0}
-              strokeMiterlimit={4}
-              strokeOpacity={1}
-              strokeWidth="1"
-              x={0}
-              y={0}
-            >
-              <RNSVGPath
-                d="M35.772821,7.81888755 C31.1512541,7.81888755 27.3680011,11.5547626 27.0211126,16.2944183 L26.9885918,16.2944183 C26.9885918,17.0717822 26.3779234,17.7057488 25.6335584,17.7057488 C24.8855801,17.7057488 24.2821386,17.0717822 24.2821386,16.2944183 L24.2496178,16.2944183 C23.8991158,11.5547626 20.1194762,7.81888755 15.4942959,7.81888755 C10.8691155,7.81888755 7.08586252,11.5547626 6.73897399,16.2944183 L6.70645319,16.2944183 C6.70645319,18.21896 7.32434838,19.9963308 8.35778712,21.4189822 C9.8392902,23.449185 14.2585055,27.5661948 13.9838854,27.5435532 L25.6335584,39.7096756 L37.2868449,27.5435532 C37.0086114,27.5661948 40.7774107,23.7888101 42.2516869,22.2152142 C43.6789887,20.6869017 44.5606637,18.6000947 44.5606637,16.2944183 L44.5245295,16.2944183 C44.1812544,11.5547626 40.4016148,7.81888755 35.772821,7.81888755 L35.772821,7.81888755 Z M47.2635035,16.2944183 L47.2635035,16.2944183 C47.2635035,19.4114211 46.0566205,22.2340822 44.0945322,24.2793795 L44.1631873,24.3510781 L26.5911153,42.7059229 C26.3454026,42.9587548 26.0057409,43.1172465 25.6335584,43.1172465 C25.2649894,43.1172465 24.9253277,42.9587548 24.679615,42.7059229 L7.10031621,24.3510781 L7.16897123,24.2793795 C5.21049642,22.2340822 4,19.4114211 4,16.2944183 L4.03974764,16.2944183 C4.38663617,9.99248759 9.37677217,5 15.4942959,5 C19.8882172,5 23.6967642,7.56982921 25.6335584,11.3547612 C27.5667393,7.56982921 31.3825131,5 35.772821,5 C41.8939581,5 46.8768673,9.99248759 47.2309827,16.2944183 L47.2635035,16.2944183 Z"
-                fill={
-                  Array [
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                  ]
-                }
-                fillOpacity={1}
-                fillRule={1}
-                matrix={
-                  Array [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                  ]
-                }
-                name="Fill-607"
-                opacity={1}
-                originX={0}
-                originY={0}
-                propList={Array []}
-                rotation={0}
-                scaleX={1}
-                scaleY={1}
-                skewX={0}
-                skewY={0}
-                stroke={null}
-                strokeDasharray={null}
-                strokeDashoffset={null}
-                strokeLinecap={0}
-                strokeLinejoin={0}
-                strokeMiterlimit={4}
-                strokeOpacity={1}
-                strokeWidth="1"
-                x={0}
-                y={0}
-              />
-            </RNSVGGroup>
-          </RNSVGGroup>
-        </RNSVGSvgView>
+            Asambleas
+          </Text>
+        </View>
       </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "fontSize": 12,
-          }
-        }
-      >
-        Recomendaciones
-      </Text>
-    </View>
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "maxWidth": 120,
-          "minWidth": 80,
-          "opacity": 1,
-          "width": 240,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
       <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderRadius": 96,
-              "height": 192,
-              "justifyContent": "center",
-              "margin": 10,
-              "width": 192,
-            },
-            false,
-          ]
-        }
-      >
-        <RNSVGSvgView
-          align="xMidYMid"
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
-          style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-              },
-              undefined,
-              false,
-              Object {
-                "flex": 0,
-                "height": 120,
-                "width": 120,
-              },
-            ]
-          }
-          vbHeight={120}
-          vbWidth={120}
-        >
-          <RNSVGGroup
-            fill={null}
-            fillOpacity={1}
-            fillRule={1}
-            font={Object {}}
-            matrix={
-              Array [
-                2.3529411764705883,
-                0,
-                0,
-                2.3529411764705883,
-                0,
-                0,
-              ]
-            }
-            name="Page-1"
-            opacity={1}
-            originX={0}
-            originY={0}
-            propList={
-              Array [
-                "stroke",
-                "strokeWidth",
-                "fill",
-              ]
-            }
-            rotation={0}
-            scaleX={2.3529411764705883}
-            scaleY={2.3529411764705883}
-            skewX={0}
-            skewY={0}
-            stroke={null}
-            strokeDasharray={null}
-            strokeDashoffset={null}
-            strokeLinecap={0}
-            strokeLinejoin={0}
-            strokeMiterlimit={4}
-            strokeOpacity={1}
-            strokeWidth="1"
-            x={0}
-            y={0}
-          >
-            <RNSVGGroup
-              fill={
-                Array [
-                  0,
-                  0.9686274509803922,
-                  0.4117647058823529,
-                  0.07450980392156863,
-                  1,
-                ]
-              }
-              fillOpacity={1}
-              fillRule={1}
-              font={Object {}}
-              matrix={
-                Array [
-                  1,
-                  0,
-                  0,
-                  1,
-                  0,
-                  0,
-                ]
-              }
-              name="Artboard"
-              opacity={1}
-              originX={0}
-              originY={0}
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-              rotation={0}
-              scaleX={1}
-              scaleY={1}
-              skewX={0}
-              skewY={0}
-              stroke={null}
-              strokeDasharray={null}
-              strokeDashoffset={null}
-              strokeLinecap={0}
-              strokeLinejoin={0}
-              strokeMiterlimit={4}
-              strokeOpacity={1}
-              strokeWidth="1"
-              x={0}
-              y={0}
-            >
-              <RNSVGPath
-                d="M2.41737942,22.1548086 L8.90347219,11.4453 L30.6056857,11.4453 L36.6581678,20.7510252 L43.9392134,21.8944294 C46.3385257,21.8944294 48.2897737,23.9321794 48.2897737,26.4378573 L48.2897737,31.8152532 L47.6574248,31.8152532 C47.0901175,28.6001365 44.398118,26.2152142 41.2580542,26.2152142 C38.038495,26.2152142 35.3428821,28.6001365 34.8514567,31.8152532 L16.8782949,31.8152532 C16.3109876,28.6001365 13.6189881,26.2152142 10.4789243,26.2152142 C7.25936511,26.2152142 4.56375218,28.6001365 4.06871335,31.8152532 L2.42099284,31.8152532 L2.42099284,22.1661294 L2.41737942,22.1548086 Z M10.399429,28.7397601 C12.7120191,28.7397601 14.5909987,30.7058115 14.5909987,33.1322435 C14.6271329,34.2492324 14.2224296,35.320938 13.4563841,36.1473588 C12.6578178,37.0077422 11.5448838,37.4983116 10.399429,37.4983116 C8.08683878,37.4983116 6.20785926,35.5322602 6.20785926,33.1209226 C6.20785926,30.7058115 8.08683878,28.7397601 10.399429,28.7397601 L10.399429,28.7397601 Z M41.2580542,28.7397601 C43.5670309,28.7397601 45.4496239,30.7058115 45.4496239,33.1209226 C45.4496239,35.5322602 43.5670309,37.4983116 41.2580542,37.4983116 C38.945464,37.4983116 37.0628711,35.5322602 37.0628711,33.1209226 C37.0628711,30.7058115 38.945464,28.7397601 41.2580542,28.7397601 L41.2580542,28.7397601 Z M43.9356,19.4566766 L43.9247597,19.4566766 L37.8144629,18.3698766 L31.7186197,9 L7.7796979,9 L0,21.3887655 L0,34.2605532 L4.00005833,34.2605532 C4.56375218,37.4794436 7.25936511,39.8605922 10.399429,39.8605922 C13.6189881,39.8605922 16.314601,37.4794436 16.8060264,34.2605532 L34.7791882,34.2605532 C35.3428821,37.4794436 38.038495,39.8605922 41.1785589,39.8605922 C44.398118,39.8605922 47.093731,37.4794436 47.5851564,34.2605532 L50.551776,34.2605532 L50.551776,26.4378573 C50.551776,22.5887739 47.556249,19.4566766 43.9356,19.4566766 L43.9356,19.4566766 Z"
-                fill={
-                  Array [
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                  ]
-                }
-                fillOpacity={1}
-                fillRule={1}
-                matrix={
-                  Array [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                  ]
-                }
-                name="Fill-621"
-                opacity={1}
-                originX={0}
-                originY={0}
-                propList={Array []}
-                rotation={0}
-                scaleX={1}
-                scaleY={1}
-                skewX={0}
-                skewY={0}
-                stroke={null}
-                strokeDasharray={null}
-                strokeDashoffset={null}
-                strokeLinecap={0}
-                strokeLinejoin={0}
-                strokeMiterlimit={4}
-                strokeOpacity={1}
-                strokeWidth="1"
-                x={0}
-                y={0}
-              />
-            </RNSVGGroup>
-          </RNSVGGroup>
-        </RNSVGSvgView>
-      </View>
-      <Text
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
         accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "fontSize": 12,
+            "alignItems": "center",
+            "alignSelf": "stretch",
+            "backgroundColor": "#f76913",
+            "margin": 10,
+            "opacity": 1,
+            "padding": 13,
           }
         }
+        testID={undefined}
+        tvParallaxProperties={undefined}
       >
-        Compartir Auto
-      </Text>
-    </View>
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "maxWidth": 120,
-          "minWidth": 80,
-          "opacity": 1,
-          "width": 240,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderRadius": 96,
-              "height": 192,
-              "justifyContent": "center",
-              "margin": 10,
-              "width": 192,
-            },
-            false,
-          ]
-        }
-      >
-        <RNSVGSvgView
-          align="xMidYMid"
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
           style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-              },
-              undefined,
-              false,
-              Object {
-                "flex": 0,
-                "height": 120,
-                "width": 120,
-              },
-            ]
-          }
-          vbHeight={120}
-          vbWidth={120}
-        >
-          <RNSVGGroup
-            fill={null}
-            fillOpacity={1}
-            fillRule={1}
-            font={Object {}}
-            matrix={
-              Array [
-                2.3529411764705883,
-                0,
-                0,
-                2.3529411764705883,
-                0,
-                0,
-              ]
-            }
-            name="Page-1"
-            opacity={1}
-            originX={0}
-            originY={0}
-            propList={
-              Array [
-                "stroke",
-                "strokeWidth",
-                "fill",
-              ]
-            }
-            rotation={0}
-            scaleX={2.3529411764705883}
-            scaleY={2.3529411764705883}
-            skewX={0}
-            skewY={0}
-            stroke={null}
-            strokeDasharray={null}
-            strokeDashoffset={null}
-            strokeLinecap={0}
-            strokeLinejoin={0}
-            strokeMiterlimit={4}
-            strokeOpacity={1}
-            strokeWidth="1"
-            x={0}
-            y={0}
-          >
-            <RNSVGGroup
-              fill={
-                Array [
-                  0,
-                  0.9686274509803922,
-                  0.4117647058823529,
-                  0.07450980392156863,
-                  1,
-                ]
-              }
-              fillOpacity={1}
-              fillRule={1}
-              font={Object {}}
-              matrix={
-                Array [
-                  1,
-                  0,
-                  0,
-                  1,
-                  0,
-                  0,
-                ]
-              }
-              name="Artboard"
-              opacity={1}
-              originX={0}
-              originY={0}
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-              rotation={0}
-              scaleX={1}
-              scaleY={1}
-              skewX={0}
-              skewY={0}
-              stroke={null}
-              strokeDasharray={null}
-              strokeDashoffset={null}
-              strokeLinecap={0}
-              strokeLinejoin={0}
-              strokeMiterlimit={4}
-              strokeOpacity={1}
-              strokeWidth="1"
-              x={0}
-              y={0}
-            >
-              <RNSVGPath
-                d="M33.118675,27.1435643 L17.703816,27.1435643 C16.9991987,27.1435643 16.4210512,26.5435601 16.4210512,25.8001587 C16.4210512,25.0643046 16.9991987,24.4605268 17.703816,24.4605268 L33.118675,24.4605268 C33.8305191,24.4605268 34.4014398,25.0643046 34.4014398,25.8001587 C34.4014398,26.5435601 33.8305191,27.1435643 33.118675,27.1435643 L33.118675,27.1435643 Z M30.5495318,32.5096394 L20.2729592,32.5096394 C19.561115,32.5096394 18.9901943,31.9134088 18.9901943,31.1700074 C18.9901943,30.426606 19.561115,29.8266019 20.2729592,29.8266019 L30.5495318,29.8266019 C31.261376,29.8266019 31.8322967,30.426606 31.8322967,31.1700074 C31.8322967,31.9134088 31.261376,32.5096394 30.5495318,32.5096394 L30.5495318,32.5096394 Z M33.118675,37.8719409 L17.703816,37.8719409 C16.9991987,37.8719409 16.4210512,37.2757103 16.4210512,36.5360825 C16.4210512,35.7926811 16.9991987,35.192677 17.703816,35.192677 L33.118675,35.192677 C33.8305191,35.192677 34.4014398,35.7926811 34.4014398,36.5360825 C34.4014398,37.2757103 33.8305191,37.8719409 33.118675,37.8719409 L33.118675,37.8719409 Z M38.2569613,16.4114141 L30.5495318,16.4114141 C29.1294569,16.4114141 27.9803886,15.2114058 27.9803886,13.7283766 L27.9803886,5.68303755 L12.5691432,5.68303755 L12.5691432,43.2417896 L38.2569613,43.2417896 L38.2569613,16.4114141 Z M30.5495318,5.68303755 L30.5495318,13.7283766 L38.2569613,13.7283766 L30.5495318,5.68303755 Z M38.2569613,45.9248271 L12.5691432,45.9248271 C11.1454548,45.9248271 10,44.7210452 10,43.2417896 L10,5.68303755 C10,4.20378197 11.1454548,3 12.5691432,3 L27.9803886,3 L30.5495318,3 L40.822491,13.7283766 L40.822491,16.4114141 L40.822491,20.4378573 L40.822491,43.2417896 C40.822491,44.7210452 39.6770362,45.9248271 38.2569613,45.9248271 L38.2569613,45.9248271 Z"
-                fill={
-                  Array [
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                  ]
-                }
-                fillOpacity={1}
-                fillRule={1}
-                matrix={
-                  Array [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                  ]
-                }
-                name="Fill-610"
-                opacity={1}
-                originX={0}
-                originY={0}
-                propList={Array []}
-                rotation={0}
-                scaleX={1}
-                scaleY={1}
-                skewX={0}
-                skewY={0}
-                stroke={null}
-                strokeDasharray={null}
-                strokeDashoffset={null}
-                strokeLinecap={0}
-                strokeLinejoin={0}
-                strokeMiterlimit={4}
-                strokeOpacity={1}
-                strokeWidth="1"
-                x={0}
-                y={0}
-              />
-            </RNSVGGroup>
-          </RNSVGGroup>
-        </RNSVGSvgView>
-      </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "fontSize": 12,
-          }
-        }
-      >
-        Anuncios
-      </Text>
-    </View>
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "maxWidth": 120,
-          "minWidth": 80,
-          "opacity": 1,
-          "width": 240,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <View
-        style={
-          Array [
             Object {
-              "alignItems": "center",
-              "borderRadius": 96,
-              "height": 192,
-              "justifyContent": "center",
-              "margin": 10,
-              "width": 192,
-            },
-            false,
-          ]
-        }
-      >
-        <RNSVGSvgView
-          align="xMidYMid"
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
-          style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-              },
-              undefined,
-              false,
-              Object {
-                "flex": 0,
-                "height": 120,
-                "width": 120,
-              },
-            ]
+              "color": "white",
+              "fontSize": 18,
+            }
           }
-          vbHeight={120}
-          vbWidth={120}
         >
-          <RNSVGGroup
-            fill={null}
-            fillOpacity={1}
-            fillRule={1}
-            font={Object {}}
-            matrix={
-              Array [
-                2.3529411764705883,
-                0,
-                0,
-                2.3529411764705883,
-                0,
-                0,
-              ]
-            }
-            name="Page-1"
-            opacity={1}
-            originX={0}
-            originY={0}
-            propList={
-              Array [
-                "stroke",
-                "fill",
-              ]
-            }
-            rotation={0}
-            scaleX={2.3529411764705883}
-            scaleY={2.3529411764705883}
-            skewX={0}
-            skewY={0}
-            stroke={null}
-            strokeDasharray={null}
-            strokeDashoffset={null}
-            strokeLinecap={0}
-            strokeLinejoin={0}
-            strokeMiterlimit={4}
-            strokeOpacity={1}
-            strokeWidth="1"
-            x={0}
-            y={0}
-          >
-            <RNSVGGroup
-              fill={
-                Array [
-                  0,
-                  0.9686274509803922,
-                  0.4117647058823529,
-                  0.07450980392156863,
-                  1,
-                ]
-              }
-              fillOpacity={1}
-              fillRule={1}
-              font={Object {}}
-              matrix={
-                Array [
-                  1,
-                  0,
-                  0,
-                  1,
-                  0,
-                  0,
-                ]
-              }
-              name="Artboard"
-              opacity={1}
-              originX={0}
-              originY={0}
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-              rotation={0}
-              scaleX={1}
-              scaleY={1}
-              skewX={0}
-              skewY={0}
-              stroke={null}
-              strokeDasharray={null}
-              strokeDashoffset={null}
-              strokeLinecap={0}
-              strokeLinejoin={0}
-              strokeMiterlimit={4}
-              strokeOpacity={1}
-              strokeWidth="1"
-              x={0}
-              y={0}
-            >
-              <RNSVGPath
-                d="M31.8350505,39.007777 C35.5785558,39.007777 38.6066036,35.8417172 38.6066036,31.9360296 C38.6066036,28.0265684 35.5785558,24.8605087 31.8350505,24.8605087 C28.0951585,24.8605087 25.0634974,28.0265684 25.0634974,31.9360296 C25.0634974,35.8417172 28.0951585,39.007777 31.8350505,39.007777 L31.8350505,39.007777 Z M31.8350505,22.5057753 C36.8251865,22.5057753 40.8649924,26.7246726 40.8649924,31.9360296 C40.8649924,34.1134033 40.1495349,36.1134172 38.960719,37.7096547 L42.7945599,41.7134562 C43.0005249,41.9210048 43.1233813,42.2153465 43.1233813,42.5474243 C43.1233813,43.1927118 42.6211156,43.7247909 41.9959936,43.7247909 C41.6852393,43.7247909 41.3997789,43.5889409 41.1974273,43.3813923 L37.3671998,39.3775909 C35.8351088,40.6191089 33.9199951,41.366284 31.8350505,41.366284 C26.8449145,41.366284 22.8051085,37.1436131 22.8051085,31.9360296 C22.8051085,26.7246726 26.8449145,22.5057753 31.8350505,22.5057753 L31.8350505,22.5057753 Z M17.1573297,10.7132404 C17.7824517,10.7132404 18.2883308,11.2415459 18.2883308,11.890607 C18.2883308,12.5434418 17.7824517,13.0717473 17.1573297,13.0717473 C16.5358211,13.0717473 16.029942,12.5434418 16.029942,11.890607 C16.029942,11.2415459 16.5358211,10.7132404 17.1573297,10.7132404 L17.1573297,10.7132404 Z M12.6441654,10.7132404 C13.265674,10.7132404 13.7751665,11.2415459 13.7751665,11.890607 C13.7751665,12.5434418 13.265674,13.0717473 12.6441654,13.0717473 C12.0190434,13.0717473 11.5167777,12.5434418 11.5167777,11.890607 C11.5167777,11.2415459 12.0190434,10.7132404 12.6441654,10.7132404 L12.6441654,10.7132404 Z M40.8649924,8.35850699 L9.25838885,8.35850699 L9.25838885,15.4302543 L40.8649924,15.4302543 L40.8649924,8.35850699 Z M40.8649924,24.8605087 L40.8649924,17.7887613 L9.25838885,17.7887613 L9.25838885,24.8605087 L22.8195622,24.8605087 C22.295616,25.5888156 21.8439382,26.3775004 21.4934363,27.2190157 L9.25838885,27.2190157 L9.25838885,34.290763 L20.7707518,34.290763 C20.9333558,35.1134102 21.1790685,35.8983214 21.4934363,36.64927 L9.25838885,36.64927 C8.0117582,36.64927 7,35.5964325 7,34.290763 L7,8.35850699 C7,7.05661113 8.0117582,6 9.25838885,6 L40.8649924,6 C42.1116231,6 43.1233813,7.05661113 43.1233813,8.35850699 L43.1233813,31.9360296 C43.1233813,29.2794074 42.2742271,26.8303337 40.8505388,24.8605087 L40.8649924,24.8605087 Z M16.029942,30.7548893 C16.029942,30.1020546 16.5358211,29.5775226 17.1573297,29.5775226 C17.7824517,29.5775226 18.2883308,30.1020546 18.2883308,30.7548893 C18.2883308,31.4039504 17.7824517,31.9360296 17.1573297,31.9360296 C16.5358211,31.9360296 16.029942,31.4039504 16.029942,30.7548893 L16.029942,30.7548893 Z M11.5167777,30.7548893 C11.5167777,30.1020546 12.0190434,29.5775226 12.6441654,29.5775226 C13.265674,29.5775226 13.7751665,30.1020546 13.7751665,30.7548893 C13.7751665,31.4039504 13.265674,31.9360296 12.6441654,31.9360296 C12.0190434,31.9360296 11.5167777,31.4039504 11.5167777,30.7548893 L11.5167777,30.7548893 Z M16.029942,21.324635 C16.029942,20.6718003 16.5358211,20.1472683 17.1573297,20.1472683 C17.7824517,20.1472683 18.2883308,20.6718003 18.2883308,21.324635 C18.2883308,21.9736961 17.7824517,22.5057753 17.1573297,22.5057753 C16.5358211,22.5057753 16.029942,21.9736961 16.029942,21.324635 L16.029942,21.324635 Z M11.5167777,21.324635 C11.5167777,20.6718003 12.0190434,20.1472683 12.6441654,20.1472683 C13.265674,20.1472683 13.7751665,20.6718003 13.7751665,21.324635 C13.7751665,21.9736961 13.265674,22.5057753 12.6441654,22.5057753 C12.0190434,22.5057753 11.5167777,21.9736961 11.5167777,21.324635 L11.5167777,21.324635 Z"
-                fill={
-                  Array [
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                  ]
-                }
-                fillOpacity={1}
-                fillRule={1}
-                matrix={
-                  Array [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                  ]
-                }
-                name="Fill-613"
-                opacity={1}
-                originX={0}
-                originY={0}
-                propList={Array []}
-                rotation={0}
-                scaleX={1}
-                scaleY={1}
-                skewX={0}
-                skewY={0}
-                stroke={null}
-                strokeDasharray={null}
-                strokeDashoffset={null}
-                strokeLinecap={0}
-                strokeLinejoin={0}
-                strokeMiterlimit={4}
-                strokeOpacity={1}
-                strokeWidth="1"
-                x={0}
-                y={0}
-              />
-            </RNSVGGroup>
-          </RNSVGGroup>
-        </RNSVGSvgView>
+          Siguiente
+        </Text>
       </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "fontSize": 12,
-          }
-        }
-      >
-        Compra / Vende
-      </Text>
     </View>
   </View>
-  <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
-    accessible={true}
-    collapsable={undefined}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
-    isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "alignSelf": "stretch",
-        "backgroundColor": "#f76913",
-        "margin": 10,
-        "opacity": 1,
-        "padding": 13,
-      }
-    }
-    testID={undefined}
-    tvParallaxProperties={undefined}
-  >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Object {
-          "color": "white",
-          "fontSize": 18,
-        }
-      }
-    >
-      Siguiente
-    </Text>
-  </View>
-</View>
+</RCTScrollView>
 `;
 
 exports[`renders Edit Publication screen 1`] = `
@@ -2345,130 +3446,132 @@ exports[`renders Edit Publication screen 1`] = `
             Eventos
           </Text>
         </View>
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-            }
-          }
-        >
+        <View>
           <View
             style={
               Object {
-                "flex": 1,
+                "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
-                "marginVertical": 10,
               }
             }
           >
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
-              accessible={true}
-              hitSlop={undefined}
-              nativeID={undefined}
-              onLayout={undefined}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
               style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "flexDirection": "row",
-                    "justifyContent": "space-between",
-                  },
-                  Object {
-                    "borderBottomColor": "#94a4a4",
-                    "borderBottomWidth": 1,
-                    "flex": 0.6,
-                  },
-                ]
-              }
-              testID={undefined}
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              />
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "fontSize": 18,
-                  }
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "marginVertical": 10,
                 }
-              >
-                12/12/2018
-              </Text>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              />
-            </View>
-            <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
-              accessible={true}
-              hitSlop={undefined}
-              nativeID={undefined}
-              onLayout={undefined}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "flexDirection": "row",
-                    "justifyContent": "space-between",
-                  },
-                  Object {
-                    "borderBottomColor": "#94a4a4",
-                    "borderBottomWidth": 1,
-                    "flex": 0.35,
-                  },
-                ]
               }
-              testID={undefined}
             >
-              <Text
+              <View
+                accessibilityComponentType={undefined}
+                accessibilityLabel={undefined}
+                accessibilityTraits={undefined}
                 accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              />
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+                hitSlop={undefined}
+                nativeID={undefined}
+                onLayout={undefined}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
-                    "fontSize": 18,
-                  }
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                    },
+                    Object {
+                      "borderBottomColor": "#94a4a4",
+                      "borderBottomWidth": 1,
+                      "flex": 0.6,
+                    },
+                  ]
                 }
+                testID={undefined}
               >
-                00:00
-              </Text>
-              <Text
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                />
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "fontSize": 18,
+                    }
+                  }
+                >
+                  12/12/2018
+                </Text>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                />
+              </View>
+              <View
+                accessibilityComponentType={undefined}
+                accessibilityLabel={undefined}
+                accessibilityTraits={undefined}
                 accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-              />
+                hitSlop={undefined}
+                nativeID={undefined}
+                onLayout={undefined}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                    },
+                    Object {
+                      "borderBottomColor": "#94a4a4",
+                      "borderBottomWidth": 1,
+                      "flex": 0.35,
+                    },
+                  ]
+                }
+                testID={undefined}
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                />
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "fontSize": 18,
+                    }
+                  }
+                >
+                  00:00
+                </Text>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                />
+              </View>
             </View>
           </View>
         </View>

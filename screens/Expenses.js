@@ -44,12 +44,11 @@ class ExpensesScreen extends React.Component {
     this.updateView()
   }
 
-  componetnDidUpdate = prevProps => {
+  componentDidUpdate = prevProps => {
     const { neighborhood } = this.props
-    const { prevNgbrhood } = prevProps
+    const { neighborhood: prevNgbrhood } = prevProps
     if (neighborhood !== prevNgbrhood) {
       this.updateView()
-      this.refreshList()
     }
   }
 
@@ -70,7 +69,7 @@ class ExpensesScreen extends React.Component {
           ? 'units/' + treasurerUnit.id
           : 'neighborhoods/' + neighborhood.id
         }/common_expenses`
-      })
+      }, this.refreshList)
       navigation.setParams({ treasurerView: this.state.treasurerView })
     })
   }

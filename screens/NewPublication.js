@@ -44,14 +44,14 @@ class NewPublication extends React.Component {
   constructor(props) {
     super(props)
     const { publication, category } = (props.navigation.state.params || { publication: null })
-    const date = publication && publication.date ? publication.date : new Date()
+    const date = publication && publication.date ? new Date(publication.date) : new Date()
     this.state = {
       title: publication ? publication.title : '',
       publication_type: publication ? publication.publication_type : category,
       date,
       hours: date.getHours(),
       minutes: date.getMinutes(),
-      seats_available: publication ? publication.spaces : '',
+      spaces: publication ? publication.spaces : '',
       destination: publication ? publication.destination : '',
       description: publication ? publication.description : '',
       options: ['Sí', 'No'],
@@ -181,7 +181,7 @@ class NewPublication extends React.Component {
       hours,
       minutes,
       destination,
-      seats_available
+      spaces
     } = this.state
     if (title && description && publication_type) {
       this.setState({ loading: true })
@@ -195,7 +195,7 @@ class NewPublication extends React.Component {
         publication_type,
         options,
         date: date_.getTime(),
-        seats_available,
+        spaces,
         destination
       }
       if (publication_type === 'poll') {
@@ -288,7 +288,7 @@ class NewPublication extends React.Component {
       destination,
       options,
       publication_type,
-      seats_available,
+      spaces,
       date,
       loading
     } = this.state
@@ -356,8 +356,8 @@ class NewPublication extends React.Component {
                   label='Lugares disponibles'
                   labelColor={Colors.subHeading}
                   containerStyle={styles.half}
-                  onChangeText={t => this.setState({ seats_available: t })}
-                  value={seats_available}
+                  onChangeText={t => this.setState({ spaces: t })}
+                  value={`${spaces}`}
                   keyboardType='numeric'
                 />
               </View>

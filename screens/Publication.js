@@ -16,8 +16,7 @@ import {
 } from 'react-native'
 import Axios from 'axios'
 import { API_URL } from 'react-native-dotenv'
-import { Bar as ProgressBar } from 'react-native-progress'
-import { EvilIcons } from '@expo/vector-icons'
+import { EvilIcons, Feather, SimpleLineIcons } from '@expo/vector-icons'
 import Colors from '../constants/Colors'
 import Categories from '../constants/Categories'
 import { Months } from '../constants/utils'
@@ -26,7 +25,6 @@ import WebarrioIcon from '../components/WebarrioIcon'
 import PublicationMenu from '../components/PublicationMenu'
 import Report from '../components/Report'
 import BackButton from '../components/BackButton'
-import Button from '../components/Button'
 import Loading from '../components/Loading'
 import firebase from '../api/firebase'
 import { getDate } from '../api/utils'
@@ -53,8 +51,7 @@ class PublicationScreen extends React.Component {
       vote: null,
       voted: false,
       publication: null,
-      laoding: false,
-      total: 1
+      laoding: false
     }
     this.toggleMenu = this.toggleMenu.bind(this)
     this.report = this.report.bind(this)
@@ -205,10 +202,14 @@ class PublicationScreen extends React.Component {
         </View>)
     }
     const { currentUser, unit } = this.props
-    const { menuOpen, offset, reportOpen, reportingId, voted, results, loading, total } = this.state
+    const { menuOpen, offset, reportOpen, reportingId, voted, results, loading } = this.state
     const menuTop = { top: publication.image_url ? 170 : 20 }
-    let date = new Date(publication.created_at)
-    date = (`0${date.getDate()}`).slice(-2) + ' ' + Months[date.getMonth()]
+    const { publication_type } = publication
+    let published = new Date(publication.created_at)
+    published = (`0${published.getDate()}`).slice(-2) + ' ' + Months[published.getMonth()]
+    const dateTime = new Date(publication.date)
+    const date = (`0${dateTime.getDate()}`).slice(-2) + '/' + `0${dateTime.getMonth() + 1}`.slice(-2) + '/' + dateTime.getFullYear()
+    const time = `${dateTime.getHours()}:${('0' + dateTime.getMinutes()).slice(-2)}`
     return (
       <View style={styles.screen} onLayout={this.onLayout}>
         <View style={styles.screen}>
@@ -235,13 +236,13 @@ class PublicationScreen extends React.Component {
                     {this.state.unit.name}
                   </Text>
                 )}
-                {publication.publication_type === 'poll' && (
+                {publication_type === 'poll' && (
                   <Text style={styles.subHeading}>
                     CIERRA EL {getDate(publication.end)}
                   </Text>
                 )}
                 <Text style={styles.title}>{publication.title}</Text>
-                {publication.publication_type !== 'poll' && (
+                {publication_type !== 'poll' && (
                   <View style={styles.author}>
                     <Avatar
                       source={{ uri: publication.author.avatar }}
@@ -252,16 +253,44 @@ class PublicationScreen extends React.Component {
                         {publication.author.name} {publication.author.last_name}
                       </Text>
                       <Text style={styles.subHeading}>
-                        {date}
+                        {published}
                       </Text>
                     </View>
                   </View>
                 )}
               </View>
+              {['car_pooling', 'event'].includes(publication_type) && (
+                <View style={[styles.info, styles.row]}>
+                  <View style={styles.row}>
+                    <Feather name='calendar' size={20} color={Colors.orange} />
+                    <Text>
+                      {date}
+                    </Text>
+                  </View>
+                  <View style={styles.row}>
+                    <SimpleLineIcons name='clock' size={20} color={Colors.orange} />
+                    <Text>
+                      {time}
+                    </Text>
+                  </View>
+                </View>
+              )}
+              {publication_type === 'car_pooling' && (
+                <View style={styles.info}>
+                  <View style={styles.row}>
+                    <Text>Destino: </Text>
+                    <Text>{publication.destination}</Text>
+                  </View>
+                  <View style={styles.row}>
+                    <Text>Lugares disponibles: </Text>
+                    <Text>{publication.spaces}</Text>
+                  </View>
+                </View>
+              )}
               <Text style={styles.description}>
                 {publication.description}
               </Text>
-              {publication.publication_type === 'poll' && !voted && (
+              {publication_type === 'poll' && !voted && (
                 <View style={styles.voteSection}>
                   <TouchableOpacity
                     style={[styles.optionBox, styles.yes]}
@@ -279,7 +308,7 @@ class PublicationScreen extends React.Component {
                   </TouchableOpacity>
                 </View>
               )}
-              {publication.publication_type === 'poll' && voted && (
+              {publication_type === 'poll' && voted && (
                 <View style={styles.voteSection}>
                   <View
                     style={[

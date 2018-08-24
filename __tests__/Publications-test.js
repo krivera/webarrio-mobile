@@ -22,6 +22,13 @@ const initialState = {
       name: 'Test',
       address: 'test street 123'
     },
+    unit: {
+      id: 1,
+      neighborhood_id: 1,
+      name: 'Test unit',
+      unit_type: 'condo',
+      user_roles: ['admin', 'secretary', 'treasurer']
+    },
     user: {
       id: 2,
       name: 'current test',
@@ -88,7 +95,7 @@ it('renders Publication', () => {
 
 it('renders Category selector screen', () => {
   const tree = renderer.create(
-    <Categories />
+    <Categories store={store} />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
