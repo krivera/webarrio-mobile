@@ -1,6 +1,7 @@
 import { setNeighborhoodTree } from './neighborhood'
 
 export const SET_CURRENT = 'SET_CURRENT'
+export const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER'
 
 export function setCurrent(key, value) {
   return {
@@ -25,5 +26,12 @@ export function setInitialData(data) {
         }
       }
     }
+  }
+}
+
+export function updateCurrentUser(data) {
+  return {
+    type: UPDATE_CURRENT_USER,
+    data: data
   }
 }

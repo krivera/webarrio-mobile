@@ -6,13 +6,16 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
+import { SimpleLineIcons } from '@expo/vector-icons'
+import { NavigationActions } from 'react-navigation'
 import Categories from '../components/Categories'
 import Avatar from '../components/Avatar'
 import Picker from '../components/Picker'
+import Colors from '../constants/Colors'
 import { setFilter } from '../actions/feed'
 import { signOut } from '../actions/auth'
 import { setCurrent } from '../actions/currents'
-import { menuRef } from '../navigation/MainTabNavigator'
+import { navigatorRef, menuRef } from '../navigation/MainTabNavigator'
 import styles from './styles/Menu'
 
 class Menu extends React.Component {
@@ -26,6 +29,15 @@ class Menu extends React.Component {
   changeFilter = category => {
     this.props.dispatch(setFilter(category.key))
     menuRef.openMenu(false)
+  }
+
+  goToSettings = () => {
+    menuRef.openMenu(false)
+    navigatorRef.dispatch(
+      NavigationActions.navigate({
+        routeName: 'Settings'
+      })
+    )
   }
 
   setNeighborhood = ngbrhoodId => {
@@ -55,7 +67,7 @@ class Menu extends React.Component {
     return (
       <View style={styles.menu}>
         <View style={styles.userSection}>
-          <Avatar source={user.avatar_url} name={user.name} />
+          <Avatar source={{ uri: user.avatar_url }} name={user.name} />
           <View style={styles.userDetails}>
             <Text style={styles.userName}>{user.name} {user.last_name}</Text>
             {apartment && (
@@ -77,11 +89,18 @@ class Menu extends React.Component {
                 ))}
               </Picker>
             )}
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.signOut}
+            >
               <Text
                 style={styles.signout}
-                onPress={this.signOut}
               >Cerrar Sesión</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.configBtn}
+              onPress={this.goToSettings}
+            >
+              <SimpleLineIcons name='settings' size={20} color={Colors.subHeading} />
             </TouchableOpacity>
           </View>
         </View>
@@ -94,12 +113,6 @@ class Menu extends React.Component {
     )
   }
 }
-// TODO add settings button
-/* <TouchableOpacity
-  style={styles.configBtn}
->
-  <SimpleLineIcons name='settings' size={20} color={Colors.subHeading} />
-</TouchableOpacity> */
 
 const mapStateToProps = state => ({
   user: state.currentsReducer.user,

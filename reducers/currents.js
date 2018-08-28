@@ -1,4 +1,4 @@
-import { SET_CURRENT } from '../actions/currents'
+import { SET_CURRENT, UPDATE_CURRENT_USER } from '../actions/currents'
 
 let initialState = {
   neighborhood: null,
@@ -14,6 +14,14 @@ export default (state = initialState, action) => {
       [action.key]: action.value
     }
     return Object.assign({}, state, new_state)
+  case UPDATE_CURRENT_USER:
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        ...action.data
+      }
+    }
   default:
     return state
   }

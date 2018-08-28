@@ -26,6 +26,7 @@ import NeighborsScreen from '../screens/Neighbors'
 import CommunityScreen from '../screens/Community'
 import NewPublication from '../screens/NewPublication'
 import Categories from '../screens/Categories'
+import Settings from '../screens/Settings'
 import SosScreen from '../screens/Sos'
 import PublicationScreen from '../screens/Publication'
 import WebarrioIcon from '../components/WebarrioIcon'
@@ -65,7 +66,8 @@ const ChatStack = StackNavigator(
 const CommunityStack = StackNavigator(
   {
     Feed: CommunityScreen,
-    Publication: PublicationScreen
+    Publication: PublicationScreen,
+    Settings
   },
   {
     headerMode: 'screen',

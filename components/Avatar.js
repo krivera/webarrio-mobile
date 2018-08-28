@@ -1,28 +1,28 @@
-import React from 'react';
+import React from 'react'
 import {
   Image,
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from 'react-native'
 
-export default class Avatar extends React.PureComponent{
-  constructor(props){
-    super(props);
+export default class Avatar extends React.PureComponent {
+  constructor(props) {
+    super(props)
     this.state = {
       loaded: false
-    };
+    }
   }
-  render(){
-    const { containerStyle, source, size, name } = this.props;
-    let size_ = size || 40;
+  render() {
+    const { containerStyle, source, size, name } = this.props
+    let size_ = size || 40
     const avatar_size = {
       width: size_,
       height: size_,
       borderRadius: size_ / 2
-    };
-    const fontSize = size_ * 0.75;
-    let name_ = name || 'W';
+    }
+    const fontSize = size_ * 0.75
+    let name_ = name || 'W'
 
     return (
       <View style={containerStyle}>
@@ -30,11 +30,16 @@ export default class Avatar extends React.PureComponent{
           {!this.state.loaded && (
             <View style={styles.letterContainer}>
               <Text style={[styles.letterAvatar, { fontSize }]}>
-                {name_.slice(0,1).toUpperCase()}
+                {name_.slice(0, 1).toUpperCase()}
               </Text>
             </View>
           )}
-          <Image style={avatar_size} source={source} onLoad={() => this.setState({loaded: true})} />
+          <Image
+            style={avatar_size}
+            source={source}
+            onLoad={() => {
+              this.setState({ loaded: true })
+            }} />
         </View>
       </View>
     )
