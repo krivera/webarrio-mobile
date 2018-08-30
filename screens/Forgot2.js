@@ -14,6 +14,7 @@ import FloatingLabelInput from '../components/FloatingLabel'
 export default class Forgot extends React.Component {
   constructor(props) {
     super(props)
+    
     this.state = {
       token: '',
       password: '',

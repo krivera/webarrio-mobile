@@ -50,4 +50,5 @@ class AuthLoadingScreen extends React.Component {
   }
 }
 
+
 export default connect(mapStateToProps)(AuthLoadingScreen)

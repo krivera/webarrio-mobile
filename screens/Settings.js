@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import Axios from 'axios'
 import { API_URL } from 'react-native-dotenv'
 import { updateCurrentUser } from '../actions/currents'
@@ -18,6 +19,7 @@ import BackButton from '../components/BackButton'
 import Button from '../components/Button'
 import Input from '../components/ClearableInput'
 import Loading from '../components/Loading'
+import KeyboardAwareView from '../components/KeyboardAwareView'
 import styles from './styles/Settings'
 
 const PASSWORD_TOKEN = 'xxxxxxx'
@@ -40,6 +42,10 @@ class Settings extends React.Component {
       currentPassword: '',
       loading: false
     }
+  }
+
+  goToInvite = () => {
+    this.props.navigation.navigate('Invite')
   }
 
   selectPicture = async () => {
@@ -119,7 +125,7 @@ class Settings extends React.Component {
         this.saveSuccess(data)
       }
     }).catch(error => {
-      if (error && error.response && error.code === 401) {
+      if (error && error.response && error.response.status === 401) {
         this.setState({
           loading: false,
           error: 'La contraseña es incorrecta'
@@ -143,87 +149,111 @@ class Settings extends React.Component {
   }
 
   render() {
+    const { apartment } = this.props
+    const isResponsible = apartment && apartment.user_roles.includes('responsible')
     return (
-      <ScrollView style={styles.screen}>
-        <View style={styles.section}>
-          <Text>Perfil</Text>
-          <TouchableOpacity
-            onPress={this.selectPicture}
-          >
-            <Avatar
-              source={{ uri: this.state.image }}
-              name={this.props.user.name}
-              size={80}
-            />
-          </TouchableOpacity>
-          <View>
-            <Input
-              value={this.state.name}
-              label='Nombre'
-              onChangeText={t => this.setState({ name: t })}
-            />
-            <Input
-              value={this.state.last_name}
-              label='Apellido'
-              onChangeText={t => this.setState({ last_name: t })}
-            />
-            <Input
-              value={this.state.email}
-              label='E-mail'
-              onChangeText={t => this.setState({ email: t })}
-              keyboardType='email-address'
-              autoCapitalize='none'
-            />
-            <Input
-              value={this.state.password}
-              label='Contraseña'
-              onFocus={this.passwordFocus}
-              onChangeText={t => this.setState({ password: t })}
-              autoCapitalize='none'
-              secureTextEntry
-            />
-          </View>
-          <View style={styles.space} />
-          <Button onPress={this.promptPassword}>GUARDAR</Button>
-        </View>
-        {this.state.promptPassword && (
-          <View style={styles.cover}>
-            <View style={styles.prompt}>
-              <Text>Para guardar los cambios ingrese su contraseña actual</Text>
+      <KeyboardAwareView style={styles.screen}>
+        <ScrollView>
+          {isResponsible && (
+            <View style={styles.section}>
+              <Text>Responsable de hogar</Text>
+              <TouchableOpacity
+                style={[styles.navigate]}
+                onPress={this.goToInvite}
+              >
+                <Text style={styles.navigateText}>
+                  Dar acceso a casa
+                </Text>
+                <Ionicons name='ios-arrow-forward' size={18} />
+              </TouchableOpacity>
+            </View>
+          )}
+          <View style={styles.section}>
+            <Text>Perfil</Text>
+            <TouchableOpacity
+              onPress={this.selectPicture}
+            >
+              <Avatar
+                source={{ uri: this.state.image }}
+                name={this.props.user.name}
+                size={80}
+              />
+            </TouchableOpacity>
+            <View>
               <Input
-                label='contraseña'
-                onChangeText={t => this.setState({ currentPassword: t })}
-                value={this.state.currentPassword}
+                value={this.state.name}
+                label='Nombre'
+                onChangeText={t => this.setState({ name: t })}
+              />
+              <Input
+                value={this.state.last_name}
+                label='Apellido'
+                onChangeText={t => this.setState({ last_name: t })}
+              />
+              <Input
+                value={this.state.email}
+                label='E-mail'
+                onChangeText={t => this.setState({ email: t })}
+                keyboardType='email-address'
+                autoCapitalize='none'
+              />
+              <Input
+                value={this.state.password}
+                label='Contraseña'
+                onFocus={this.passwordFocus}
+                onChangeText={t => this.setState({ password: t })}
+                autoCapitalize='none'
                 secureTextEntry
               />
-              <View style={styles.promptButtons}>
-                <TouchableOpacity
-                  onPress={this.cancelSave}
-                  style={styles.promptButton}
-                >
-                  <Text
-                    style={styles.promptButtonText}>CANCELAR</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.promptButton}
-                  onPress={this.save}
-                >
-                  <Text style={styles.promptButtonText}>GUARDAR</Text>
-                </TouchableOpacity>
+            </View>
+            <View style={styles.space} />
+            <Button onPress={this.promptPassword}>GUARDAR</Button>
+          </View>
+          {this.state.promptPassword && (
+            <View style={styles.cover}>
+              <View style={styles.prompt}>
+                <Text>Para guardar los cambios ingrese su contraseña actual</Text>
+                {this.state.error && (
+                  <View style={styles.error}>
+                    <Text style={styles.errorText}>{this.state.error}</Text>
+                  </View>
+                )}
+                <Input
+                  label='Contraseña'
+                  onChangeText={t => this.setState({ currentPassword: t })}
+                  value={this.state.currentPassword}
+                  secureTextEntry
+                />
+                <View style={styles.promptButtons}>
+                  <TouchableOpacity
+                    onPress={this.cancelSave}
+                    style={styles.promptButton}
+                  >
+                    <Text
+                      style={styles.promptButtonText}>CANCELAR</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.promptButton}
+                    onPress={this.save}
+                  >
+                    <Text style={styles.promptButtonText}>GUARDAR</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
-        )}
-        <Loading
-          loading={this.state.loading}
-        />
-      </ScrollView>
+          )}
+          <Loading
+            loading={this.state.loading}
+          />
+        </ScrollView>
+      </KeyboardAwareView>
     )
   }
 }
 
 const mapStateToProps = state => ({
   authToken: state.authReducer.authToken,
+  apartment: state.currentsReducer.apartment,
   user: state.currentsReducer.user
 })
 

@@ -67,9 +67,13 @@ class Menu extends React.Component {
     return (
       <View style={styles.menu}>
         <View style={styles.userSection}>
-          <Avatar source={{ uri: user.avatar_url }} name={user.name} />
+          <TouchableOpacity onPress={this.goToSettings}>
+            <Avatar source={{ uri: user.avatar_url }} name={user.name} />
+          </TouchableOpacity>
           <View style={styles.userDetails}>
-            <Text style={styles.userName}>{user.name} {user.last_name}</Text>
+            <TouchableOpacity onPress={this.goToSettings}>
+              <Text style={styles.userName}>{user.name} {user.last_name}</Text>
+            </TouchableOpacity>
             {apartment && (
               <Text style={styles.apartment}>{apartment.number}</Text>
             )}
@@ -95,12 +99,6 @@ class Menu extends React.Component {
               <Text
                 style={styles.signout}
               >Cerrar Sesión</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.configBtn}
-              onPress={this.goToSettings}
-            >
-              <SimpleLineIcons name='settings' size={20} color={Colors.subHeading} />
             </TouchableOpacity>
           </View>
         </View>

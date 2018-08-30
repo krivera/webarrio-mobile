@@ -14,6 +14,7 @@ import AuthContainer, { authStyles } from '../components/AuthContainer'
 class LoginScreen extends React.Component {
   constructor(props) {
     super(props)
+    
     this.state = {
       email: '',
       password: '',

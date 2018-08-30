@@ -27,6 +27,7 @@ import CommunityScreen from '../screens/Community'
 import NewPublication from '../screens/NewPublication'
 import Categories from '../screens/Categories'
 import Settings from '../screens/Settings'
+import Invite from '../screens/Invite'
 import SosScreen from '../screens/Sos'
 import PublicationScreen from '../screens/Publication'
 import WebarrioIcon from '../components/WebarrioIcon'
@@ -67,7 +68,8 @@ const CommunityStack = StackNavigator(
   {
     Feed: CommunityScreen,
     Publication: PublicationScreen,
-    Settings
+    Settings,
+    Invite
   },
   {
     headerMode: 'screen',
@@ -116,6 +118,7 @@ const AppTabNavigator = TabNavigator(
       tabBarIcon: ({ focused }) => {
         const { routeName } = navigation.state
         let iconName
+        
         switch (routeName) {
         case 'Home':
           iconName = 'home'

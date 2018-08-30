@@ -17,6 +17,24 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  error: {
+    backgroundColor: Colors.errorBox,
+    padding: 5,
+    marginVertical: 5
+  },
+  errorText: {
+    color: Colors.errorText
+  },
+  navigate: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 15
+  },
+  navigateText: {
+    color: Colors.orange,
+    fontSize: 18
+  },
   prompt: {
     backgroundColor: 'white',
     padding: 25,
@@ -39,7 +57,9 @@ export default StyleSheet.create({
     backgroundColor: 'white'
   },
   section: {
-    padding: 25
+    padding: 25,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.subHeading
   },
   space: {
     height: 35
